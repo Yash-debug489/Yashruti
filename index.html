@@ -58,6 +58,61 @@ header p {
   font-size: 0.95rem;
   color: #666;
 }
+  
+  
+  
+  /* Love Countdown */
+.countdown {
+  max-width: 900px;
+  margin: 80px auto 20px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.countdown h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.countdown p {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.time-box {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: 16px 18px;
+  min-width: 90px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+  transition: 0.3s ease;
+}
+
+.time-box:hover {
+  transform: translateY(-4px);
+}
+
+.time {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.label {
+  font-size: 0.7rem;
+  color: #777;
+  margin-top: 4px;
+  letter-spacing: 0.08em;
+}
 
 /* Timeline */
 .timeline {
@@ -325,6 +380,30 @@ footer {
   </div>
 
 </section>
+  <section class="countdown">
+  <h2>Us, Since</h2>
+  <p>Every second with u💕 </p>
+
+  <div class="timer">
+    <div class="time-box">
+      <div class="time" id="days">0</div>
+      <div class="label">DAYS</div>
+    </div>
+    <div class="time-box">
+      <div class="time" id="hours">0</div>
+      <div class="label">HOURS</div>
+    </div>
+    <div class="time-box">
+      <div class="time" id="minutes">0</div>
+      <div class="label">MINUTES</div>
+    </div>
+    <div class="time-box">
+      <div class="time" id="seconds">0</div>
+      <div class="label">SECONDS</div>
+    </div>
+  </div>
+</section>
+
 
 <section class="right-now">
   <h2>Right Now</h2>
@@ -360,6 +439,29 @@ footer {
 <footer>
   Made with quiet love 🤍
 </footer>
+<script>
+const startDate = new Date("December 15, 2025 00:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = now - startDate;
+
+  if (diff < 0) return;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
 
 </body>
 </html>
