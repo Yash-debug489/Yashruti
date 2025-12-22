@@ -90,13 +90,24 @@ header p {
 .event.left { left: 0; justify-content: flex-start; }
 .event.right { left: 50%; }
 
+
 .date {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.8rem;
-  color: #888;
+  color: #000; /* full black */
+  font-weight: 600; /* slightly bolder */
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.3); /* subtle glow */
+  transition: all 0.3s ease;
 }
+
+/* Optional: intensify glow when hovering the card */
+.event:hover .date {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 
 .event.left .date { right: -80px; }
 .event.right .date { left: -80px; }
