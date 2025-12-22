@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<style>
+  /* Final Message Accordion Styling */
+.panel.final-message {
+  display: none;
+  background: #fff5f8;
+  text-align: center;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: fadeIn 1s ease;
+}
+
+.confession-container h2 {
+  color: #ff6b81;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+}
+
+.confession-container p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  max-width: 500px;
+  margin: 0 auto;
+  white-space: pre-line;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+  .accordion.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.accordion.locked::after {
+  content: "🔒";
+  position: absolute;
+  right: 15px;
+  font-size: 1.2rem;
+}
+  /* Pop-up overlay */
+#popupIntro {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255, 192, 203, 0.95); /* soft pink overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; /* above everything else */
+  flex-direction: column;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+/* Pop-up content */
+#popupContent {
+  text-align: center;
+  background: white;
+  padding: 30px 50px;
+  border-radius: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  animation: popupBounce 1s ease;
+}
+
+#popupContent h1 {
+  font-size: 2rem;
+  color: #ff6b6b;
+  margin-bottom: 15px;
+}
+
+#popupContent p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+#popupContent button {
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
+  background: #ff6b6b;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+#popupContent button:hover { transform: scale(1.1); }
+
+/* Bounce animation */
+@keyframes popupBounce {
+  0% { transform: scale(0.5); opacity:0; }
+  60% { transform: scale(1.1); opacity:1; }
+  100% { transform: scale(1); }
+}
+  #musicToggle {
+  position: fixed;
+  top: 60px;
+  right: 15px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+#musicToggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+  .floating-balloons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* keeps them behind your card */
+  pointer-events: none; /* so clicks go through */
+}
+
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 40px;
+  height: 50px;
+  background: radial-gradient(circle at 30% 30%, #ff9a9e, #fad0c4);
+  border-radius: 50% 50% 50% 50%;
+  opacity: 0.8;
+  animation: floatUp 12s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+}
+  /* Hearts style */
+.fallingHeart {
+  position: absolute;
+  font-size: 24px;
+  user-select: none;
+  pointer-events: none;
+}
+
+  #dareWheelContainer, #truthContainer {
+  margin-top: 15px;
+}
+
+#tttBoard {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.ttt-cell {
+  border: 2px solid #ff6b6b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.ttt-cell img {
+  width: 70%;
+  height: 70%;
+}
+
+
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    padding: 20px;
+    transition: background 0.5s, color 0.5s;
+    color: #333;
+  }
+  body.dark {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: #f0f0f0;
+  }
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background 0.5s, color 0.5s;
+    position: relative;
+  }
+  body.dark .card { background: white; color: #333; }
+
+  .theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #ff6b6b;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .theme-toggle:hover { background: #ff4757; }
+  body.dark .theme-toggle { background: #3498db; }
+
+  h1 { font-size: 2rem; color: #ff6b6b; text-align: center; margin-bottom: 10px; transition: color 0.5s; }
+  body.dark h1 { color: #f39c12; }
+
+  p { line-height: 1.6; margin: 10px 0; }
+
+  .accordion {
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 10px;
+  }
+  .accordion:hover { background: #e0e0e0; }
+  body.dark .accordion { background: #34495e; }
+  body.dark .accordion:hover { background: #3d566e; }
+
+  .panel { display: none; padding: 10px 15px; border-left: 3px solid #ff6b6b; margin-bottom: 10px; }
+  body.dark .panel { border-left: 3px solid #f39c12; }
+
+  
+   .keychain {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .keychain span {
+      font-size: 3rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .keychain span:hover {
+      transform: scale(1.3);
+    }
+
+
+  .heart {
+    font-size: 2.5rem;
+    text-align: center;
+    animation: pulse 1.5s infinite;
+    cursor: pointer;
+  }
+  @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+
+  .quizOption {
+    margin:5px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#ff6b6b;
+    color:white;
+    transition: background 0.3s;
+  }
+  .quizOption:hover { background:#ff4757; }
+  body.dark .quizOption { background:#3498db; color:white; }
+  body.dark .quizOption:hover { background:#2980b9; }
+  
+  #memoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.polaroid {
+  width: 150px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.polaroid img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.polaroid p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+}
+
+  canvas { position: fixed; pointer-events: none; top:0; left:0; width:100%; height:100%; z-index:9999; }
+
+</style>
+</head>
+<body>
+  <!-- Pop-up Intro -->
+<div id="popupIntro">
+  <div id="popupContent">
+    <h1>Happy Birthday Okuu! 💖</h1>
+    <p>This is ur website- a tiny world i created.💌</p>
+    <p>A special gift🎁 just for u to brighten up ur day and add a little sparkle to ur life🐣❤️</p>
+    <p></p>
+
+    <button id="enterBtn">✨ Dive in ✨</button>
+  </div>
+</div>
+  <div class="floating-balloons"></div>
+  <button id="musicToggle">🔊 Play Music</button>
+<audio id="bgMusic" loop>
+  <source src="images/music.mp3" type="audio/mpeg">
+</audio>
+<button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+<div class="card">
+  <h1>Happy Birthday Okuu 💫</h1>
+
+  <button class="accordion">🎉 Birthday wishes</button>
+  <div class="panel"><p>Happy birthday Shrutii🥳🥳💞. Wase the word OKU in japanese means the inner or deep part of something and calling u OKU means ur my "Inner person" , someone very close to my heart.Happy birthday yrr, enjoy ur day,i wish tum hamesa
+    khush raho , ur so adorable , so so cute, becoming gol matol too🤭🤭...Wase u can count on me I'm 
+    always here, whenever u feel like it call me,  text me , blast my phone , teri marji [wase i know u already do this, batane ka jarurat nii hai] ..I love u so so much🫂🫂..
+    This gift is my effort to put a smile on ur face and to make u feel special which i
+    hope
+    
+    
+    
+    
+    
+    i did. I hope safely reach kr gyaa hoo, wase i couriered it on 30 September because i feared late na ho jaye , 
+    kyuki beech me sat , sun tha and also festive season so i spent the whole night of 29sep making this because i really wanted to make something special,
+    u mean a lot to me, love u bae🥹🥹...It's ur 18th birthday and tumhari phutti kismat toh dekho next day test🥲🥲. I hope padh li ho , ur chill nd serious now, right? That's my girl.Wase jitna i can guess 6oct ko
+  ur reading this because 4oct ko delay hoga[my future prediction, as im writing this on 1oct]</p>
+    <p> Future me here on oct4, looks like i was right..Wase yesterday i didn't tell u this but ur haircut looks so cute .  </p>
+    <p>Wase the bottom button wants to be touched by u</p>
+     <div id="birthdaySticker" style="
+      display:inline-block;
+      background: #ff6b6b;
+      color:white;
+      padding:15px 25px;
+      border-radius:20px;
+      font-weight:bold;
+      cursor:pointer;
+      text-align:center;
+      margin-top:15px;
+      transition: transform 0.2s;
+  ">
+    🎉 Happy Birthday!(Touch me pls🥹🥹) 🎉
+  </div>
+  
+  
+  
+  </div>
+
+ <button class="accordion locked" data-password="SUNMOON">📦 Hidden Surprise</button>
+<div class="panel"><p>U unlocked this segment..Bht badhiya..SO Wanna know a secret , don't u think bracelet box doesn't exactly fit? Like ho skta hai niche kuch ho. Remove the padding(its glued btw) and check the bottom of the box, there's a surprise for u😁.
+Agge ka check krne ke baad hi padhna.</p></div>
+
+ <button class="accordion locked" data-password="SUNMOON">💌 Memories</button>
+<div class="panel"><p>I hope u got it. Iske do piece hai[sun and moon] the second[moon] is with me. I gave u the sun because u light up my world even from a far. I think maine bas negative aspects bataye haii mere 11, 12th ke but lets lighten up the mood, u know how dull life is for a jee aspirant(especially ppl like me jo 11th se suru kiye hai), its not very happening, don't get me wrong i liked it(the thrill of solving questions , the fun in learning)..but then u came along , we again started talking in class 12 and let me tell u those calls, were a source of happiness for me..u wouldn't believe it but in class 12 around October i think i used to wait for ur call every evening and bht baar hua tha kii i didn't slept in the afternoon  not only because ki mujhe padhna haii but also kyuki if i did i would miss ur call(if u did call that day). Then the day before my JEE mains first attempt (21 January night), u called me..That time i was alone in my hotel room , in pitch darkness , the only sound being of my own heart, beating so fast i thought i would die. But then suddenly after a month(i guess) u called me , made me laugh and during the call i felt calm , i forgot mera kal JEE hai[woh alag baat hai after the call , i again wasn't able to sleep bcz of my anxiety 😂]. Ur my SUN, i hope that little keychain would remind u of me , abt how much i care abt u and how much i love u. Make sure to bring it with u the next time we meet.</p>
+  <img src="images/key.jpg" alt="Memory" 
+       style="display:block; margin:10px auto; max-width:80%; border-radius:15px;">
+    <p> This cutiee, finding a permanent place in my wallet.</p>
+  
+  
+  </div>
+  <h2 style="text-align:center; color:#ff4b5c;">Password🔑</h3>
+   <!-- Friendship Quiz -->
+  <button class="accordion">🎓Sawal jawab</button>
+  <div class="panel" style="text-align:center;">
+    <div id="quizContainer">
+      <h3 id="quizTitle">Silly questions fr U🩷🎉</h3>
+      <div id="quizContent"></div>
+      <p id="quizResult" style="margin-top:10px; font-weight:bold;"></p>
+
+      <!-- Secret Hint Emoji -->
+      <div style="margin-top:15px;">
+        <span id="hintEmoji" style="font-size:2rem; cursor:pointer;">🕵️</span>
+      </div>
+    </div>
+  </div>
+
+ 
+
+
+ 
+  
+  <h3 style="text-align:center; color:#ff4b5c;">🎮Silly Games</h3>
+  
+  <button class="accordion">🎡 Spin the Wheel</button>
+<div class="panel" style="text-align:center; padding:20px; position:relative;">
+  <!-- Wheel container -->
+  <div style="position:relative; width:250px; height:250px; margin:0 auto;">
+    
+<!-- Pointer inside wheel container -->
+<div style="
+    width:0; height:0;
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-top:30px solid black;  /* changed color to black */
+    position:absolute;
+    top:-15px;  /* adjust so it sits above the wheel */
+    left:50%;
+    transform:translateX(-50%);
+    z-index:2;
+"></div>
+
+    <!-- Wheel itself -->
+    <div id="wheel" style="
+        width:250px; height:250px; border-radius:50%; 
+        background: conic-gradient(
+          #ff6b6b 0deg 60deg,
+          #ff9a9e 60deg 120deg,
+          #fad0c4 120deg 180deg,
+          #f39c12 180deg 240deg,
+          #f9d5e5 240deg 300deg,
+          #6a5acd 300deg 360deg
+        );
+        transition: transform 4s ease-out;
+    "></div>
+
+  </div>
+
+  <!-- Spin Button -->
+  <button id="spinBtn" style="
+      margin-top:20px; padding:10px 20px; border-radius:10px; 
+      background:#ff6b6b; color:white; border:none; cursor:pointer; font-weight:bold;
+  ">Spin!</button>
+
+  <!-- Result -->
+<p id="wheelResult" style="margin-top:15px; font-weight:bold; font-size:1.1rem;"></p>
+
+<!-- Prize Meaning -->
+<p id="wheelMeaning" style="margin-top:5px; font-style:italic; color:#555;"></p>
+  <!-- Hidden Easter Egg Popup -->
+  <div id="hiddenMessage" style="
+      display:none;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      background: rgba(255,255,255,0.95);
+      border-radius:15px;
+      padding:20px;
+      text-align:center;
+      box-shadow:0 0 20px rgba(0,0,0,0.3);
+      z-index:10;
+      max-width:80%;
+      font-weight:bold;
+  "></div>
+</div>
+<button class="accordion">🎮 Tic Tac Toe(SY version)</button>
+<div class="panel" style="text-align:center; padding:20px;">
+  
+  <div id="tttContainer">
+    <!-- Mode Toggle -->
+    <div id="modeToggle" style="text-align:center; margin-bottom:10px;">
+      Mode: 
+      <select id="gameMode">
+        <option value="offline">2player for u and ur sister</option>
+        <option value="easy">Reverse Tic-Tac-Toe(objective is to lose)</option>
+        <option value="hard">Computer</option>
+      </select>
+    </div>
+    
+    <!-- Board -->
+    <div id="tttBoard">
+      <div class="ttt-cell" data-index="0"></div>
+      <div class="ttt-cell" data-index="1"></div>
+      <div class="ttt-cell" data-index="2"></div>
+      <div class="ttt-cell" data-index="3"></div>
+      <div class="ttt-cell" data-index="4"></div>
+      <div class="ttt-cell" data-index="5"></div>
+      <div class="ttt-cell" data-index="6"></div>
+      <div class="ttt-cell" data-index="7"></div>
+      <div class="ttt-cell" data-index="8"></div>
+    </div>
+
+    <!-- Result -->
+    <div id="tttResult" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
+
+    <!-- Reset -->
+    <button id="tttReset" style="display:block; margin:10px auto; padding:5px 15px;">Reset</button>
+  </div>
+
+</div>
+  <button class="accordion">🎲 Truth or Dare</button>
+<div class="panel" style="text-align:center;">
+  <p>Choose your challenge:</p>
+  <div style="display:flex; justify-content:center; gap:20px; margin-bottom:15px;">
+    <button id="truthBtn" class="quizOption">Truth</button>
+    <button id="dareBtn" class="quizOption">Dare</button>
+  </div>
+
+  <!-- Dare Wheel -->
+  <div id="dareWheelContainer" style="display:none; text-align:center; position:relative;">
+    <div style="position:relative; width:200px; height:200px; margin:0 auto;">
+      <div id="dareWheel" style="
+          width:200px; height:200px; border-radius:50%;
+          background: conic-gradient(
+            #ff6b6b 0deg 60deg,
+            #ff9a9e 60deg 120deg,
+            #fad0c4 120deg 180deg,
+            #f39c12 180deg 240deg,
+            #f9d5e5 240deg 300deg,
+            #6a5acd 300deg 360deg
+          );
+          transition: transform 4s ease-out;
+      "></div>
+      <!-- Pointer -->
+      <div style="
+          width:0; height:0;
+          border-left:10px solid transparent;
+          border-right:10px solid transparent;
+          border-top:20px solid black;
+          position:absolute; top:-10px; left:50%;
+          transform:translateX(-50%); z-index:2;
+      "></div>
+    </div>
+    <button id="spinDareBtn" style="margin-top:10px;" class="quizOption">Spin Dare!</button>
+    <p id="dareResult" style="margin-top:10px; font-weight:bold;"></p>
+  </div>
+
+  <!-- Truth Reaction -->
+  <div id="truthContainer" style="display:none;">
+    <p id="truthPrompt" style="font-weight:bold; margin-bottom:10px;"></p>
+    <button id="nextTruth" class="quizOption" style="display:none;">Next</button>
+  </div>
+</div>
+ <button class="accordion">💘 Catch my Heart</button>
+<div class="panel" style="text-align:center; padding:20px;">
+  <p>Move the basket with ⬅️ and ➡️ keys or swipe on mobile to catch the falling hearts ❤️</p>
+
+  <!-- Game Container -->
+  <div id="heartGameContainer" style="position:relative; width:300px; height:400px; margin:0 auto; border:2px solid #ff6b6b; border-radius:10px; overflow:hidden; background:#fff;">
+    <div id="basket" style="position:absolute; bottom:10px; left:130px; width:40px; height:40px; background:#ff6b6b; border-radius:10px;"></div>
+    <p id="heartScore" style="position:absolute; top:10px; left:10px; font-weight:bold;">Score: 0</p>
+
+    <!-- Start/Restart Button -->
+    <button id="heartStart" style="position:absolute; bottom:10px; right:10px; padding:5px 10px; background:#ff6b6b; color:#fff; border:none; border-radius:5px; cursor:pointer;">Start</button>
+  </div>
+
+  <p id="heartResult" style="font-weight:bold; margin-top:10px; color:#ff6b6b;"></p>
+</div>
+
+
+    <h3 style="text-align:center; color:#ff4b5c;">💌 Final Message</h3>
+
+
+
+  <button class="accordion locked" data-password="1890">💌 Final Message</button>
+<div class="panel final-message">
+  <div class="confession-container">
+    <h2>My Heart’s Confession💖</h2>
+    <p>
+      You’ve reached the very end — Hope u enjoyed😇.
+      <br><br>
+      <!-- 👉 Replace below text with your actual confession -->
+    <p>  I’ve wanted to tell you this for a long time. I love you — not just as a best friend, but romantically.</p>
+
+<p>Being your best friend has meant the world to me, but deep down my heart has always wanted more.</p>
+
+<p>I don’t know what the future holds, but I know I want you in it. If you choose me, I promise I’ll work hard to build a future so good it would feel like a dream.</p>
+
+<p>You’ve become the calm to my chaos — the one person who makes everything feel right.</p>
+
+<p>I’m not expecting anything in return. I just needed to be honest with you, because you deserve to know how deeply you’re loved.</p>
+
+<p>Whatever your answer, I’ll always cherish the precious bond we share. You once told me my timing wasn’t right that time — I hope it is now.</p>
+    <p>Waah yrr aisa lg ra matrimony likh ra.</p>
+</p>
+    </p>
+  </div>
+</div>
+
+
+
+
+
+  
+
+  <!-- Keychain Mini-Game -->
+   <div class="keychain">
+      <span onclick="alert('This is u my SUN 🌞 — always lighting my world!')">🌞</span>
+      <span onclick="alert('This is the MOON 🌙 — waiting to be with you!')">🌙</span>
+    </div>
+
+  <!-- Clickable Heart -->
+  <div class="heart" id="heart">❤️</div>
+  <div style="text-align:center; margin-top:20px;">
+  <span id="cameraEmoji" style="font-size:2.5rem; cursor:pointer;">📷</span>
+</div>
+
+<!-- Container where polaroids will appear -->
+<div id="memoryContainer" style="position:relative; width:100%; min-height:250px; margin-top:10px;"></div>
+</div>
+<!-- Camera Emoji for Memories -->
+
+
+<canvas id="confetti"></canvas>
+
+<script>
+  const popup = document.getElementById("popupIntro");
+const enterBtn = document.getElementById("enterBtn");
+
+enterBtn.addEventListener("click", () => {
+  popup.style.opacity = "0";
+  setTimeout(() => { popup.style.display = "none"; }, 800);
+});
+  (function(){
+  const container = document.getElementById("heartGameContainer");
+  const basket = document.getElementById("basket");
+  const scoreDisplay = document.getElementById("heartScore");
+  const resultDisplay = document.getElementById("heartResult");
+  const startBtn = document.getElementById("heartStart");
+
+  let basketX = 130;
+  const basketWidth = 40;
+  let score = 0;
+  let hearts = [];
+  let gameActive = false;
+  const maxScore = 18;
+  let heartSpawner = null; // control interval
+
+  // Move basket with arrow keys
+  function moveBasket(x){
+    basketX = Math.max(0, Math.min(300 - basketWidth, x));
+    basket.style.left = basketX + "px";
+  }
+
+  // Keyboard controls
+  window.addEventListener("keydown", (e)=>{
+    if(!gameActive) return;
+    if(e.key === "ArrowLeft") moveBasket(basketX - 20);
+    if(e.key === "ArrowRight") moveBasket(basketX + 20);
+  });
+
+  // Touch controls
+  let touchStartX = null;
+  container.addEventListener("touchstart", (e)=>{ touchStartX = e.touches[0].clientX; });
+  container.addEventListener("touchmove", (e)=>{
+    if(!gameActive || touchStartX === null) return;
+    const touchX = e.touches[0].clientX;
+    const delta = touchX - touchStartX;
+    moveBasket(basketX + delta);
+    touchStartX = touchX;
+    e.preventDefault();
+  });
+  container.addEventListener("touchend", ()=>{ touchStartX = null; });
+
+  // Create falling heart
+  function createHeart(){
+    if(!gameActive) return;
+    const heart = document.createElement("div");
+    heart.classList.add("fallingHeart");
+    heart.style.left = Math.floor(Math.random() * 260) + "px";
+    heart.style.top = "-30px";
+    heart.innerText = "❤️";
+    container.appendChild(heart);
+    hearts.push(heart);
+
+    const fallInterval = setInterval(()=>{
+      if(!gameActive){
+        clearInterval(fallInterval);
+        heart.remove();
+        return;
+      }
+
+      const heartTop = parseInt(heart.style.top);
+      heart.style.top = (heartTop + 5) + "px";
+
+      const heartLeft = parseInt(heart.style.left);
+      const heartRight = heartLeft + 24;
+      const basketRight = basketX + basketWidth;
+
+      // Collision
+      if(heartTop + 24 >= 370 && heartTop + 24 <= 410){
+        if(heartRight > basketX && heartLeft < basketRight){
+          score++;
+          scoreDisplay.innerText = "Score: " + score;
+          heart.remove();
+          clearInterval(fallInterval);
+          hearts = hearts.filter(h => h !== heart);
+
+          if(score >= maxScore){
+            resultDisplay.innerText = "💖Happy 18th birthday!🫠\nNumber: 18";
+            stopGame();
+          }
+        }
+      }
+
+      // Missed heart
+      if(heartTop > 400){
+        heart.remove();
+        clearInterval(fallInterval);
+        hearts = hearts.filter(h => h !== heart);
+      }
+    }, 50);
+  }
+
+  // Start / Restart Game
+  function startGame(){
+    stopGame(); // ensure clean start
+    score = 0;
+    scoreDisplay.innerText = "Score: 0";
+    resultDisplay.innerText = "";
+    basketX = 130;
+    moveBasket(basketX);
+    hearts.forEach(h=>h.remove());
+    hearts = [];
+    gameActive = true;
+
+    heartSpawner = setInterval(()=>{ if(gameActive) createHeart(); }, 1000);
+  }
+
+  // Stop Game
+  function stopGame(){
+    gameActive = false;
+    clearInterval(heartSpawner);
+    hearts.forEach(h => h.remove());
+    hearts = [];
+  }
+
+  // Start button functionality
+  startBtn.addEventListener("click", ()=>{
+    startGame();
+    startBtn.innerText = "Restart";
+  });
+})();
+
+const music = document.getElementById("bgMusic");
+const toggleBtn = document.getElementById("musicToggle");
+let isPlaying = false;
+
+// Lower the volume to 30%
+music.volume = 0.3;
+
+toggleBtn.addEventListener("click", () => {
+  if (isPlaying) {
+    music.pause();
+    toggleBtn.textContent = "🔊 Play Music";
+  } else {
+    music.play();
+    toggleBtn.textContent = "🔈 Pause Music";
+  }
+  isPlaying = !isPlaying;
+});
+ 
+  
+
+
+  // ========== Truth or Dare ==========
+const truthBtn = document.getElementById("truthBtn");
+const dareBtn = document.getElementById("dareBtn");
+const dareWheelContainer = document.getElementById("dareWheelContainer");
+const truthContainer = document.getElementById("truthContainer");
+const dareWheel = document.getElementById("dareWheel");
+const spinDareBtn = document.getElementById("spinDareBtn");
+const dareResult = document.getElementById("dareResult");
+const truthPrompt = document.getElementById("truthPrompt");
+const nextTruth = document.getElementById("nextTruth");
+
+// Dare list
+const dares = [
+  "send me one of ur iconic selfie with the silliest expressions ",
+  "Record a 5-sec barati dance 🕺💃",
+  "Make sounds of 3different animals😁",
+  "Sing your favorite line from chikni chameli😗",
+  "Sing me a song",
+  "Don't eat junk food for a day"
+];
+
+// Truth prompts (personal / interactive)
+const truths = [
+  "If one day u woke up as me, What's the first embarrassing thing u would do?",
+  "If ur parents installed cctv in ur room,kaun sa act dekh ke they would be surprised?",
+  "What's your happiest memory from last month? 🌸",
+  "What's the most embarrassing incident of ur life, jisko sochte hi cringe ajataa ho? ",
+  "If i appeared in front u right now, whats that one place that u really want to visit with me in lucknow?"
+];
+
+let currentTruth = 0;
+
+// Show Dare
+dareBtn.addEventListener("click", () => {
+  dareWheelContainer.style.display = "block";
+  truthContainer.style.display = "none";
+  dareResult.innerText = "";
+});
+
+// Show Truth
+truthBtn.addEventListener("click", () => {
+  dareWheelContainer.style.display = "none";
+  truthContainer.style.display = "block";
+  currentTruth = 0;
+  truthPrompt.innerText = truths[currentTruth];
+  nextTruth.style.display = "inline-block";
+});
+
+// Spin Dare Wheel
+spinDareBtn.addEventListener("click", () => {
+  const randomDeg = Math.floor(Math.random() * 360);
+  const spins = Math.floor(Math.random() * 5) + 5;
+  const rotation = spins * 360 + randomDeg;
+
+  dareWheel.style.transition = "transform 4s cubic-bezier(0.33, 1, 0.68, 1)";
+  dareWheel.style.transform = `rotate(${rotation}deg)`;
+
+  dareWheel.addEventListener("transitionend", function handler() {
+    const normalized = rotation % 360;
+    const segment = Math.floor(normalized / 60);
+    const dareIndex = 5 - segment;
+    const dareText = dares[dareIndex];
+    dareResult.innerText = `Your dare: ${dareText}`;
+
+    // Confetti
+    confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { y: 0.6 },
+      emojis: ["🎉","🥳","😜","💖"]
+    });
+
+    dareWheel.style.transition = "none";
+    dareWheel.style.transform = `rotate(${normalized}deg)`;
+    dareWheel.removeEventListener("transitionend", handler);
+  });
+});
+
+// Truth Next
+nextTruth.addEventListener("click", () => {
+  currentTruth++;
+  if(currentTruth >= truths.length){
+    truthPrompt.innerText = "All done! Hope you enjoyed 🙂";
+    nextTruth.style.display = "none";
+  } else {
+    truthPrompt.innerText = truths[currentTruth];
+  }
+});
+
+  // ===== Tic Tac Toe =====
+const board = Array(9).fill("");
+let currentPlayer = "X";
+let gameActive = true;
+
+const xImg = "images/x.jpg"; // your X image path
+const oImg = "images/o.jpg"; // your O image path
+
+const tttCells = document.querySelectorAll(".ttt-cell");
+const resultDiv = document.getElementById("tttResult");
+const resetBtn = document.getElementById("tttReset");
+const modeSelect = document.getElementById("gameMode");
+const modeInfo = document.getElementById("modeInfo"); // info text div
+
+function checkWin(bd) {
+  const winCombos = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+  for (let combo of winCombos) {
+    const [a,b,c] = combo;
+    if (bd[a] && bd[a] === bd[b] && bd[a] === bd[c]) return bd[a];
+  }
+  return bd.includes("") ? null : "Draw";
+}
+
+function renderBoard() {
+  tttCells.forEach((cell,i) => {
+    cell.innerHTML = board[i] === "X" ? `<img src="${xImg}">` :
+                     board[i] === "O" ? `<img src="${oImg}">` : "";
+  });
+}
+
+function computerMoveEasy() {
+  let empty = board.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+  return empty[Math.floor(Math.random()*empty.length)];
+}
+
+function computerMoveHard() {
+  let empty = board.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+  // 1. Win
+  for (let i of empty) { 
+    let copy=[...board]; 
+    copy[i]="O"; 
+    if (checkWin(copy)==="O") return i; 
+  }
+  // 2. Block
+  for (let i of empty) { 
+    let copy=[...board]; 
+    copy[i]="X"; 
+    if (checkWin(copy)==="X") return i; 
+  }
+  // 3. Random
+  return empty[Math.floor(Math.random()*empty.length)];
+}
+
+function makeMove(index) {
+  if (!gameActive || board[index] !== "") return;
+  board[index] = currentPlayer;
+  renderBoard();
+
+  let winner = checkWin(board);
+
+  if (winner) { 
+    if (modeSelect.value === "easy") { 
+      // Reverse mode: whoever makes 3 in a row loses
+      if (winner === "X") {
+        resultDiv.innerText = "Yash Loses (Reverse Mode)![Yrr mujhe jitao]";
+      } else if (winner === "O") {
+        resultDiv.innerText = "Shruti Loses (Reverse Mode)! [😅]";
+      } else {
+        resultDiv.innerText = "It's a Draw!";
+      }
+    } else {
+      // Normal mode
+      if (winner === "X") {
+        resultDiv.innerText = "Yash Wins! Hehe 🎉"; 
+      } else if (winner === "O") {
+        resultDiv.innerText = "Shruti Wins! 😜";
+      } else {
+        resultDiv.innerText = "It's a Draw!";
+      }
+    }
+    gameActive = false; 
+    return; 
+  }
+
+  if (currentPlayer === "X" && modeSelect.value !== "offline") {
+    currentPlayer = "O";
+    let compIndex = modeSelect.value === "easy" ? computerMoveEasy() : computerMoveHard();
+    board[compIndex] = "O";
+    renderBoard();
+    winner = checkWin(board);
+
+    if (winner) { 
+      if (modeSelect.value === "easy") { 
+        if (winner === "X") {
+          resultDiv.innerText = "Yash Loses (Reverse Mode)! 😜";
+        } else if (winner === "O") {
+          resultDiv.innerText = "Shruti Loses (Reverse Mode)! 😜";
+        } else {
+          resultDiv.innerText = "It's a Draw!";
+        }
+      } else {
+        resultDiv.innerText = winner === "Draw" ? "It's a Draw!" : `Shruti Wins!🎉`; 
+      }
+      gameActive = false; 
+      return; 
+    }
+    currentPlayer = "X";
+  } else { 
+    currentPlayer = currentPlayer === "X" ? "O" : "X"; 
+  }
+}
+
+tttCells.forEach((cell,i) => cell.addEventListener("click", () => makeMove(i)));
+
+resetBtn.addEventListener("click", () => {
+  board.fill(""); 
+  renderBoard(); 
+  resultDiv.innerText=""; 
+  gameActive=true; 
+  currentPlayer="X";
+});
+
+// Mode info text
+modeSelect.addEventListener("change", () => {
+  if (modeSelect.value === "easy") {
+    modeInfo.innerText = "Reverse Tic Tac Toe: Try NOT to win!";
+  } else {
+    modeInfo.innerText = "";
+  }
+});
+
+
+
+
+
+// Prize definitions
+const results = [
+  { prize: 'Prize 1 🎁', meaning: 'Japan trip' },
+  { prize: 'Prize 2 🎉', meaning: 'Darjeeling trip' },
+  { prize: 'Prize 3 🍰', meaning: 'Dancing in mumbai rains' },
+  { prize: 'Prize 4 🥳', meaning: 'Party by me🥳' },
+  { prize: 'Prize 5 🌟', meaning: 'Make a wish 🌠' },
+  { prize: 'Prize 6 💖', meaning: 'Love u💌' }
+];
+
+// DOM elements
+const spinBtn = document.getElementById('spinBtn');
+const wheel = document.getElementById('wheel');
+const resultDisplay = document.getElementById('wheelResult');
+const meaningDisplay = document.getElementById('wheelMeaning');
+
+let spinning = false; // flag to prevent multiple spins
+
+spinBtn.addEventListener('click', () => {
+  if (spinning) return; // ignore clicks during spin
+  spinning = true;
+
+  // Generate random spin
+  const randomDeg = Math.floor(Math.random() * 360); // 0–359°
+  const spins = Math.floor(Math.random() * 4) + 5;   // 5–8 full spins
+  const rotationThisSpin = spins * 360 + randomDeg;
+
+  // Apply smooth spin
+  wheel.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
+  wheel.style.transform = `rotate(${rotationThisSpin}deg)`;
+
+  // After spin ends
+  wheel.addEventListener('transitionend', function handler() {
+    const normalized = rotationThisSpin % 360;          // normalize to 0-360
+    const segment = Math.floor(normalized / 60);       // 6 segments
+
+    const result = results[5 - segment];              // clockwise mapping
+    resultDisplay.innerText = `You got: ${result.prize}`;
+    meaningDisplay.innerText = result.meaning;
+
+    // Reset wheel visually for next spin without slowdown
+    wheel.style.transition = 'none';
+    wheel.style.transform = `rotate(${normalized}deg)`; 
+
+    spinning = false; // allow next spin
+    wheel.removeEventListener('transitionend', handler);
+  });
+  // Easter egg interaction for multiple prizes
+const hiddenMessage = document.getElementById('hiddenMessage');
+const closeHidden = document.getElementById('closeHidden');
+
+// Map prize meanings to hidden messages
+const hiddenMessages = {
+  'Japan trip': '✈️ U found this hehehe...Ur the reason this even exists..I hope u smilled and laughed and enjoyed..Thats all i want TBH,I wish one day ill get to make u smile like this in person :)',
+  'Party by me🥳': '🎉 Surprise! Jarur let us meet',
+  'Make a wish 🌠': '🌟 Batao kya chahiye💫'
+};
+
+meaningDisplay.addEventListener('click', () => {
+  const msg = hiddenMessages[meaningDisplay.innerText];
+  if (msg) {
+    hiddenMessage.innerHTML = `${msg}<br><br>
+      <button id="closeHidden" style="
+        margin-top:10px;
+        padding:5px 10px;
+        border-radius:10px;
+        border:none;
+        background:#ff6b6b;
+        color:white;
+        cursor:pointer;
+        font-weight:bold;
+      ">Close</button>`;
+    
+    // Show the popup
+    hiddenMessage.style.display = 'block';
+
+    // Re-attach close button listener
+    document.getElementById('closeHidden').addEventListener('click', () => {
+      hiddenMessage.style.display = 'none';
+    });
+  }
+});
+});
+    const sticker = document.getElementById('birthdaySticker');
+
+  sticker.addEventListener('click', () => {
+    // small pop animation
+    sticker.style.transform = 'scale(1.2)';
+    setTimeout(() => { sticker.style.transform = 'scale(1)'; }, 200);
+
+    // trigger confetti
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      emojis: ['🎂', '🎉', '🍰', '🥳'] // cake + birthday emojis
+    });
+  });
+
+ const memories = [
+  {img:"images/poto1.jpg", caption:"World war 3 ❌  Sticker war✅"},
+  {img:"images/poto2.jpg", caption:"I want to be the sun😔"},
+  {img:"images/poto3.jpg", caption:"Tumharii ankhe👀💗"},
+  {img:"images/poto4.jpg", caption:"Tumhari psychopath wali ankhe👀"},
+  {img:"images/poto5.jpg", caption:"Hamarii ankhee👀\nNumber: 15"} // special one
+];
+
+const cameraEmoji = document.getElementById("cameraEmoji");
+const memoryContainer = document.getElementById("memoryContainer");
+let currentMemory = 0;
+
+cameraEmoji.addEventListener("click", () => {
+  if (currentMemory >= memories.length) return; // stop if all shown
+
+  const mem = memories[currentMemory];
+  const polaroid = document.createElement("div");
+  polaroid.classList.add("polaroid");
+  polaroid.style.position = "relative"; // important for grid flow
+  polaroid.innerHTML = `<img src="${mem.img}" alt="memory"><p>${mem.caption}</p>`;
+  memoryContainer.appendChild(polaroid);
+
+  // Small "pop in" animation
+  polaroid.style.opacity = 0;
+  polaroid.style.transform = "scale(0.5) rotate(-3deg)";
+  setTimeout(() => {
+    polaroid.style.opacity = 1;
+    polaroid.style.transform = "scale(1) rotate(0deg)";
+  }, 50);
+
+  currentMemory++;
+});
+  // Theme toggle
+  function toggleTheme() { document.body.classList.toggle("dark"); }
+
+  // Accordion
+  const accordions = document.getElementsByClassName("accordion");
+for (let i = 0; i < accordions.length; i++) {
+  accordions[i].addEventListener("click", function() {
+    const panel = this.nextElementSibling;
+
+    // Check if accordion is locked
+    if (this.classList.contains("locked")) {
+
+      // 🎯 Custom alert for the last two locked accordions
+      if (this.innerText.includes("Hidden Surprise") || this.innerText.includes("Memories")) {
+        alert("🔐 To unlock this section, you need to get 6/6 score in Sawal Jawab! 📝");
+      }
+
+      // Final message logic
+      if (this.innerText.includes("Final Message")) {
+        alert("🔐 To unlock this final message, multiply the 3 hidden numbers:\n1️⃣ From Sawal Jawab (5/6 score)\n2️⃣ From Catch the Heart message\n3️⃣ From the last Polaroid caption(Click on the camera emoji 5 times).\n\nThen enter their product as the password.");
+      }
+
+      const userPassword = prompt("Enter the password to unlock this section 🔑");
+      if (userPassword === this.dataset.password) {
+        alert("🎉 Correct! Wowww yrr.");
+        this.classList.remove("locked");
+        this.style.opacity = 1;
+        panel.style.display = "block";
+      } else {
+        alert("❌ Wrong password! Get all hints before trying again.");
+      }
+      return; // stop further toggling
+    }
+
+    // Normal accordion toggle
+    this.classList.toggle("active");
+    panel.style.display = (panel.style.display === "block") ? "none" : "block";
+
+    // Quiz refresh logic (optional)
+    if (this.innerText.includes("Sawal jawab") && panel.style.display === "block") {
+      currentQuestion = 0; 
+      score = 0; 
+      quizResult.innerText = ""; 
+      loadQuestion();
+    }
+  });
+}
+
+  // Friendship Quiz
+  const quizQuestions = [
+    { question: "On 1st oct jab me late so ke utha tha us din tumne mujhe VN me kya nai bola tha?", options: ["असुर","दैत्य","बेताल","राक्षस","दानव"], answer:"बेताल" },
+    { question: "Jeewan me kuch acha krne ke liye", options: ["Padhai krni hogi","Ache connections banane honge","Khud pe kaam krna hoga","Kuch acha krna hoga"], answer:"Kuch acha krna hoga" },
+    { question: "The luckiest day of ur life😁", options: ["15MAY 2007","145 before u were born","The day i was born","ALL😁😁"], answer:"ALL😁😁"},
+    { question: "whats my favourite chocolate?", options: ["Kit-kat","Dairy milk","Munch","Nestle","Perk"], answer:"Kit-kat"},
+    { question: "Whats ur value in my life?", options: ["69","10^10^10","1billion","8"], answer:"8" },
+    { question: "Chalo easy question,whose birthday is on 7oct", options: ["The person i love","The women i talk to the most","The girl i know with the most beautiful eyes","ALL"], answer:"ALL"}
+  ];
+  let currentQuestion=0, score=0;
+  const quizContent=document.getElementById("quizContent");
+  const quizResult=document.getElementById("quizResult");
+
+  function loadQuestion() {
+    if(currentQuestion>=quizQuestions.length){
+      let message="";
+      if(score===quizQuestions.length){ message="🎉6 out of 6🥳🥳| Epic win — my gulabjamun❤️\nPassword: SUNMOON"; triggerConfetti(); }
+      else if(score==5){ message="5 out of 6🤧🤧 |  Fantastic !\nNumber: 7"; triggerConfetti(); }
+      else if(score==4){ message="4 out of 6 | I knew you’d get here eventually, bht badhiyaa😉"; triggerConfetti();}
+      else if(score==3){ message="3 out of 6 | Looks like you’re trying, I’ll give you credit 😅"; triggerConfetti();}
+      else if(score==2){ message="2 out of 6 | 4 real though, you can obviously do better than this"; }
+      else if(score==1){ message="1 out of 6 | Seriously, i think i'll have to give u a 101 coaching"; }
+      else{ message="0 out of 6 | Uhhh..Who hacked my bae's PC 😰..."; }
+      quizContent.innerHTML=""; quizResult.innerText=message; return;
+    }
+
+    const q=quizQuestions[currentQuestion];
+    let html=`<p style="font-weight:bold;">${q.question}</p>`;
+    q.options.forEach(option=>{ html+=`<button class="quizOption">${option}</button>`; });
+    quizContent.innerHTML=html;
+
+    const options=document.getElementsByClassName("quizOption");
+    for(let i=0;i<options.length;i++){
+      options[i].addEventListener("click", function(){
+        if(this.innerText===q.answer){ score++; }
+        currentQuestion++; loadQuestion();
+      });
+    }
+  }
+
+  // Secret Hint Emoji
+  document.getElementById("hintEmoji").addEventListener("click", ()=>{
+    alert("💡 Secret Hint: Wase there is another code here[Different from the password]for it u need to score all possible marks from 0-6 and note the first letter from each result message and place them vertically.Example:if u get 3 marks\n RESULT MESSAGE=(3 out of 6 | Looks like you’re trying, I’ll give you credit 😅) the Letter to take here is 'L', Once u got the message text me that💌");
+  });
+
+
+  // Clickable Heart
+  const heart=document.getElementById("heart");
+  heart.addEventListener("click", ()=>{
+    heart.style.transform="scale(2)";
+    setTimeout(()=>{ heart.style.transform="scale(1)"; alert("💖 Sending you love!"); triggerConfetti(); },500);
+  });
+
+  // ================= Confetti =================
+  const canvas=document.getElementById("confetti");
+  const ctx=canvas.getContext("2d");
+  let confettiParticles=[];
+  function resizeCanvas(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  window.addEventListener("resize", resizeCanvas); resizeCanvas();
+
+  function createConfetti() {
+    for(let i=0;i<150;i++){
+      confettiParticles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height- canvas.height,
+        r: Math.random()*6+2,
+        d: Math.random()*50+1,
+        color: `hsl(${Math.random()*360},100%,50%)`,
+        tilt: Math.random()*10-10
+      });
+    }
+  }
+
+  function drawConfetti(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    confettiParticles.forEach(p=>{
+      ctx.beginPath();
+      ctx.moveTo(p.x+p.tilt,p.y);
+      ctx.lineTo(p.x+p.tilt+ p.r/2, p.y + p.r);
+      ctx.strokeStyle=p.color;
+      ctx.lineWidth=p.r/2;
+      ctx.stroke();
+    });
+    updateConfetti();
+  }
+
+  function updateConfetti(){
+    confettiParticles.forEach((p,i)=>{
+      p.y += Math.cos(0.01+p.d)*2 + 2 + p.r/2;
+      p.x += Math.sin(0.01)*2;
+      p.tilt = Math.sin(p.y/10);
+      if(p.y>canvas.height){ confettiParticles.splice(i,1); }
+    });
+  }
+
+  function triggerConfetti(){
+    createConfetti();
+    const confettiInterval=setInterval(()=>{
+      drawConfetti();
+      if(confettiParticles.length===0) clearInterval(confettiInterval);
+    }, 20);
+  }
+
+function createBalloon() {
+  const balloon = document.createElement("div");
+  balloon.classList.add("balloon");
+
+  // random size
+  const size = Math.random() * 30 + 30; // 30px–60px
+  balloon.style.width = size + "px";
+  balloon.style.height = size * 1.2 + "px";
+
+  // random color
+  const colors = ["#ff9a9e", "#fad0c4", "#fbc2eb", "#a1c4fd", "#c2e9fb"];
+  balloon.style.background = `radial-gradient(circle at 30% 30%, ${colors[Math.floor(Math.random()*colors.length)]}, #fff)`;
+
+  // random horizontal position
+  balloon.style.left = Math.random() * 100 + "vw";
+
+  // random speed
+  balloon.style.animationDuration = (8 + Math.random() * 8) + "s";
+
+  document.querySelector(".floating-balloons").appendChild(balloon);
+
+  // remove after floating out
+  setTimeout(() => balloon.remove(), 15000);
+}
+
+// keep generating balloons
+setInterval(createBalloon, 800);
+
+
+  
+</script>
+</body>
+</html>
