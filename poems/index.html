@@ -4,138 +4,146 @@
 <meta charset="UTF-8">
 <title>Poems 🤍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Indie+Flower&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:wght@500;600&family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  margin: 0;
-  padding: 0;
+  font-family: "Inter", sans-serif;
+  color: #2b2b2b;
   min-height: 100vh;
-  font-family: 'Indie Flower', cursive;
-  background: #fefaf6;
-  color: #2d2d2d;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 60px;
+
+  /* Warm, notebook dusk – DIFFERENT from hub */
+  background:
+    linear-gradient(180deg, #fbf4ea 0%, #f1ede6 60%, #e9ecf5 100%);
+}
+
+/* subtle paper texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.4), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(0,0,0,0.03), transparent 45%);
+  pointer-events: none;
 }
 
 /* Header */
 header {
   text-align: center;
-  padding: 60px 20px 30px;
+  padding: 80px 20px 40px;
 }
 
 header h1 {
-  font-family: 'Parisienne', cursive;
-  font-size: 4rem;
-  color: #6b4e3c;
+  font-family: "Pacifico", cursive;
+  font-size: 3rem;
 }
 
 header p {
-  font-size: 1.2rem;
-  color: #5a4335;
-  font-style: italic;
-  margin-top: 5px;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #777;
 }
 
-/* Poems Section */
+/* Container */
 .poems-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  width: 90%;
-  max-width: 1000px;
-  margin-top: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
 }
 
-/* Highlighted Card */
-.highlight-card {
-  background: #fff3e6;
-  border-left: 6px solid #d18b6b;
-  padding: 25px 20px;
-  border-radius: 14px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  text-align: center;
-  grid-column: 1 / -1; /* spans full width */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.highlight-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-}
-
-.highlight-card img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 15px;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-
-.highlight-card h3 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: #6b4e3c;
-  border-bottom: 1px solid #d18b6b;
-  padding-bottom: 5px;
-}
-
-/* Poem Cards */
+/* Poem card */
 .poem-card {
-  background: #fff;
-  padding: 20px 25px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  background: #fffdf9;
+  border-radius: 22px;
+  padding: 22px 26px;
+  margin: 38px auto;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  transition: 0.35s ease;
+}
+
+/* Summary */
+.poem-card summary {
+  list-style: none;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  position: relative;
-  border-left: 4px solid #d18b6b;
+  text-align: center;
 }
 
-.poem-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+.poem-card summary::-webkit-details-marker {
+  display: none;
 }
 
-/* Expandable poem text */
-.poem-card p {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.5s ease;
-  opacity: 0;
-  margin-top: 10px;
-  line-height: 1.6;
-  color: #3a2f2f;
-}
-
-.poem-card.expanded p {
-  max-height: 500px;
-  opacity: 1;
-}
-
-.poem-card h3 {
-  margin: 0;
+.poem-card summary h2 {
+  font-family: "Playfair Display", serif;
   font-size: 1.6rem;
-  color: #6b4e3c;
-  border-bottom: 1px solid #d18b6b;
-  padding-bottom: 5px;
 }
 
-/* Footer */
+.poem-card summary p {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* heart indicator */
+.poem-card summary::after {
+  content: "♡";
+  display: block;
+  margin-top: 8px;
+  font-size: 1.1rem;
+  color: #d38c6a;
+  transition: transform 0.3s ease;
+}
+
+.poem-card[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* poem content */
+.poem-content {
+  margin-top: 26px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+/* highlighted pact */
+.poem-card.highlight {
+  background: linear-gradient(180deg, #fff1dc, #fffdf8);
+  border: 1px solid rgba(210, 150, 100, 0.35);
+}
+
+/* image inside poem */
+.poem-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 16px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 18px 35px rgba(0,0,0,0.22);
+}
+
+/* STATIC DOODLES — appear only on scroll */
+.doodles {
+  margin: 90px auto 20px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  opacity: 0.95;
+}
+
+.doodles img {
+  width: 70px;
+}
+
+/* footer */
 footer {
   text-align: center;
-  font-size: 0.8rem;
-  color: #555;
-  padding: 50px 0 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .poems-container {
-    grid-template-columns: 1fr;
-  }
+  font-size: 0.75rem;
+  color: #777;
+  padding: 40px 0;
 }
 </style>
 </head>
@@ -143,69 +151,70 @@ footer {
 <body>
 
 <header>
-  <h1>Poems & Memories</h1>
+  <h1>Poems</h1>
   <p>Moments captured in words… and images</p>
 </header>
 
-<div class="poems-container">
-  <!-- Highlighted Card -->
-  <div class="highlight-card">
-    <h3>The Food Global Pact!</h3>
-    <img src="images/food_global_pact.jpg" alt="The Food Global Pact Image">
-  </div>
+<section class="poems-container">
+
+  <!-- Highlighted Pact -->
+  <details class="poem-card highlight">
+    <summary>
+      <h2>The Food Global Pact!</h2>
+      <p>A promise written for the future</p>
+    </summary>
+
+    <div class="poem-content">
+      <img src="images/food_global_pact.jpg" alt="The Food Global Pact">
+    </div>
+  </details>
 
   <!-- Poem 1 -->
-  <div class="poem-card" onclick="this.classList.toggle('expanded')">
-    <h3>Poem Title 1</h3>
-    <p>
-      Your eyes like stars that light my nights…<br>
-      Every message a gentle touch…<br>
-      Every memory a melody…<br>
-      Love woven into every line…<br>
-      More lines when expanded…
-    </p>
-  </div>
+  <details class="poem-card">
+    <summary>
+      <h2>Poem One</h2>
+      <p>When I first knew</p>
+    </summary>
+    <div class="poem-content">
+      Write your poem here.
+    </div>
+  </details>
 
   <!-- Poem 2 -->
-  <div class="poem-card" onclick="this.classList.toggle('expanded')">
-    <h3>Poem Title 2</h3>
-    <p>
-      Across the distance, your voice echoes…<br>
-      A soft reminder that we are near…<br>
-      In every call, laughter blends with heartbeats…<br>
-      And in every pause, I find your soul…<br>
-      More lines when expanded…
-    </p>
-  </div>
+  <details class="poem-card">
+    <summary>
+      <h2>Poem Two</h2>
+      <p>Distance didn’t win</p>
+    </summary>
+    <div class="poem-content">
+      Another poem lives here.
+    </div>
+  </details>
 
   <!-- Poem 3 -->
-  <div class="poem-card" onclick="this.classList.toggle('expanded')">
-    <h3>Poem Title 3</h3>
-    <p>
-      Moments we share, though far apart…<br>
-      Become poems in my heart…<br>
-      Your laughter, your words, your soul…<br>
-      A symphony of love, forever…<br>
-      More lines when expanded…
-    </p>
-  </div>
+  <details class="poem-card">
+    <summary>
+      <h2>Poem Three</h2>
+      <p>Something that stayed</p>
+    </summary>
+    <div class="poem-content">
+      And this one stayed.
+    </div>
+  </details>
+
+</section>
+
+<!-- STATIC DOODLES -->
+<div class="doodles">
+  <img src="stickers/doodle1.png">
+  <img src="stickers/doodle2.png">
+  <img src="stickers/doodle3.png">
+  <img src="stickers/doodle4.png">
 </div>
 
 <footer>
-  Made with quiet love ✒
+  Written slowly 🤍
 </footer>
-
-<script>
-// Collapse other poems when one opens
-const poemCards = document.querySelectorAll('.poem-card');
-poemCards.forEach(card => {
-  card.addEventListener('click', () => {
-    poemCards.forEach(c => {
-      if(c !== card) c.classList.remove('expanded');
-    });
-  });
-});
-</script>
 
 </body>
 </html>
