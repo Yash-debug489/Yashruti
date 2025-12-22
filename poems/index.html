@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poems 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Indie+Flower&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Indie Flower', cursive;
+  background: #fff8ee;
+  background-image: url('https://i.imgur.com/yJ3tF0v.png'); /* subtle parchment texture */
+  background-size: cover;
+  color: #3a2f2f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 60px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+header h1 {
+  font-family: 'Mr Dafoe', cursive;
+  font-size: 4rem;
+  color: #6b3e26;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #5a4335;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+/* Poems Section */
+.poems-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  width: 90%;
+  max-width: 1000px;
+  margin-top: 40px;
+}
+
+/* Poem Cards */
+.poem-card {
+  background: rgba(255, 248, 230, 0.95);
+  border-left: 6px solid #d18b6b;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 5px 8px 20px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.poem-card:hover {
+  transform: translateY(-5px) rotate(-1deg);
+  box-shadow: 8px 12px 35px rgba(0,0,0,0.15);
+}
+
+/* Expandable poem text */
+.poem-card p {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
+  margin-top: 10px;
+}
+
+.poem-card.expanded p {
+  max-height: 500px; /* adjust for long poems */
+  opacity: 1;
+}
+
+/* Poem Titles */
+.poem-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #7d4a38;
+  text-decoration: underline;
+}
+
+/* Quill / Decorative icons */
+.poem-card::after {
+  content: "✒";
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #d18b6b;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #555;
+  padding: 50px 0 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .poems-container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Poems for Her</h1>
+  <p>Words that bloom in the quiet corners of the heart…</p>
+</header>
+
+<div class="poems-container">
+  <!-- Poem 1 -->
+  <div class="poem-card" onclick="this.classList.toggle('expanded')">
+    <h3>Poem Title 1</h3>
+    <p>
+      Your eyes like stars that light my nights…<br>
+      Every message a gentle touch…<br>
+      Every memory a melody…<br>
+      Love woven into every line…<br>
+      More lines when expanded…
+    </p>
+  </div>
+
+  <!-- Poem 2 -->
+  <div class="poem-card" onclick="this.classList.toggle('expanded')">
+    <h3>Poem Title 2</h3>
+    <p>
+      Across the distance, your voice echoes…<br>
+      A soft reminder that we are near…<br>
+      In every call, laughter blends with heartbeats…<br>
+      And in every pause, I find your soul…<br>
+      More lines when expanded…
+    </p>
+  </div>
+
+  <!-- Poem 3 -->
+  <div class="poem-card" onclick="this.classList.toggle('expanded')">
+    <h3>Poem Title 3</h3>
+    <p>
+      Morning sun reminds me of your smile…<br>
+      Evening winds carry your whispers…<br>
+      Every day, our story grows…<br>
+      Etched in heartbeats and time…<br>
+      More lines when expanded…
+    </p>
+  </div>
+
+  <!-- Poem 4 -->
+  <div class="poem-card" onclick="this.classList.toggle('expanded')">
+    <h3>Poem Title 4</h3>
+    <p>
+      Moments we share, though far apart…<br>
+      Become poems in my heart…<br>
+      Your laughter, your words, your soul…<br>
+      A symphony of love, forever…<br>
+      More lines when expanded…
+    </p>
+  </div>
+</div>
+
+<footer>
+  Made with quiet love ✒
+</footer>
+
+<script>
+// Optional: collapse other poems when one opens
+const poemCards = document.querySelectorAll('.poem-card');
+poemCards.forEach(card => {
+  card.addEventListener('click', () => {
+    poemCards.forEach(c => {
+      if(c !== card) c.classList.remove('expanded');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
