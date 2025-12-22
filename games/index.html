@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Games ♟️🤍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      min-height: 100vh;
+      color: #2b2b2b;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 200, 220, 0.45), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(200, 215, 255, 0.45), transparent 45%),
+        linear-gradient(180deg, #fff6fa, #eef1ff);
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    header h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.6rem;
+    }
+
+    header p {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Container */
+    .games-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Main Game Card */
+    .game-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 26px;
+      margin: 40px auto;
+      max-width: 500px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: 0.35s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .game-icon {
+      font-size: 3rem;
+      margin-bottom: 14px;
+    }
+
+    .game-card h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+    }
+
+    .game-card p {
+      font-size: 0.85rem;
+      color: #666;
+      margin: 12px 0 22px;
+      line-height: 1.6;
+    }
+
+    .game-card::after {
+      content: "🤍";
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 0.9rem;
+      opacity: 0.5;
+    }
+
+    /* Play Button */
+    .play-btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ffb6d5, #b6c8ff);
+      color: #000;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Coming Soon */
+    .coming-soon {
+      margin-top: 80px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #777;
+      padding: 50px 0 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Khel kud</h1>
+    <p>13days distance can't stop us from playing💕</p>
+  </header>
+
+  <section class="games-container">
+
+    <!-- Ludo Card -->
+    <div class="game-card">
+      <div class="game-icon">🎲</div>
+      <h2>Ludo</h2>
+
+      <p>
+        After clicking play, u can change ur name on top left<br>
+        Click on play with friends and share code.<br>
+      </p>
+
+      <a
+        class="play-btn"
+        href="https://www.gamezop.com/en/game/ludo-with-friends/SkhljT2fdgb"
+        target="_blank"
+      >
+        Come play Ludo with me 💓🎲
+      </a>
+
+      <p style="margin-top:14px; font-size:0.75rem; color:#777;">
+        Rule: Winner gets more of the other's affection💗
+      </p>
+    </div>
+
+    <!-- Tic Tac Toe -->
+    <div class="game-card">
+      <div class="game-icon">❌⭕</div>
+      <h2>Tic Tac Toe</h2>
+
+      <p>
+        If i win i get a goodnight VN💓<br>
+        If u win u get to make a wish to me
+      </p>
+
+      <a
+        class="play-btn"
+        href="https://www.playfacetoface.com/sessions/new?return_to=/tictactoe/start_new"
+        target="_blank"
+      >
+        Tic Tac Toe with me💓
+      </a>
+
+      <p style="margin-top:14px; font-size:0.75rem; color:#777;">
+        Rule: if i win i get more of ur love✨
+      </p>
+    </div>
+
+    <!-- Skribbl -->
+    <div class="game-card">
+      <div class="game-icon">🎨</div>
+      <h2>Drawing together</h2>
+
+      <p>
+        Skribbl<br>
+      </p>
+
+      <a
+        class="play-btn"
+        href="https://skribbl.io/"
+        target="_blank"
+      >
+        Skribble with me💓
+      </a>
+
+      <p style="margin-top:14px; font-size:0.75rem; color:#777;">
+        One creates the room, the other joins✏️
+      </p>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="coming-soon">
+      New games will be added soon…
+      because this page is growing with us.
+    </div>
+
+  </section>
+
+  <footer>
+    YASHRUTI💕
+  </footer>
+
+</body>
+</html>
