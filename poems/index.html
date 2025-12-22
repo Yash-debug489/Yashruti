@@ -4,18 +4,15 @@
 <meta charset="UTF-8">
 <title>Poems 🤍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Mr+Dafoe&family=Indie+Flower&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Indie+Flower&display=swap" rel="stylesheet">
 <style>
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
   font-family: 'Indie Flower', cursive;
-  background: #fff8ee;
-  background-image: url('https://i.imgur.com/yJ3tF0v.png'); /* subtle parchment texture */
-  background-size: cover;
-  color: #3a2f2f;
+  background: #fefaf6;
+  color: #2d2d2d;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,10 +26,9 @@ header {
 }
 
 header h1 {
-  font-family: 'Mr Dafoe', cursive;
+  font-family: 'Parisienne', cursive;
   font-size: 4rem;
-  color: #6b3e26;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  color: #6b4e3c;
 }
 
 header p {
@@ -46,62 +42,85 @@ header p {
 .poems-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  gap: 25px;
   width: 90%;
   max-width: 1000px;
   margin-top: 40px;
 }
 
+/* Highlighted Card */
+.highlight-card {
+  background: #fff3e6;
+  border-left: 6px solid #d18b6b;
+  padding: 25px 20px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  text-align: center;
+  grid-column: 1 / -1; /* spans full width */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+}
+
+.highlight-card img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.highlight-card h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #6b4e3c;
+  border-bottom: 1px solid #d18b6b;
+  padding-bottom: 5px;
+}
+
 /* Poem Cards */
 .poem-card {
-  background: rgba(255, 248, 230, 0.95);
-  border-left: 6px solid #d18b6b;
+  background: #fff;
   padding: 20px 25px;
   border-radius: 12px;
-  box-shadow: 5px 8px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
   position: relative;
+  border-left: 4px solid #d18b6b;
 }
 
 .poem-card:hover {
-  transform: translateY(-5px) rotate(-1deg);
-  box-shadow: 8px 12px 35px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
 /* Expandable poem text */
 .poem-card p {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.6s ease, opacity 0.6s ease;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
   opacity: 0;
   margin-top: 10px;
+  line-height: 1.6;
+  color: #3a2f2f;
 }
 
 .poem-card.expanded p {
-  max-height: 500px; /* adjust for long poems */
+  max-height: 500px;
   opacity: 1;
 }
 
-/* Poem Titles */
 .poem-card h3 {
   margin: 0;
-  font-size: 1.5rem;
-  color: #7d4a38;
-  text-decoration: underline;
-}
-
-/* Quill / Decorative icons */
-.poem-card::after {
-  content: "✒";
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  color: #d18b6b;
-  opacity: 0.4;
-  pointer-events: none;
+  font-size: 1.6rem;
+  color: #6b4e3c;
+  border-bottom: 1px solid #d18b6b;
+  padding-bottom: 5px;
 }
 
 /* Footer */
@@ -124,11 +143,17 @@ footer {
 <body>
 
 <header>
-  <h1>Poems for Her</h1>
-  <p>Words that bloom in the quiet corners of the heart…</p>
+  <h1>Poems & Memories</h1>
+  <p>Moments captured in words… and images</p>
 </header>
 
 <div class="poems-container">
+  <!-- Highlighted Card -->
+  <div class="highlight-card">
+    <h3>The Food Global Pact!</h3>
+    <img src="images/food_global_pact.jpg" alt="The Food Global Pact Image">
+  </div>
+
   <!-- Poem 1 -->
   <div class="poem-card" onclick="this.classList.toggle('expanded')">
     <h3>Poem Title 1</h3>
@@ -157,18 +182,6 @@ footer {
   <div class="poem-card" onclick="this.classList.toggle('expanded')">
     <h3>Poem Title 3</h3>
     <p>
-      Morning sun reminds me of your smile…<br>
-      Evening winds carry your whispers…<br>
-      Every day, our story grows…<br>
-      Etched in heartbeats and time…<br>
-      More lines when expanded…
-    </p>
-  </div>
-
-  <!-- Poem 4 -->
-  <div class="poem-card" onclick="this.classList.toggle('expanded')">
-    <h3>Poem Title 4</h3>
-    <p>
       Moments we share, though far apart…<br>
       Become poems in my heart…<br>
       Your laughter, your words, your soul…<br>
@@ -183,7 +196,7 @@ footer {
 </footer>
 
 <script>
-// Optional: collapse other poems when one opens
+// Collapse other poems when one opens
 const poemCards = document.querySelectorAll('.poem-card');
 poemCards.forEach(card => {
   card.addEventListener('click', () => {
