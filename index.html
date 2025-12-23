@@ -58,10 +58,8 @@ header p {
   font-size: 0.95rem;
   color: #666;
 }
-  
-  
-  
-  /* Love Countdown */
+
+/* Love Countdown */
 .countdown {
   max-width: 900px;
   margin: 80px auto 20px;
@@ -145,7 +143,7 @@ header p {
 .event.left { left: 0; justify-content: flex-start; }
 .event.right { left: 50%; }
 
-  .dot {
+.dot {
   position: absolute;
   top: 50%;
   width: 14px;
@@ -157,40 +155,30 @@ header p {
   animation: pulse 2s infinite;
 }
 
-/* Align dot exactly on the timeline */
 .event.left .dot { right: -7px; }
 .event.right .dot { left: -7px; }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(0,0,0,0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(0,0,0,0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(0,0,0,0);
-  }
+  0% { box-shadow: 0 0 0 0 rgba(0,0,0,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
 }
-
 
 .date {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 0.8rem;
-  color: #000; /* full black */
-  font-weight: 600; /* slightly bolder */
+  color: #000;
+  font-weight: 600;
   letter-spacing: 0.04em;
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.3); /* subtle glow */
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
-/* Optional: intensify glow when hovering the card */
 .event:hover .date {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-
 
 .event.left .date { right: -80px; }
 .event.right .date { left: -80px; }
@@ -324,10 +312,40 @@ footer {
     justify-content: flex-start;
     padding-left: 50px;
   }
-  .date {
-    left: 0 !important;
-    right: auto !important;
+  .event.left .dot,
+  .event.right .dot {
+    left: 12px;
+    right: auto;
   }
+  .date {
+    left: 50px !important;
+    top: -12px;
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 { font-size: 2rem; }
+  header p { font-size: 0.85rem; }
+  .countdown h2,
+  .right-now h2 { font-size: 1.5rem; }
+  .countdown p, .right-now p { font-size: 0.8rem; }
+
+  .timer {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .time-box { min-width: 120px; }
+
+  .now-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .now-card { width: 90%; }
+
+  .card { width: 90%; margin: 0 auto 30px; }
+  .photo { height: 140px; }
 }
 </style>
 </head>
@@ -380,7 +398,8 @@ footer {
   </div>
 
 </section>
-  <section class="countdown">
+
+<section class="countdown">
   <h2>Us, Since</h2>
   <p>Every second with u💕 </p>
 
@@ -404,7 +423,6 @@ footer {
   </div>
 </section>
 
-
 <section class="right-now">
   <h2>Right Now</h2>
   <p>Things that don’t belong to a date.</p>
@@ -425,19 +443,21 @@ footer {
         <p>Words for U.</p>
       </div>
     </a>
- <a href="music/" class="now-card"> <!-- added link here -->
+
+    <a href="music/" class="now-card">
       <div class="now-photo"></div>
       <div class="now-caption">
         <h3>Music</h3>
         <p>Songs we share.</p>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 
 <footer>
   Made with quiet love 🤍
 </footer>
+
 <script>
 const startDate = new Date("December 15, 2025 00:00:00").getTime();
 
