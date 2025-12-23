@@ -166,7 +166,7 @@ header p {
 
 .date {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 14px); /* lifts date above the dot */
   transform: translateY(-50%);
   font-size: 0.8rem;
   color: #000;
@@ -174,7 +174,9 @@ header p {
   letter-spacing: 0.04em;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  z-index: 4; /* ensure date stays above */
 }
+
 
 .event:hover .date {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
