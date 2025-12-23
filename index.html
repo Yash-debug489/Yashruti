@@ -325,50 +325,54 @@ footer {
 
 @media (max-width: 768px) {
 
-  /* Move timeline line to left */
+  /* Timeline vertical line */
   .timeline::before {
     left: 20px;
   }
 
-  /* Single-column layout */
+  /* Single-column events */
   .event {
     width: 100%;
     left: 0;
-    justify-content: flex-start;
-    padding: 40px 0 40px 50px;
+    padding: 40px 0 40px 60px;
     position: relative;
   }
 
-  /* Kill right-shift bug */
+  /* Remove desktop right offset */
   .event.right {
     left: 0;
   }
 
-  /* Timeline dot */
+  /* 🔴 DOT — hard aligned to timeline */
   .event .dot {
-    left: 12px;
-    right: auto;
-    top: 32px;
-    transform: none;
+    left: 13px;              /* exactly centered on line */
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 3;
   }
 
-  /* Date label (no overlap, clean) */
+  /* 📅 DATE — default (above card, readable) */
   .date {
     position: absolute;
-    top: -18px;
-    left: 50px;
+    top: -20px;
+    left: 60px;
     transform: none;
     font-size: 0.75rem;
     font-weight: 600;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 8px;
     border-radius: 6px;
     z-index: 4;
     white-space: nowrap;
   }
 
-  /* Cards aligned perfectly */
+  /* 🩹 Fix 2nd event date getting cut → move to right */
+  .event:nth-child(2) .date {
+    left: auto;
+    right: 10px;
+  }
+
+  /* Cards */
   .card {
     width: 90%;
     margin: 0;
