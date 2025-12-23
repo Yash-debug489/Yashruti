@@ -323,66 +323,7 @@ footer {
   padding: 40px 0;
 }
 
-@media (max-width: 768px) {
 
-  /* Timeline vertical line */
-  .timeline::before {
-    left: 20px;
-  }
-
-  /* Single-column events */
-  .event {
-    width: 100%;
-    left: 0;
-    padding: 40px 0 40px 60px;
-    position: relative;
-  }
-
-  /* Remove desktop right offset */
-  .event.right {
-    left: 0;
-  }
-
-  /* 🔴 DOT — hard aligned to timeline */
-  .event .dot {
-    left: 13px;              /* exactly centered on line */
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 3;
-  }
-
-  /* 📅 DATE — default (above card, readable) */
-  .date {
-    position: absolute;
-    top: -20px;
-    left: 60px;
-    transform: none;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 2px 8px;
-    border-radius: 6px;
-    z-index: 4;
-    white-space: nowrap;
-  }
-
-  /* 🩹 Fix 2nd event date getting cut → move to right */
-  .event:nth-child(2) .date {
-    left: auto;
-    right: 10px;
-  }
-
-  /* Cards */
-  .card {
-    width: 90%;
-    margin: 0;
-    transform: none;
-  }
-
-  .card:hover {
-    transform: translateY(-6px);
-  }
-}
 
 @media (max-width: 480px) {
   header h1 { font-size: 2rem; }
@@ -407,6 +348,85 @@ footer {
   .card { width: 90%; margin: 0 auto 30px; }
   .photo { height: 140px; }
 }
+
+  @media (max-width: 768px) {
+
+  /* Disable desktop left/right logic completely */
+  .event.left,
+  .event.right {
+    left: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .event.left .date,
+  .event.right .date {
+    left: 56px !important;
+    right: auto !important;
+  }
+
+  .event.left .dot,
+  .event.right .dot {
+    left: 24px !important;
+    right: auto !important;
+  }
+
+  /* Timeline container */
+  .timeline {
+    position: relative;
+    padding: 30px 16px 30px 56px;
+  }
+
+  /* Vertical line */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(0,0,0,0.15);
+  }
+
+  /* Event block */
+  .event {
+    position: relative;
+    width: 100%;
+    padding-top: 36px;     /* space for date */
+    margin-bottom: 96px;  /* BIG vertical gap */
+  }
+
+  /* Date */
+  .date {
+    position: absolute;
+    top: 0;
+    font-size: 0.75rem;
+    color: #333;
+    text-shadow: none;
+    letter-spacing: 0.08em;
+  }
+
+  /* Dot */
+  .dot {
+    position: absolute;
+    top: 42px;
+    width: 12px;
+    height: 12px;
+    transform: none;
+  }
+
+  /* Card */
+  .card {
+    width: 100%;
+    transform: none;
+    margin: 0;
+    border-radius: 12px;
+  }
+
+  .event.right .card {
+    transform: none;
+  }
+}
+
 </style>
 </head>
 
