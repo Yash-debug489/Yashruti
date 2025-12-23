@@ -349,81 +349,81 @@ footer {
   .photo { height: 140px; }
 }
 
-  @media (max-width: 768px) {
+ @media (max-width: 768px) {
 
-  /* Disable desktop left/right logic completely */
+  /* ========= SINGLE SOURCE OF TRUTH ========= */
+  .timeline {
+    --line-x: 24px;                /* timeline x-position */
+    position: relative;
+    padding: 30px 16px 30px 64px;  /* space for line + cards */
+  }
+
+  /* ========= LEFT TIMELINE LINE ========= */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: var(--line-x);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  /* ========= KILL DESKTOP LEFT/RIGHT LOGIC ========= */
   .event.left,
   .event.right {
     left: 0 !important;
     justify-content: flex-start !important;
   }
 
-  .event.left .date,
-  .event.right .date {
-    left: 56px !important;
-    right: auto !important;
-  }
-
-  .event.left .dot,
-  .event.right .dot {
-    left: 24px !important;
-    right: auto !important;
-  }
-
-  /* Timeline container */
-  .timeline {
-    position: relative;
-    padding: 30px 16px 30px 56px;
-  }
-
-  /* Vertical line */
-  .timeline::before {
-    content: "";
-    position: absolute;
-    left: 24px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: rgba(0,0,0,0.15);
-  }
-
-  /* Event block */
+  /* ========= EVENT BLOCK ========= */
   .event {
     position: relative;
     width: 100%;
-    padding-top: 36px;     /* space for date */
-    margin-bottom: 96px;  /* BIG vertical gap */
+    padding-top: 38px;     /* reserved space for date */
+    margin-bottom: 100px; /* BIG vertical separation */
   }
 
-  /* Date */
-  .date {
+  /* ========= DOT — PERFECTLY ALIGNED ========= */
+  .event.left .dot,
+  .event.right .dot {
     position: absolute;
-    top: 0;
-    font-size: 0.75rem;
-    color: #333;
-    text-shadow: none;
-    letter-spacing: 0.08em;
-  }
-
-  /* Dot */
-  .dot {
-    position: absolute;
-    top: 42px;
+    left: calc(var(--line-x) - 6px); /* center dot on line */
+    top: 46px;
     width: 12px;
     height: 12px;
     transform: none;
   }
 
-  /* Card */
+  /* ========= DATE — SAME POSITION FOR ALL ========= */
+  .event.left .date,
+  .event.right .date {
+    position: absolute;
+    top: 0;
+    left: 64px !important;
+    right: auto !important;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: #333;
+    text-shadow: none;
+  }
+
+  /* ========= CARD ========= */
   .card {
     width: 100%;
-    transform: none;
+    max-width: 100%;
     margin: 0;
+    transform: none;
     border-radius: 12px;
   }
 
   .event.right .card {
     transform: none;
+  }
+
+  /* ========= TOUCH FRIENDLY ========= */
+  .card:hover {
+    transform: translateY(-4px);
   }
 }
 
