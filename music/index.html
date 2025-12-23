@@ -1,132 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Our Music 🎵💓</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<title>Music 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: "Inter", sans-serif;
-  color: #2b2b2b;
   min-height: 100vh;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 200, 220, 0.35), transparent 40%),
-              radial-gradient(circle at 80% 30%, rgba(200, 215, 255, 0.35), transparent 45%),
-              linear-gradient(180deg, #fff6fa, #eef1ff);
-  background-attachment: fixed;
-  overflow-x: hidden;
+  color: #2b2b2b;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 200, 220, 0.45), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(200, 215, 255, 0.45), transparent 45%),
+    linear-gradient(180deg, #fff6fa, #eef1ff);
 }
 
-/* Floating musical notes */
-.note {
-  position: absolute;
-  font-size: 1.5rem;
-  opacity: 0.3;
-  animation: floatNote linear infinite;
-}
-
-@keyframes floatNote {
-  0% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
-  50% { opacity: 0.6; }
-  100% { transform: translateY(-50vh) rotate(360deg); opacity: 0; }
-}
-
-/* Header */
 header {
   text-align: center;
-  padding: 70px 20px 40px;
+  padding: 80px 20px 40px;
 }
 
 header h1 {
   font-family: "Playfair Display", serif;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
 }
 
 header p {
-  margin-top: 8px;
-  font-size: 0.95rem;
+  margin-top: 12px;
+  font-size: 0.9rem;
   color: #666;
 }
 
-/* Music section */
-.music-container {
+/* Mood buttons */
+.moods {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.mood-btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+  transition: 0.3s ease;
+}
+
+.mood-btn.active,
+.mood-btn:hover {
+  background: linear-gradient(135deg, #ffb6d5, #b6c8ff);
+}
+
+/* Music grid */
+.music-grid {
+  display: none;
   max-width: 900px;
-  margin: 0 auto 80px;
-  padding: 0 20px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.music-grid.active {
+  display: flex;
+}
+
+/* Cards */
+.song-card {
+  background: #fff;
+  width: 260px;
+  padding: 16px 16px 22px;
+  border-radius: 14px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+  text-align: center;
+  transition: 0.35s ease;
+}
+
+.song-card:hover {
+  transform: translateY(-8px);
+}
+
+.song-card h3 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.song-card p {
+  font-size: 0.7rem;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+audio {
+  width: 100%;
+}
+
+/* Playlist card */
+.playlist-card {
+  max-width: 600px;
+  margin: 0 auto 60px;
+  background: #fff;
+  padding: 28px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.playlist-card h2 {
+  font-family: "Playfair Display", serif;
+  margin-bottom: 8px;
+}
+
+.playlist-card p {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* 🔥 Highlighted primary button */
+.playlist-open-btn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 12px 26px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ffb6d5, #b6c8ff);
+  color: #2b2b2b;
+  font-size: 0.8rem;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+  transition: 0.3s ease;
+}
+
+.playlist-open-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+}
+
+/* ➖ Separated add section */
+.add-section {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.add-btn {
+  padding: 9px 22px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffb6d5, #b6c8ff);
+  font-size: 0.75rem;
+  transition: 0.3s ease;
+}
+
+
+.add-btn:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Locked section */
+.locked {
+  opacity: 0.6;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-box {
+  background: #fff;
+  padding: 26px;
+  border-radius: 16px;
+  max-width: 320px;
   text-align: center;
 }
 
-.music-container h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  margin-bottom: 15px;
+.popup-box p {
+  font-size: 0.8rem;
+  margin-bottom: 16px;
 }
 
-.music-container p {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 30px;
+.popup-box button {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffb6d5, #b6c8ff);
 }
 
-/* Spotify Embed */
-.spotify-embed {
-  width: 100%;
-  max-width: 660px;
-  height: 380px;
-  border-radius: 15px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-  margin: 0 auto 30px;
-}
-
-/* Footer */
 footer {
   text-align: center;
   font-size: 0.75rem;
   color: #777;
-  padding: 40px 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .spotify-embed { height: 300px; }
+  padding-bottom: 40px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Floating musical notes -->
-<div class="note" style="left: 10%; animation-duration: 18s;">🎵</div>
-<div class="note" style="left: 30%; animation-duration: 25s; font-size: 2rem;">🎶</div>
-<div class="note" style="left: 50%; animation-duration: 20s;">🎵</div>
-<div class="note" style="left: 70%; animation-duration: 22s; font-size: 1.8rem;">🎶</div>
-<div class="note" style="left: 90%; animation-duration: 19s;">🎵</div>
-
 <header>
-  <h1>Our Music</h1>
-  <p>Vibes we share 💓 Add your songs too!</p>
+  <h1>Music</h1>
+  <p>Songs that will slowly became us 🤍</p>
 </header>
 
-<section class="music-container">
-  <h2>Shared Playlist</h2>
-  <p>Click the play button below to listen together and add your favorite songs!</p>
+<!-- Shared playlist -->
+<div class="playlist-card">
+  <h2>Our Playlist 🤍</h2>
+  <p>Every song here is a memory in progress.</p>
 
-  <!-- Embed your Spotify Collaborative Playlist here -->
-  <iframe class="spotify-embed" 
-    src="https://open.spotify.com/playlist/4eziIh294utU0YiJ3C5qmC?si=o90L_2CSS-abf7wJNURwzA&pi=QeIsb6YVTC6s3"
-    frameborder="0" 
-    allowtransparency="true" 
-    allow="encrypted-media">
-  </iframe>
+  <a class="playlist-open-btn" href="YOUR_PLAYLIST_LINK" target="_blank">
+    Open our playlist🩷
+  </a>
+
+  <div class="add-section">
+    <button class="add-btn" onclick="openPopup()">Add a song 🤍</button>
+  </div>
+</div>
+
+<div class="moods">
+  <button class="mood-btn active" onclick="showMood(this,'miss')">For U🤍</button>
+  <button class="mood-btn" onclick="showMood(this,'happy')">Because of U</button>
+  <button class="mood-btn" onclick="showMood(this,'her')">Ur Favorites ✨</button>
+  <button class="mood-btn" onclick="showMood(this,'locked')">To be continued🔒</button>
+</div>
+
+<section id="miss" class="music-grid active">
+  <div class="song-card">
+    <h3>Hua hai aaj pehli baar</h3>
+    <p>A song i dedicate to u</p>
+    <audio controls src="songs/hua.mp3"></audio>
+  </div>
+</section>
+
+<section id="happy" class="music-grid">
+  <div class="song-card">
+    <h3>Until i found U</h3>
+    <p>🌺</p>
+    <audio controls src="songs/until.mp3"></audio>
+  </div>
+</section>
+  
+  <section id="her" class="music-grid">
+  <div class="song-card">
+    <h3>Tum tak</h3>
+    <p>Because this feels like you</p>
+    <audio controls src="songs/song1.mp3"></audio>
+    <p style="font-size:0.65rem;color:#999;margin-top:6px;">✨ 🌺</p>
+  </div>
+
+  <div class="song-card">
+    <h3>Raanjhanaa</h3>
+    <p>The one you always vibe to</p>
+    <audio controls src="songs/song2.mp3"></audio>
+    <p style="font-size:0.65rem;color:#999;margin-top:6px;">✨ 🌺</p>
+  </div>
+</section>
+
+
+<section id="locked" class="music-grid locked">
+  <div class="song-card">
+    <h3>Ongoing</h3>
+    <p>Will quietly expand with time</p>
+  </div>
 </section>
 
 <footer>
-  Made with quiet love 🤍
+  YASHRUTII 🤍
 </footer>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <p>
+      This here is a little old-school.<br><br>
+      Just text me the song 🤍<br>
+      I’ll add it here with a <b>“Shruti added ✨”</b> badge.
+    </p>
+    <button onclick="closePopup()">Okayyy🤍</button>
+  </div>
+</div>
+
+<script>
+function showMood(btn, id) {
+  document.querySelectorAll('.music-grid').forEach(g => g.classList.remove('active'));
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function openPopup() {
+  document.getElementById('popup').style.display = 'flex';
+}
+
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
+</script>
 
 </body>
 </html>
