@@ -325,45 +325,56 @@ footer {
 
 @media (max-width: 768px) {
 
-  /* Kill timeline visuals */
-  .timeline::before {
-    display: none;
-  }
-
+  /* Timeline container */
   .timeline {
-    padding: 20px 16px;
+    position: relative;
+    padding: 30px 16px 30px 44px;
   }
 
-  /* Reset event layout */
+  /* Left vertical line */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  /* Stack events */
   .event {
     width: 100%;
     left: 0;
     padding: 0;
-    margin-bottom: 32px;
+    margin-bottom: 70px; /* ⬅️ increased vertical separation */
     display: block;
   }
 
-  /* Hide dots (they look bad on mobile) */
+  /* Dot on the line */
   .dot {
-    display: none;
+    left: 11px;
+    top: 22px;
+    transform: none;
+    width: 12px;
+    height: 12px;
   }
 
-  /* Date becomes header */
+  /* Date near dot */
   .date {
-    position: static;
-    display: block;
-    margin-bottom: 8px;
+    position: absolute;
+    left: 36px;
+    top: 0;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    color: #444;
     text-shadow: none;
+    color: #333;
   }
 
-  /* Full-width cards */
+  /* Event card on right */
   .card {
     width: 100%;
     max-width: 100%;
-    margin: 0;
+    margin-left: 0;
     transform: none;
     border-radius: 12px;
   }
@@ -372,13 +383,11 @@ footer {
     transform: none;
   }
 
-  /* Softer hover for touch */
+  /* Softer hover */
   .card:hover {
-    transform: none;
-    box-shadow: 0 18px 35px rgba(0,0,0,0.14);
+    transform: translateY(-4px);
   }
 }
-
 
 @media (max-width: 480px) {
   header h1 { font-size: 2rem; }
