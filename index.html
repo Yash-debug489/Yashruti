@@ -481,11 +481,16 @@ footer {
   </div>
 </section>
 
-<footer>
+<footer id="secret">
   Made with quiet love 🤍
 </footer>
 
 <script>
+document.getElementById("secret").addEventListener("click", () => {
+  alert("Hehee...this is our digital scrapbook🤍");
+});
+
+  
 const startDate = new Date("December 15, 2025 00:00:00").getTime();
 
 function updateCountdown() {
