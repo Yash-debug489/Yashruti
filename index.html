@@ -328,54 +328,57 @@ footer {
   /* Timeline container */
   .timeline {
     position: relative;
-    padding: 30px 16px 30px 44px;
+    padding: 30px 16px 30px 56px;
   }
 
   /* Left vertical line */
   .timeline::before {
     content: "";
     position: absolute;
-    left: 18px;
+    left: 24px;
     top: 0;
     bottom: 0;
     width: 2px;
     background: rgba(0, 0, 0, 0.15);
   }
 
-  /* Stack events */
+  /* Each event block */
   .event {
+    position: relative;
     width: 100%;
     left: 0;
-    padding: 0;
-    margin-bottom: 70px; /* ⬅️ increased vertical separation */
+    padding-top: 34px;          /* ⬅️ SPACE RESERVED FOR DATE */
+    margin-bottom: 90px;        /* ⬅️ BIG vertical separation */
     display: block;
   }
 
-  /* Dot on the line */
+  /* Dot */
   .dot {
-    left: 11px;
-    top: 22px;
+    position: absolute;
+    left: 18px;
+    top: 38px;
     transform: none;
     width: 12px;
     height: 12px;
   }
 
-  /* Date near dot */
+  /* Date — now sits safely above card */
   .date {
     position: absolute;
-    left: 36px;
+    left: 56px;
     top: 0;
     font-size: 0.75rem;
-    text-shadow: none;
     color: #333;
+    text-shadow: none;
+    letter-spacing: 0.08em;
   }
 
-  /* Event card on right */
+  /* Card */
   .card {
     width: 100%;
     max-width: 100%;
-    margin-left: 0;
     transform: none;
+    margin: 0;
     border-radius: 12px;
   }
 
@@ -383,7 +386,7 @@ footer {
     transform: none;
   }
 
-  /* Softer hover */
+  /* Touch-friendly hover */
   .card:hover {
     transform: translateY(-4px);
   }
