@@ -323,26 +323,56 @@ footer {
   padding: 40px 0;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-  .timeline::before { left: 20px; }
+
+  /* Remove center line */
+  .timeline::before {
+    display: none;
+  }
+
+  .timeline {
+    padding-left: 20px;
+  }
+
+  /* Stack all events */
   .event {
     width: 100%;
     left: 0;
+    padding: 30px 0;
     justify-content: flex-start;
-    padding-left: 50px;
   }
-  .event.left .dot,
-  .event.right .dot {
-    left: 12px;
+
+  /* Dot on left */
+  .dot {
+    left: 0;
     right: auto;
+    top: 18px;
+    transform: none;
   }
+
+  /* Date above card */
   .date {
-    left: 50px !important;
-    top: -12px;
+    position: relative;
+    left: 0 !important;
+    top: 0;
+    margin-left: 28px;
+    margin-bottom: 8px;
+    display: inline-block;
+    font-size: 0.75rem;
+  }
+
+  /* Card full width */
+  .card {
+    width: calc(100% - 30px);
+    margin-left: 30px;
+    transform: none;
+  }
+
+  .event.right .card {
     transform: none;
   }
 }
+
 
 @media (max-width: 480px) {
   header h1 { font-size: 2rem; }
