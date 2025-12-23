@@ -325,51 +325,57 @@ footer {
 
 @media (max-width: 768px) {
 
-  /* Remove center line */
+  /* Kill timeline visuals */
   .timeline::before {
     display: none;
   }
 
   .timeline {
-    padding-left: 20px;
+    padding: 20px 16px;
   }
 
-  /* Stack all events */
+  /* Reset event layout */
   .event {
     width: 100%;
     left: 0;
-    padding: 30px 0;
-    justify-content: flex-start;
+    padding: 0;
+    margin-bottom: 32px;
+    display: block;
   }
 
-  /* Dot on left */
+  /* Hide dots (they look bad on mobile) */
   .dot {
-    left: 0;
-    right: auto;
-    top: 18px;
-    transform: none;
+    display: none;
   }
 
-  /* Date above card */
+  /* Date becomes header */
   .date {
-    position: relative;
-    left: 0 !important;
-    top: 0;
-    margin-left: 28px;
+    position: static;
+    display: block;
     margin-bottom: 8px;
-    display: inline-block;
     font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: #444;
+    text-shadow: none;
   }
 
-  /* Card full width */
+  /* Full-width cards */
   .card {
-    width: calc(100% - 30px);
-    margin-left: 30px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     transform: none;
+    border-radius: 12px;
   }
 
   .event.right .card {
     transform: none;
+  }
+
+  /* Softer hover for touch */
+  .card:hover {
+    transform: none;
+    box-shadow: 0 18px 35px rgba(0,0,0,0.14);
   }
 }
 
