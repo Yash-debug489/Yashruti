@@ -325,70 +325,58 @@ footer {
 
 @media (max-width: 768px) {
 
-  /* Timeline container */
-  .timeline {
-    position: relative;
-    padding: 30px 16px 30px 56px;
-  }
-
-  /* Left vertical line */
+  /* Move timeline line to left */
   .timeline::before {
-    content: "";
-    position: absolute;
-    left: 24px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: rgba(0, 0, 0, 0.15);
+    left: 20px;
   }
 
-  /* Each event block */
+  /* Single-column layout */
   .event {
-    position: relative;
     width: 100%;
     left: 0;
-    padding-top: 34px;          /* ⬅️ SPACE RESERVED FOR DATE */
-    margin-bottom: 90px;        /* ⬅️ BIG vertical separation */
-    display: block;
+    justify-content: flex-start;
+    padding: 40px 0 40px 50px;
+    position: relative;
   }
 
-  /* Dot */
-  .dot {
-    position: absolute;
-    left: 18px;
-    top: 38px;
+  /* Kill right-shift bug */
+  .event.right {
+    left: 0;
+  }
+
+  /* Timeline dot */
+  .event .dot {
+    left: 12px;
+    right: auto;
+    top: 32px;
     transform: none;
-    width: 12px;
-    height: 12px;
+    z-index: 3;
   }
 
-  /* Date — now sits safely above card */
+  /* Date label (no overlap, clean) */
   .date {
     position: absolute;
-    left: 56px;
-    top: 0;
+    top: -18px;
+    left: 50px;
+    transform: none;
     font-size: 0.75rem;
-    color: #333;
-    text-shadow: none;
-    letter-spacing: 0.08em;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 2px 6px;
+    border-radius: 6px;
+    z-index: 4;
+    white-space: nowrap;
   }
 
-  /* Card */
+  /* Cards aligned perfectly */
   .card {
-    width: 100%;
-    max-width: 100%;
-    transform: none;
+    width: 90%;
     margin: 0;
-    border-radius: 12px;
-  }
-
-  .event.right .card {
     transform: none;
   }
 
-  /* Touch-friendly hover */
   .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
   }
 }
 
