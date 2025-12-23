@@ -353,64 +353,66 @@ footer {
 
   /* Timeline line */
   .timeline::before {
-    left: 20px;
+    left: 22px;
     width: 2px;
   }
 
-  /* Events: single column */
+  /* Event container */
   .event {
     width: 100%;
     left: 0;
-    padding: 40px 0 40px 60px;
+    padding: 60px 0 80px 70px; /* 👈 MORE vertical spacing */
     position: relative;
   }
+  /* FORCE all dates to the right on mobile */
+  .event .date {
+    left: 60px !important;
+    right: auto !important;
+    text-align: left;
+  }
 
+
+  .event.left,
   .event.right {
     left: 0;
   }
 
-  /* 🔴 DOT — PERFECTLY CENTERED ON LINE */
+  /* DOT — aligned with DATE, not card */
   .event .dot {
-    left: 20px;                 /* same as line */
-    transform: translateX(-50%) translateY(-50%);
-    top: 50%;
-    width: 14px;
-    height: 14px;
+    left: 22px;
+    top: 32px;              /* 👈 moved UP near date */
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
     z-index: 3;
   }
 
-  /* 📅 DATE */
+  /* DATE — clean, readable */
   .date {
     position: absolute;
-    top: -20px;
+    top: 18px;
     left: 60px;
-    transform: none;
     font-size: 0.75rem;
     font-weight: 600;
-    background: rgba(255,255,255,0.9);
-    padding: 2px 8px;
+    background: rgba(255,255,255,0.95);
+    padding: 4px 10px;
     border-radius: 6px;
-    z-index: 4;
     white-space: nowrap;
+    z-index: 4;
   }
 
-  /* 2nd event date on right */
-  .event:nth-child(2) .date {
-    left: auto;
-    right: 12px;
-  }
-
-  /* Cards */
+  /* Card */
   .card {
-    width: 90%;
-    margin: 0;
-    transform: none;
+    width: calc(100% - 70px);
+    margin-top: 30px;       /* 👈 space between date & card */
+    transform: none !important;
   }
 
   .card:hover {
     transform: translateY(-6px);
   }
 }
+
 
 </style>
 </head>
