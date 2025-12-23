@@ -349,81 +349,66 @@ footer {
   .photo { height: 140px; }
 }
 
- @media (max-width: 768px) {
+@media (max-width: 768px) {
 
-  /* ========= SINGLE SOURCE OF TRUTH ========= */
-  .timeline {
-    --line-x: 24px;                /* timeline x-position */
-    position: relative;
-    padding: 30px 16px 30px 64px;  /* space for line + cards */
-  }
-
-  /* ========= LEFT TIMELINE LINE ========= */
+  /* Timeline line */
   .timeline::before {
-    content: "";
-    position: absolute;
-    left: var(--line-x);
-    top: 0;
-    bottom: 0;
+    left: 20px;
     width: 2px;
-    background: rgba(0, 0, 0, 0.15);
   }
 
-  /* ========= KILL DESKTOP LEFT/RIGHT LOGIC ========= */
-  .event.left,
-  .event.right {
-    left: 0 !important;
-    justify-content: flex-start !important;
-  }
-
-  /* ========= EVENT BLOCK ========= */
+  /* Events: single column */
   .event {
+    width: 100%;
+    left: 0;
+    padding: 40px 0 40px 60px;
     position: relative;
-    width: 100%;
-    padding-top: 38px;     /* reserved space for date */
-    margin-bottom: 100px; /* BIG vertical separation */
   }
 
-  /* ========= DOT — PERFECTLY ALIGNED ========= */
-  .event.left .dot,
-  .event.right .dot {
+  .event.right {
+    left: 0;
+  }
+
+  /* 🔴 DOT — PERFECTLY CENTERED ON LINE */
+  .event .dot {
+    left: 20px;                 /* same as line */
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    z-index: 3;
+  }
+
+  /* 📅 DATE */
+  .date {
     position: absolute;
-    left: calc(var(--line-x) - 6px); /* center dot on line */
-    top: 46px;
-    width: 12px;
-    height: 12px;
+    top: -20px;
+    left: 60px;
     transform: none;
-  }
-
-  /* ========= DATE — SAME POSITION FOR ALL ========= */
-  .event.left .date,
-  .event.right .date {
-    position: absolute;
-    top: 0;
-    left: 64px !important;
-    right: auto !important;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    color: #333;
-    text-shadow: none;
+    font-weight: 600;
+    background: rgba(255,255,255,0.9);
+    padding: 2px 8px;
+    border-radius: 6px;
+    z-index: 4;
+    white-space: nowrap;
   }
 
-  /* ========= CARD ========= */
+  /* 2nd event date on right */
+  .event:nth-child(2) .date {
+    left: auto;
+    right: 12px;
+  }
+
+  /* Cards */
   .card {
-    width: 100%;
-    max-width: 100%;
+    width: 90%;
     margin: 0;
     transform: none;
-    border-radius: 12px;
   }
 
-  .event.right .card {
-    transform: none;
-  }
-
-  /* ========= TOUCH FRIENDLY ========= */
   .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
   }
 }
 
