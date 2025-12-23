@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>We Became Us 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin:0;
+  padding:0;
+  font-family: "Playfair Display", serif;
+  overflow:hidden;
+  height:100vh;
+  background: linear-gradient(135deg, #ffe6f0, #f0f7ff, #fff9e6); /* pastel sunrise vibe */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+
+/* Quote */
+.quote {
+  position:absolute;
+  font-size:2rem;
+  color:#d63384;
+  text-align:center;
+  padding:0 20px;
+  opacity:0;
+  animation: fadeIn 2s forwards;
+  animation-delay:5s;
+  z-index:10;
+}
+
+@keyframes fadeIn {
+  to { opacity:1; }
+}
+
+/* floating emojis */
+.floating {
+  position:absolute;
+  bottom:-30px; /* start slightly off screen */
+  font-size:24px;
+  opacity:0.8;
+  animation-name:floatUp;
+  animation-timing-function: linear;
+  animation-iteration-count:1;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity:0; }
+  10% { opacity:1; }
+  100% { transform: translateY(-120vh) rotate(360deg) scale(1.2); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<div class="quote">“The day 'US' became real”</div>
+
+<script>
+const symbols = ['❤️','💖','🌷','🌹','🌱','💗','💕'];
+
+function createEmoji() {
+  const span = document.createElement('span');
+  span.className = 'floating';
+  span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+  span.style.left = Math.random() * 100 + 'vw';
+  span.style.fontSize = (16 + Math.random() * 20) + 'px';
+  span.style.animationDuration = (6 + Math.random() * 6) + 's';
+  document.body.appendChild(span);
+
+  // remove after animation
+  setTimeout(() => {
+    span.remove();
+  }, parseFloat(span.style.animationDuration) * 1000);
+}
+
+// spawn emojis gradually
+setInterval(createEmoji, 400);
+</script>
+
+</body>
+</html>
