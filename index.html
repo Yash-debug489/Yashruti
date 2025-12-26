@@ -59,6 +59,42 @@ header p {
   color: #666;
 }
 
+
+  /* Locked Polaroid */
+.locked-card {
+  opacity: 0.75;
+  filter: grayscale(0.4);
+  pointer-events: none; /* 🔒 disable click */
+}
+
+.locked-photo {
+  background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+  position: relative;
+}
+
+/* Lock icon */
+.lock-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0.7;
+}
+
+/* UNLOCKED STATE */
+.unlocked {
+  opacity: 1;
+  filter: none;
+  pointer-events: auto;
+}
+
+.unlocked .lock-icon {
+  display: none;
+}
+
+
   .hero {
   text-align: center;
   padding: 100px 20px 60px;
@@ -459,7 +495,25 @@ footer {
     </a>
   </div>
 
-  <div class="event left">
+  <div class="event left locked-event" id="newYearCard">
+  <span class="date">1 Jan 2026</span>
+  <span class="dot"></span>
+
+  <!-- Link stays disabled till unlock -->
+  <a href="newyear/" class="card locked-card" id="newYearLink">
+    <div class="photo locked-photo">
+      <span class="lock-icon">🔒</span>
+    </div>
+
+    <div class="caption">
+      <h3>New Year</h3>
+      <p id="nyTimer">Unlocking soon…</p>
+    </div>
+  </a>
+</div>
+
+
+  <div class="event right">
     <span class="date">∞</span>
     <span class="dot"></span>
     <div class="card">
@@ -533,6 +587,38 @@ footer {
 </footer>
 
 <script>
+
+const newYearDate = new Date("January 1, 2026 00:00:00").getTime();
+
+const nyTimer = document.getElementById("nyTimer");
+const nyCard = document.getElementById("newYearCard");
+const nyLink = document.getElementById("newYearLink");
+
+function updateNewYearTimer() {
+  const now = new Date().getTime();
+  const diff = newYearDate - now;
+
+  if (diff <= 0) {
+    nyTimer.innerText = "Happy New Year 🤍";
+    nyLink.classList.add("unlocked");
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+  nyTimer.innerText = `${days}d ${hours}h ${minutes}m left`;
+}
+
+setInterval(updateNewYearTimer, 1000);
+updateNewYearTimer();
+
+
+
+
+
+  
 document.getElementById("secret").addEventListener("click", () => {
   alert("Hehee...this is our digital scrapbook🤍");
 });
