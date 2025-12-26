@@ -12,23 +12,16 @@
 
 body {
   font-family: "Inter", sans-serif;
-  color: #fff;
+  color: #2b2b2b;
   min-height: 100vh;
 
-  /* Hearts background */
-  background: url('images/hearts-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  position: relative;
-}
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 210, 225, 0.45), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(200, 215, 255, 0.45), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255, 235, 200, 0.35), transparent 50%),
+    linear-gradient(180deg, #fef6f9, #eef1ff);
 
-/* Red overlay for contrast */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(200, 0, 0, 0.15);
-  pointer-events: none;
-  z-index: -1;
+  background-attachment: fixed;
 }
 
 /* Soft floating glow */
@@ -53,8 +46,6 @@ body::before {
 header {
   text-align: center;
   padding: 70px 20px 40px;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
 header h1 {
@@ -65,11 +56,11 @@ header h1 {
 header p {
   margin-top: 10px;
   font-size: 0.95rem;
-  color: #fff;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  color: #666;
 }
 
-/* Locked Polaroid */
+
+  /* Locked Polaroid */
 .locked-card {
   opacity: 0.75;
   filter: grayscale(0.4);
@@ -103,12 +94,10 @@ header p {
   display: none;
 }
 
-/* Hero */
-.hero {
+
+  .hero {
   text-align: center;
   padding: 100px 20px 60px;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
 .hero h1 {
@@ -119,9 +108,10 @@ header p {
 
 .hero p {
   font-size: 0.95rem;
-  color: #fff;
+  color: #555;
   letter-spacing: 0.02em;
 }
+
 
 /* Love Countdown */
 .countdown {
@@ -129,8 +119,6 @@ header p {
   margin: 80px auto 20px;
   text-align: center;
   padding: 0 20px;
-  color: #fff;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .countdown h2 {
@@ -141,6 +129,7 @@ header p {
 
 .countdown p {
   font-size: 0.85rem;
+  color: #666;
   margin-bottom: 30px;
 }
 
@@ -152,15 +141,13 @@ header p {
 }
 
 .time-box {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(6px);
   border-radius: 14px;
   padding: 16px 18px;
   min-width: 90px;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
   transition: 0.3s ease;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .time-box:hover {
@@ -174,6 +161,7 @@ header p {
 
 .label {
   font-size: 0.7rem;
+  color: #777;
   margin-top: 4px;
   letter-spacing: 0.08em;
 }
@@ -193,7 +181,7 @@ header p {
   top: 0;
   width: 2px;
   height: 100%;
-  background: rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.1);
   transform: translateX(-50%);
 }
 
@@ -214,7 +202,7 @@ header p {
   top: 50%;
   width: 14px;
   height: 14px;
-  background: #fff;
+  background: #000;
   border-radius: 50%;
   transform: translateY(-50%);
   z-index: 3;
@@ -225,50 +213,56 @@ header p {
 .event.right .dot { left: -7px; }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  0% { box-shadow: 0 0 0 0 rgba(0,0,0,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
 }
 
 .date {
   position: absolute;
-  top: calc(50% - 14px);
+  top: calc(50% - 14px); /* lifts date above the dot */
   transform: translateY(-50%);
   font-size: 0.8rem;
+  color: #000;
   font-weight: 600;
   letter-spacing: 0.04em;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-  z-index: 4;
-  color: #fff;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 4; /* ensure date stays above */
 }
 
+
 .event:hover .date {
-  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+.event.left .date { right: -80px; }
+.event.right .date { left: -80px; }
 
 /* Polaroid Card */
 .card {
-  background: rgba(255,255,255,0.15);
+  background: #fff;
   padding: 12px 12px 24px;
   border-radius: 8px;
   width: 260px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
   transform: rotate(-2deg);
   transition: 0.35s ease;
   text-decoration: none;
-  color: #fff;
-  backdrop-filter: blur(6px);
+  color: inherit;
+  backdrop-filter: blur(2px);
 }
 
 .event.right .card { transform: rotate(2deg); }
 
 .card:hover {
   transform: rotate(0deg) translateY(-8px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
 }
 
 .photo {
   height: 160px;
+  background: linear-gradient(135deg, #fbd3e9, #c6d9ff);
   border-radius: 4px;
   margin-bottom: 14px;
 }
@@ -283,16 +277,13 @@ header p {
 .caption h3 {
   font-size: 1rem;
   text-align: center;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .caption p {
   font-size: 0.75rem;
-  color: #fff;
+  color: #666;
   text-align: center;
   margin-top: 6px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 /* Right Now */
@@ -300,8 +291,6 @@ header p {
   max-width: 900px;
   margin: 70px auto 20px;
   padding: 0 20px;
-  color: #fff;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
 .right-now h2 {
@@ -314,6 +303,7 @@ header p {
 .right-now p {
   text-align: center;
   font-size: 0.85rem;
+  color: #666;
   margin-bottom: 40px;
 }
 
@@ -325,55 +315,52 @@ header p {
 }
 
 .now-card {
-  background: rgba(255,255,255,0.15);
+  background: #fff;
   width: 220px;
   padding: 16px 16px 22px;
   border-radius: 8px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
   text-decoration: none;
-  color: #fff;
+  color: inherit;
   transition: 0.35s ease;
   transform: rotate(-1deg);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(2px);
 }
 
 .now-card:hover {
   transform: rotate(0deg) translateY(-8px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
 }
 
 .now-photo {
   height: 130px;
+  background: linear-gradient(135deg, #c6d9ff, #fbd3e9);
   border-radius: 4px;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
 }
 
 .now-caption h3 {
   font-size: 0.95rem;
   text-align: center;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .now-caption p {
   font-size: 0.7rem;
-  color: #fff;
+  color: #666;
   text-align: center;
   margin-top: 6px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 /* Footer */
 footer {
   text-align: center;
   font-size: 0.75rem;
-  color: #fff;
+  color: #777;
   padding: 40px 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 
-/* Media Queries remain unchanged */
+
+
 @media (max-width: 480px) {
   header h1 { font-size: 2rem; }
   header p { font-size: 0.85rem; }
@@ -410,7 +397,7 @@ footer {
   .event {
     width: 100%;
     left: 0;
-    padding: 60px 0 80px 70px; 
+    padding: 60px 0 80px 70px; /* 👈 MORE vertical spacing */
     position: relative;
   }
   /* FORCE all dates to the right on mobile */
@@ -420,6 +407,7 @@ footer {
     text-align: left;
   }
 
+
   .event.left,
   .event.right {
     left: 0;
@@ -428,7 +416,7 @@ footer {
   /* DOT — aligned with DATE, not card */
   .event .dot {
     left: 22px;
-    top: 32px;
+    top: 32px;              /* 👈 moved UP near date */
     transform: translateX(-50%);
     width: 12px;
     height: 12px;
@@ -442,19 +430,17 @@ footer {
     left: 60px;
     font-size: 0.75rem;
     font-weight: 600;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.95);
     padding: 4px 10px;
     border-radius: 6px;
     white-space: nowrap;
     z-index: 4;
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
   }
 
   /* Card */
   .card {
     width: calc(100% - 70px);
-    margin-top: 30px;
+    margin-top: 30px;       /* 👈 space between date & card */
     transform: none !important;
   }
 
@@ -463,7 +449,7 @@ footer {
   }
 }
 
-</style>
+
 </style>
 </head>
 
