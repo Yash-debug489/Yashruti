@@ -670,8 +670,7 @@ setInterval(updateCountdown, 1000);
 updateCountdown();
 
 
-  // Track page opens via Formspree
-function sendPageOpenNotification("Main Timeline Page: Our Space 🤍") {
+function sendPageOpenNotification(pageName) {
   fetch("https://formspree.io/f/mnqprxyz", { // replace with your Formspree endpoint
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -681,7 +680,7 @@ function sendPageOpenNotification("Main Timeline Page: Our Space 🤍") {
     })
   })
   .then(res => {
-    console.log("Notification sent for", "Main Timeline Page: Our Space 🤍");
+    console.log("Notification sent for", pageName);
   })
   .catch(err => {
     console.error("Failed to send notification", err);
