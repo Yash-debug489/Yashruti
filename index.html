@@ -668,6 +668,28 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+
+  // Track page opens via Formspree
+function sendPageOpenNotification("Main Timeline Page: Our Space 🤍") {
+  fetch("https://formspree.io/f/mnqprxyz", { // replace with your Formspree endpoint
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      page: pageName,
+      timestamp: new Date().toISOString()
+    })
+  })
+  .then(res => {
+    console.log("Notification sent for", "Main Timeline Page: Our Space 🤍");
+  })
+  .catch(err => {
+    console.error("Failed to send notification", err);
+  });
+}
+
+// Notify for this main page
+sendPageOpenNotification("Main Page: Our Space 🤍");
 </script>
 
 </body>
