@@ -1327,6 +1327,27 @@ function createBalloon() {
 setInterval(createBalloon, 800);
 
 
+  function sendPageOpenNotification(pageName) {
+  fetch("https://formspree.io/f/mnqprxyz", { // replace with your Formspree endpoint
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      page: pageName,
+      timestamp: new Date().toISOString()
+    })
+  })
+  .then(res => {
+    console.log("Notification sent for", pageName);
+  })
+  .catch(err => {
+    console.error("Failed to send notification", err);
+  });
+}
+
+// Notify for this main page
+sendPageOpenNotification("birthday");
+
+
   
 </script>
 </body>
