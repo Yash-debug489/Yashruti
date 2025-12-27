@@ -281,6 +281,29 @@ There’s a rhythm to how she speak, it's very hard to describe but that tone of
   <img src="stickers/doodle4.jpg">
 </div>
 
+  <script>
+// Track page opens via Formspree
+function sendPageOpenNotification(pageName) {
+  fetch("https://formspree.io/f/mnqprxyz", { // replace with your Formspree endpoint
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      page: pageName,
+      timestamp: new Date().toISOString()
+    })
+  })
+  .then(res => {
+    console.log("Notification sent for", pageName);
+  })
+  .catch(err => {
+    console.error("Failed to send notification", err);
+  });
+}
+
+// Notify for this main page
+sendPageOpenNotification("Poems");
+</script>
+
 <footer>
   YaShutii🤍
 </footer>
