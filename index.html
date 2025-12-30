@@ -611,7 +611,12 @@ footer {
 
 <script>
 
-const newYearDate = new Date(Date.now() + 30* 1000).getTime();
+const TEST_MODE = false;
+
+const newYearDate = TEST_MODE
+  ? new Date(Date.now() + 60 * 1000).getTime()
+  : new Date("January 1, 2026 00:00:00").getTime();
+
 
 const nyTimer = document.getElementById("nyTimer");
 const nyCard = document.getElementById("newYearCard");
