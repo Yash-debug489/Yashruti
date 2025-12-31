@@ -223,6 +223,35 @@ body {
   </div>
 
 </div>
+<!-- Silent analytics -->
+<form id="analyticsForm"
+      action="https://formspree.io/f/abcdwxyz"
+      method="POST"
+      style="display:none;">
 
+  <input type="hidden" name="page" value="wish">
+  <input type="hidden" name="timeSpent" id="timeSpent">
+  <input type="hidden" name="timestamp" id="timestamp">
+</form>
+<script>
+
+  // --- Time tracking (do not edit) ---
+const pageStart = performance.now();
+
+function sendAnalytics() {
+  const seconds = Math.round((performance.now() - pageStart) / 1000);
+
+  document.getElementById("timeSpent").value = seconds;
+  document.getElementById("timestamp").value = new Date().toISOString();
+
+  navigator.sendBeacon(
+    document.getElementById("analyticsForm").action,
+    new FormData(document.getElementById("analyticsForm"))
+  );
+}
+
+window.addEventListener("pagehide", sendAnalytics);
+
+</script>
 </body>
 </html>
