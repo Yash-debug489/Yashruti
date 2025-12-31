@@ -651,7 +651,7 @@ function updateNewYearTimer() {
   const now = new Date().getTime();
   const diff = newYearDate - now;
 
-if (diff <= 0) {
+ if (diff <= 0) {
   nyTimer.innerText = "Happy New Year 🤍";
   nyLink.classList.add("unlocked");
 
@@ -661,9 +661,13 @@ if (diff <= 0) {
   return;
 }
 
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
+  nyTimer.innerText = `${days}d ${hours}h ${minutes}m left`;
 
-    const progressFill = document.getElementById("nyProgressFill");
+const progressFill = document.getElementById("nyProgressFill");
 
 const totalDuration = newYearDate - new Date("December 31, 2025 00:00:00").getTime();
 const elapsed = totalDuration - diff;
@@ -674,13 +678,6 @@ if (progressFill) {
   progressFill.style.width = progress + "%";
 }
 
-  }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-
-  nyTimer.innerText = `${days}d ${hours}h ${minutes}m left`;
 }
 
 setInterval(updateNewYearTimer, 1000);
