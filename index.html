@@ -67,6 +67,25 @@ header p {
   margin: 0 auto 10px;
 }
 
+  /* ⏳ New Year progress bar */
+.ny-progress {
+  width: 100%;
+  height: 6px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 6px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.ny-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff9aa2, #ffd1dc);
+  border-radius: 6px;
+  transition: width 1s linear, opacity 0.5s ease;
+}
+
+
 
   /* Locked Polaroid */
 .locked-card {
@@ -528,10 +547,16 @@ footer {
       <span class="lock-icon">🔒</span>
     </div>
 
-    <div class="caption">
-      <h3>New Year</h3>
-      <p id="nyTimer">Unlocking soon…</p>
-    </div>
+   <div class="caption">
+  <h3>New Year</h3>
+  <p id="nyTimer">Unlocking soon…</p>
+
+  <!-- Progress bar -->
+  <div class="ny-progress">
+    <div class="ny-progress-fill" id="nyProgressFill"></div>
+  </div>
+</div>
+
   </a>
 </div>
 
@@ -626,10 +651,29 @@ function updateNewYearTimer() {
   const now = new Date().getTime();
   const diff = newYearDate - now;
 
-  if (diff <= 0) {
-    nyTimer.innerText = "Happy New Year 🤍";
-    nyLink.classList.add("unlocked");
-    return;
+if (diff <= 0) {
+  nyTimer.innerText = "Happy New Year 🤍";
+  nyLink.classList.add("unlocked");
+
+  const bar = document.querySelector(".ny-progress");
+  if (bar) bar.style.opacity = "0";
+
+  return;
+}
+
+
+
+    const progressFill = document.getElementById("nyProgressFill");
+
+const totalDuration = newYearDate - new Date("December 31, 2025 00:00:00").getTime();
+const elapsed = totalDuration - diff;
+
+let progress = Math.min(Math.max((elapsed / totalDuration) * 100, 0), 100);
+
+if (progressFill) {
+  progressFill.style.width = progress + "%";
+}
+
   }
 
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
