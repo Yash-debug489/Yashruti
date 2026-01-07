@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +48,8 @@ header p {
   font-size: 0.9rem;
   color: #777;
 }
-/* Spin Wheel */
+  
+  /* Spin Wheel */
 #wheel-container {
   margin: 20px auto;
   width: 120px;
@@ -86,7 +88,8 @@ header p {
 #results p {
   margin-top: 8px;
   font-size: 0.9rem;
-}
+  }
+
 /* Container */
 .poems-container {
   max-width: 900px;
@@ -309,11 +312,11 @@ Then comes the way she talks about her day, especially her coaching stories, ya 
 There’s a rhythm to how she speak, it's very hard to describe but that tone of speaking --. I love her for all who u r.
     </div>
   </details>
-
+  
   <!-- Spin the Wheel Section -->
 <details class="poem-card">
   <summary>
-    <h2>The darling theorm🐥</h2>
+    <h2>The Darling theorm🐥</h2>
     <p>Spin it 3 times</p>
   </summary>
 
@@ -321,7 +324,7 @@ There’s a rhythm to how she speak, it's very hard to describe but that tone of
 
     <p id="spin-instruction" style="margin-bottom:18px; font-size:0.9rem;">
       Instruction: Spin the wheel <b>three times</b>.  
-      Observe each outcome to understand darling theorm.
+      Each spin will be recorded to help u understand darling theorm💗
     </p>
 
     <div id="wheel-container">
@@ -333,13 +336,13 @@ There’s a rhythm to how she speak, it's very hard to describe but that tone of
     <div id="results" style="margin-top:20px;"></div>
 
     <button id="strange-btn" style="display:none; margin-top:18px;">
-      Strange...?click here
+      Strange…
     </button>
 
     <p id="final-message" style="display:none; margin-top:20px; font-style:italic;"></p>
 
   </div>
-</details>
+  </details>
 
 </section>
 
@@ -372,7 +375,8 @@ function sendPageOpenNotification(pageName) {
 
 // Notify for this main page
 sendPageOpenNotification("Poems");
-
+    
+    
     let spins = 0;
 const maxSpins = 3;
 
@@ -405,10 +409,10 @@ spinBtn.addEventListener("click", () => {
 strangeBtn.addEventListener("click", () => {
   finalMessage.style.display = "block";
   finalMessage.textContent =
-    "It appears strange that the result is always U.
+    ""It appears strange that the result is always U.
 However, this follows directly from the Darling Theorem:
 the system is biased, the choice is intentional,
-and ill always choose U.";
+and ill always choose U.🌹;
 });
 </script>
 
