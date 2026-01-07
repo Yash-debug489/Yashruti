@@ -336,7 +336,7 @@ There’s a rhythm to how she speak, it's very hard to describe but that tone of
     <div id="results" style="margin-top:20px;"></div>
 
     <button id="strange-btn" style="display:none; margin-top:18px;">
-      Strange…
+      Strange…?click here
     </button>
 
     <p id="final-message" style="display:none; margin-top:20px; font-style:italic;"></p>
@@ -409,10 +409,10 @@ spinBtn.addEventListener("click", () => {
 strangeBtn.addEventListener("click", () => {
   finalMessage.style.display = "block";
   finalMessage.textContent =
-    ""It appears strange that the result is always U.
-However, this follows directly from the Darling Theorem:
-the system is biased, the choice is intentional,
-and ill always choose U.🌹;
+    "It appears strange that the result is always U. " +
+    "However, this follows directly from the Darling Theorem: " +
+    "the system is biased, the choice is intentional, " +
+    "and I will always choose U. 🌹";
 });
 </script>
 
