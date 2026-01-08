@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Us 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background: linear-gradient(180deg, #ffd6e8, #fff1f6);
+  font-family: Inter, sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container{
+  width:100%;
+  max-width:500px;
+  padding:30px 20px;
+}
+
+.card{
+  background: rgba(255,255,255,0.9);
+  border-radius:26px;
+  padding:32px 26px;
+  box-shadow: 0 25px 45px rgba(255,182,193,0.35);
+  animation: fadeIn 0.6s ease;
+}
+
+.question{
+  font-family: 'Playfair Display', serif;
+  font-size:22px;
+  color:#3a3a3a;
+  margin-bottom:28px;
+}
+
+.option{
+  background:#ffffff;
+  border:1px solid #ffd1e3;
+  border-radius:999px;
+  padding:14px 20px;
+  margin-bottom:14px;
+  cursor:pointer;
+  text-align:center;
+  font-size:15px;
+  color:#444;
+  transition:0.3s ease;
+}
+
+.option:hover{
+  background:#ffe4f0;
+  transform:scale(1.03);
+}
+
+.heart{
+  text-align:center;
+  font-size:14px;
+  opacity:0.6;
+  margin-top:18px;
+}
+
+.final{
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  font-size:26px;
+  color:#333;
+  padding:40px 0;
+}
+
+input[type="text"]{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid #ffd1e3;
+  border-radius:999px;
+  font-size:15px;
+  margin-bottom:14px;
+  outline:none;
+  transition:0.2s ease;
+}
+
+input[type="text"]:focus{
+  border-color:#ff9abc;
+  box-shadow:0 0 8px rgba(255,150,180,0.3);
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div id="box"></div>
+</div>
+
+<script>
+/* ================= QUESTIONS ================= */
+const questions = [
+  { q: "Coffee or chai?" },
+  { q: "Movie chill at home or random late night drives?" },
+  { q: "Being teased or pampered?" },
+  { q: "Long hug or a quick kiss?" },
+  { q: "If we get stuck somewhere for a day, where would u want it to be?" },
+  { q: "If u had to describe US in one vibe, what would that be.." },
+  { q: "At last a few words for me" }
+];
+
+let index = 0;
+let locked = false;
+
+/* ================= RENDER ================= */
+function render(){
+  const box = document.getElementById("box");
+
+  if(index >= questions.length){
+    box.innerHTML = `
+      <div class="card">
+        <div class="final">❤️SHrutii,i love ur name so i just spelled it at last</div>
+      </div>`;
+    return;
+  }
+
+  const q = questions[index];
+
+  box.innerHTML = `
+    <div class="card">
+      <div class="question">${q.q}</div>
+      <input type="text" id="answerInput" placeholder="Type your answer..."/>
+      <div class="option" onclick="submitAnswer()">Submit</div>
+      <div class="heart">🤍</div>
+    </div>
+  `;
+
+  // allow Enter key to submit
+  const input = document.getElementById("answerInput");
+  input.addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+      submitAnswer();
+    }
+  });
+  input.focus();
+}
+
+/* ================= SEND (SILENT) ================= */
+function submitAnswer(){
+  if(locked) return;
+  locked = true;
+
+  const input = document.getElementById("answerInput");
+  if(!input || input.value.trim() === "") {
+    alert("Please type an answer 🤍");
+    locked = false;
+    return;
+  }
+
+  const typedAnswer = input.value.trim();
+  const questionText = questions[index].q;
+
+  // send to Formspree
+  fetch("https://formspree.io/f/xqearwpd", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      question: questionText,
+      answer: typedAnswer,
+      index: index + 1,
+      timestamp: new Date().toISOString()
+    })
+  }).catch(() => {}); // fail silently
+
+  index++;
+  setTimeout(() => {
+    locked = false;
+    render();
+  }, 300);
+}
+
+/* ================= START ================= */
+render();
+</script>
+
+</body>
+</html>
