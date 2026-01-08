@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:#0f0f0f;
+  color:white;
+  font-family:Inter, sans-serif;
+  display:flex;
+  justify-content:center;
+}
+.container{
+  max-width:600px;
+  padding:40px 20px;
+}
+.fade{
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.8s;
+  margin-bottom:30px;
+}
+.fade.show{opacity:1;transform:none}
+button{
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  color:white;
+  padding:12px 24px;
+  border-radius:30px;
+  cursor:pointer;
+}
+#yes{
+  font-size:64px;
+  text-align:center;
+  display:none;
+  margin:40px 0;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="fade">I know i have hesitated in being sure about u.</div>
+
+  <div class="fade">
+    But i know ur different now...a 20 year girl with a lot of brain..hehehee, waisee
+  </div>
+
+  <div class="fade">
+    I like how conversation feels so easy with u NOW, i can express myself freely...without being judged..like yesterday,
+  </div>
+
+  <div class="fade">
+    It felt calm.  
+    It felt real.
+  </div>
+
+  <div class="fade">
+    So… am I sure now?
+    <br><br>
+    <button onclick="reveal()">Yes</button>
+    <button onclick="reveal()">U already know the answer</button>
+  </div>
+
+  <div id="yes">YES.</div>
+
+  <button id="next" style="display:none" onclick="go()">Continue</button>
+
+</div>
+
+<script>
+const p=document.querySelectorAll('.fade');let i=0;
+(function show(){ if(i<p.length){p[i].classList.add('show');i++;setTimeout(show,1200);} })();
+
+function reveal(){
+  document.getElementById('yes').style.display='block';
+  document.getElementById('next').style.display='block';
+}
+function go(){
+  window.location.href="questions.html";
+}
+</script>
+
+</body>
+</html>
