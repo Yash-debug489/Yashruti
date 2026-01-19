@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Safe Space🌸</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', cursive;
+      background: linear-gradient(#fff0f5, #fde2eb);
+      overflow-x: hidden;
+      color: #444;
+    }
+
+    .float {
+      position: fixed;
+      animation: float 10s ease-in-out infinite;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .float1 { top: 10%; left: 5%; width: 60px; }
+    .float2 { top: 30%; right: 10%; width: 80px; animation-duration: 12s; }
+    .float3 { bottom: 15%; left: 15%; width: 70px; animation-duration: 14s; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .container {
+      padding: 30px 20px 100px;
+      max-width: 420px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff6fae;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .soft-text {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: #666;
+    }
+
+    .card {
+      background: #ffe4ef;
+      border-radius: 22px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 20px rgba(255,150,180,0.25);
+    }
+
+    button {
+      background: #ff78a8;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 22px;
+      color: white;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #ff5f9b;
+    }
+
+    textarea {
+      width: 100%;
+      height: 90px;
+      border-radius: 15px;
+      border: none;
+      padding: 12px;
+      font-family: inherit;
+      resize: none;
+    }
+
+    canvas {
+      border-radius: 15px;
+      background: #fff;
+      margin-top: 10px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<img src="assets/heart.png" class="float float1">
+<img src="assets/star.png" class="float float2">
+<img src="assets/cloud.png" class="float float3">
+
+<div class="container">
+
+  <h2>I’m here with you 🌷</h2>
+  <p class="soft-text">You don’t need to explain anything.</p>
+
+  <div class="card">
+    <p id="affirmation">It’s okay to feel like this.</p>
+    <button onclick="newAffirmation()">Touch me for some words</button>
+  </div>
+
+  <div class="card">
+    <p style="text-align:center;">
+      Which subject made you cry this week?
+    </p>
+
+    <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+      <button onclick="showSubject('phy')">Physics</button>
+      <button onclick="showSubject('chem')">Chemistry</button>
+      <button onclick="showSubject('zoo')">Zoology</button>
+      <button onclick="showSubject('bot')">Botany</button>
+    </div>
+
+    <img id="subjectImage"
+         style="display:none; margin-top:15px; width:100%; border-radius:18px;"
+         alt="comfort image">
+  </div>
+
+  <div class="card">
+    <p>Write whatever u fell or want to dump...don't worry i can't read them,it's not stored</p>
+   <textarea id="thoughtBox" placeholder="Let goo…"></textarea>
+
+    <button onclick="burn()">Burn it🔥</button>
+  </div>
+
+  <div class="card">
+    <p>Draw anything u want.</p>
+    <canvas id="pad" width="300" height="180"></canvas><br>
+    <button onclick="clearPad()">Clear</button>
+  </div>
+
+  <!-- FINAL LETTER SECTION -->
+  <div class="card" style="text-align:center;">
+    <p>
+      I u still feel heavy...
+    </p>
+    <a href="letter.html">
+      <button>Open 💌</button>
+    </a>
+  </div>
+
+</div>
+
+<script>
+  const affirmations = [
+    "It’s okay if u feel tired,or overwhelmed",
+    "You don’t have to be strong right now.",
+    "I know family pressure is high, but ur my strong miss-izzz naa",
+    "I’m here. ur not alone.",
+    "Ur allowed to rest.",
+    "Ull feel recharged and motivated again..if ur feeling heavy this feeling will pass",
+    "Im proud of u and ur mehnat ",
+    "This stress will go to..im with u",
+    "You are enough, exactly as you are."
+  ]
+
+  function newAffirmation() {
+    document.getElementById("affirmation").innerText =
+      affirmations[Math.floor(Math.random() * affirmations.length)];
+  }
+
+  function burn() {
+    document.getElementById("thoughtBox").value = "";
+  }
+
+  function showSubject(sub) {
+    const img = document.getElementById("subjectImage");
+    const images = {
+      phy: "assets/phy.png",
+      chem: "assets/chem.png",
+      zoo: "assets/zoo.png",
+      bot: "assets/bot.png"
+    };
+    img.src = images[sub];
+    img.style.display = "block";
+  }
+
+  const canvas = document.getElementById("pad");
+  const ctx = canvas.getContext("2d");
+  let draw = false;
+
+  canvas.onmousedown = () => draw = true;
+  canvas.onmouseup = () => draw = false;
+  canvas.onmousemove = e => {
+    if (draw) {
+      ctx.fillStyle = "#ff8bb8";
+      ctx.beginPath();
+      ctx.arc(e.offsetX, e.offsetY, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  };
+
+  function clearPad() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+</script>
+
+</body>
+</html>
