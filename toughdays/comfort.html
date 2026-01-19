@@ -14,22 +14,6 @@
       color: #444;
     }
 
-    .float {
-      position: fixed;
-      animation: float 10s ease-in-out infinite;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    .float1 { top: 10%; left: 5%; width: 60px; }
-    .float2 { top: 30%; right: 10%; width: 80px; animation-duration: 12s; }
-    .float3 { bottom: 15%; left: 15%; width: 70px; animation-duration: 14s; }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
     .container {
       padding: 30px 20px 100px;
       max-width: 420px;
@@ -56,6 +40,16 @@
       padding: 20px;
       margin-bottom: 25px;
       box-shadow: 0 8px 20px rgba(255,150,180,0.25);
+    }
+
+    .divider {
+      text-align: center;
+      margin: 25px 0;
+    }
+
+    .divider img {
+      width: 60px;
+      opacity: 0.7;
     }
 
     button {
@@ -87,6 +81,7 @@
       border-radius: 15px;
       background: #fff;
       margin-top: 10px;
+      touch-action: none;
     }
 
     a {
@@ -97,10 +92,6 @@
 
 <body>
 
-<img src="assets/heart.png" class="float float1">
-<img src="assets/star.png" class="float float2">
-<img src="assets/cloud.png" class="float float3">
-
 <div class="container">
 
   <h2>I’m here with you 🌷</h2>
@@ -109,6 +100,11 @@
   <div class="card">
     <p id="affirmation">It’s okay to feel like this.</p>
     <button onclick="newAffirmation()">Touch me for some words</button>
+  </div>
+
+  <!-- divider -->
+  <div class="divider">
+    <img src="assets/heart.png">
   </div>
 
   <div class="card">
@@ -128,11 +124,20 @@
          alt="comfort image">
   </div>
 
+  <!-- divider -->
+  <div class="divider">
+    <img src="assets/star.png">
+  </div>
+
   <div class="card">
     <p>Write whatever u fell or want to dump...don't worry i can't read them,it's not stored</p>
-   <textarea id="thoughtBox" placeholder="Let goo…"></textarea>
-
+    <textarea id="thoughtBox" placeholder="Let goo…"></textarea>
     <button onclick="burn()">Burn it🔥</button>
+  </div>
+
+  <!-- divider -->
+  <div class="divider">
+    <img src="assets/cloud.png">
   </div>
 
   <div class="card">
@@ -141,7 +146,6 @@
     <button onclick="clearPad()">Clear</button>
   </div>
 
-  <!-- FINAL LETTER SECTION -->
   <div class="card" style="text-align:center;">
     <p>
       I u still feel heavy...
@@ -164,7 +168,7 @@
     "Im proud of u and ur mehnat ",
     "This stress will go to..im with u",
     "You are enough, exactly as you are."
-  ]
+  ];
 
   function newAffirmation() {
     document.getElementById("affirmation").innerText =
@@ -189,18 +193,45 @@
 
   const canvas = document.getElementById("pad");
   const ctx = canvas.getContext("2d");
-  let draw = false;
+  let drawing = false;
 
-  canvas.onmousedown = () => draw = true;
-  canvas.onmouseup = () => draw = false;
-  canvas.onmousemove = e => {
-    if (draw) {
-      ctx.fillStyle = "#ff8bb8";
-      ctx.beginPath();
-      ctx.arc(e.offsetX, e.offsetY, 4, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  };
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches ? e.touches[0] : e;
+    return {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
+    };
+  }
+
+  function startDraw(e) {
+    drawing = true;
+    drawPoint(e);
+  }
+
+  function endDraw() {
+    drawing = false;
+  }
+
+  function drawPoint(e) {
+    if (!drawing) return;
+    const pos = getPos(e);
+    ctx.fillStyle = "#ff8bb8";
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mouseup", endDraw);
+  canvas.addEventListener("mousemove", drawPoint);
+
+  canvas.addEventListener("touchstart", startDraw);
+  canvas.addEventListener("touchend", endDraw);
+  canvas.addEventListener("touchmove", e => {
+    e.preventDefault();
+    drawPoint(e);
+  });
 
   function clearPad() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
