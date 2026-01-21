@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  background: #fff0f5;
+  font-family: 'Comic Sans MS', 'Poppins', cursive;
+  overflow: hidden;
+}
+
+.main {
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.small-text {
+  color: #f7a1c4;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 2.8rem;
+  color: #ff6fae;
+  margin: 10px 0 25px;
+}
+
+.card {
+  background: #ffe4ef;
+  border-radius: 25px;
+  padding: 25px;
+  max-width: 320px;
+  margin: auto;
+  box-shadow: 0 8px 20px rgba(255, 150, 180, 0.3);
+}
+
+.card-text {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.tap-text {
+  margin-top: 10px;
+  color: #ff8bb8;
+  font-style: italic;
+}
+
+.btn {
+  margin-top: 20px;
+  background: #ff78a8;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1rem;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  background: #ff5f9b;
+  transform: scale(1.05);
+}
+
+/* Cute characters */
+.bunny {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  width: 70px;
+}
+
+.blob {
+  position: absolute;
+  bottom: 40px;
+  right: 15px;
+  width: 90px;
+}
+
+/* Floating petals */
+.petals {
+  background: url("assets/petals.png") repeat;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  animation: float 20s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes float {
+  from { background-position: 0 0; }
+  to { background-position: 0 1000px; }
+}
