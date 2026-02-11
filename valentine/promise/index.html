@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myYashrutii App</title>
+    <style>
+        :root { --aakash-blue: #00a0e3; --light-bg: #f5f8fa; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light-bg); margin: 0; padding: 0; color: #333; }
+        
+        /* Header */
+        .header { padding: 20px; background: white; }
+        .greeting { font-size: 0.9rem; color: #666; margin: 0; }
+        .user-name { font-size: 1.5rem; font-weight: bold; margin: 5px 0; }
+
+        /* Punch Card Section */
+        .punch-container { display: flex; justify-content: space-around; background: white; margin: 15px; padding: 15px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .punch-box { text-align: center; }
+        .date-box { background: #e6f7ff; color: var(--aakash-blue); padding: 10px; border-radius: 8px; font-weight: bold; }
+        .punch-label { font-size: 0.75rem; color: #888; margin-bottom: 5px; }
+        .punch-time { font-weight: bold; font-size: 0.9rem; }
+
+        /* Banner Style */
+        .banner { background: linear-gradient(90deg, #0072bc, #00a0e3); margin: 15px; padding: 20px; border-radius: 15px; color: white; position: relative; overflow: hidden; }
+        .banner h2 { margin: 0; font-size: 1.1rem; }
+        .banner-rank { font-size: 2.5rem; font-weight: 900; margin: 10px 0; }
+        .banner-sub { font-size: 0.8rem; opacity: 0.9; }
+
+        /* Promise Section (Academic Info) */
+        .academic-card { background: white; margin: 15px; padding: 20px; border-radius: 12px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .info-item { background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #eee; }
+        .info-label { font-size: 0.7rem; color: #888; }
+        .info-value { font-size: 0.85rem; font-weight: bold; color: var(--aakash-blue); }
+
+        /* Cinema Button */
+        .btn-cinema { display: block; background: var(--aakash-blue); color: white; text-align: center; margin: 20px; padding: 15px; border-radius: 8px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
+        
+        .footer-nav { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #eee; }
+        .nav-item { font-size: 0.7rem; color: var(--aakash-blue); text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <p class="greeting">Hi Good Afternoon!</p>
+        <h1 class="user-name">Shrutii ❤️</h1>
+    </div>
+
+    <div class="punch-container">
+        <div class="date-box">11 Feb<br>Wed</div>
+        <div class="punch-box">
+            <div class="punch-label">First Punch</div>
+            <div class="punch-time">When I met u</div>
+        </div>
+        <div class="punch-box">
+            <div class="punch-label">Last Punch</div>
+            <div class="punch-time">Never</div>
+        </div>
+    </div>
+
+    <div class="banner">
+        <h2>Yashrutii Shine Again!</h2>
+        <div class="banner-rank">AIR 1</div>
+        <p class="banner-sub">Ranked #1 in LOVE(Lifetime Official Vows Examination) </p>
+    </div>
+
+    <div class="academic-card">
+        <h3 style="margin-top:0">Official Commitments</h3>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Branch Name</div>
+                <div class="info-value">Lucknow Hazratganj (Home)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Stream</div>
+                <div class="info-value">S.O.M (Source of Magic)</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Term</div>
+                <div class="info-value">FOREVER</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Batch</div>
+                <div class="info-value">MSID, RM12 (Besties)</div>
+            </div>
+        </div>
+        
+        <p style="font-size: 0.85rem; color: #555; line-height: 1.5; margin-top: 20px;">
+            <strong>Internal Memo:</strong> 
+            I promise to always fill ur water bottle, catch the bugs, and never start the next episode without you. (Check WhatsApp for full report).
+        </p>
+    </div>
+
+    <a href="https://moviethreatervalentine2.vercel.app/" class="btn-cinema">ENTER CINEMA</a>
+
+    <div style="height: 70px;"></div> <div class="footer-nav">
+        <div class="nav-item">🏠<br>Home</div>
+        <div class="nav-item">📋<br>Promises</div>
+        <div class="nav-item">💬<br>Chat</div>
+        <div class="nav-item">⚙️<br>More</div>
+    </div>
+
+</body>
+</html>
