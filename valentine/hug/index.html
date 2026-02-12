@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hug Day - You're Safe Here</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        /* Animated heart-pounding background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(80px);
+            transition: all 2s ease;
+        }
+
+        .background.active {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .background.calm {
+            animation: calmbeat 4s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                background: radial-gradient(circle at 50% 50%, 
+                    rgba(255, 105, 180, 0.6) 0%, 
+                    rgba(255, 20, 147, 0.4) 30%, 
+                    rgba(219, 112, 147, 0.3) 60%,
+                    rgba(255, 182, 193, 0.2) 100%);
+                transform: scale(1);
+            }
+            15% {
+                background: radial-gradient(circle at 50% 50%, 
+                    rgba(255, 20, 147, 0.7) 0%, 
+                    rgba(255, 105, 180, 0.5) 30%, 
+                    rgba(255, 192, 203, 0.4) 60%,
+                    rgba(255, 182, 193, 0.2) 100%);
+                transform: scale(1.05);
+            }
+            30% {
+                background: radial-gradient(circle at 50% 50%, 
+                    rgba(255, 105, 180, 0.6) 0%, 
+                    rgba(255, 20, 147, 0.4) 30%, 
+                    rgba(219, 112, 147, 0.3) 60%,
+                    rgba(255, 182, 193, 0.2) 100%);
+                transform: scale(1);
+            }
+            40% {
+                background: radial-gradient(circle at 50% 50%, 
+                    rgba(255, 20, 147, 0.7) 0%, 
+                    rgba(255, 105, 180, 0.5) 30%, 
+                    rgba(255, 192, 203, 0.4) 60%,
+                    rgba(255, 182, 193, 0.2) 100%);
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes calmbeat {
+            0%, 100% {
+                background: radial-gradient(circle at 50% 50%, 
+                    rgba(135, 206, 250, 0.4) 0%, 
+                    rgba(176, 196, 222, 0.3) 40%, 
+                    rgba(221, 160, 221, 0.2) 70%,
+                    rgba(255, 182, 193, 0.1) 100%);
+                transform: scale(1);
+            }
+            50% {
+                background: radial-gradient(circle at 50% 50%, 
+                    rgba(176, 196, 222, 0.5) 0%, 
+                    rgba(135, 206, 250, 0.4) 40%, 
+                    rgba(230, 230, 250, 0.3) 70%,
+                    rgba(255, 182, 193, 0.1) 100%);
+                transform: scale(1.02);
+            }
+        }
+
+        /* Central card */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin: 20px 0;
+        }
+
+        .gif-container {
+            width: 100%;
+            height: 250px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .question {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .emotions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .emotion-btn {
+            padding: 15px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .emotion-btn:hover {
+            border-color: #ff69b4;
+            background: #fff5f9;
+            transform: translateY(-2px);
+        }
+
+        .emotion-btn.selected {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border-color: #ff1493;
+        }
+
+        .write-section {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .write-prompt {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 12px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        #thoughts {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            font-size: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            resize: vertical;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        #thoughts:focus {
+            outline: none;
+            border-color: #ff69b4;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+        }
+
+        #thoughts::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .virtual-hug-btn {
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .virtual-hug-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+
+        .virtual-hug-btn.show {
+            display: inline-block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hug experience */
+        .hug-experience {
+            display: none;
+        }
+
+        .hug-experience.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .comfort-text {
+            font-size: 22px;
+            color: #4a90e2;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .breathe-text {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            font-size: 48px;
+            color: #ff69b4;
+            font-weight: 700;
+            margin: 20px 0;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .final-message {
+            display: none;
+        }
+
+        .final-message.show {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .final-message h2 {
+            font-size: 32px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .final-message p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Flicker effect */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            10%, 30%, 50%, 70%, 90% { opacity: 0.3; }
+            20%, 40%, 60%, 80% { opacity: 1; }
+        }
+
+        .flicker {
+            animation: flicker 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="background active" id="background"></div>
+
+    <div class="card">
+        <div id="mainContent">
+            <div class="gif-container">
+                <!-- Replace this URL with your preferred hug GIF -->
+                <img src="hug.gif" alt="Warm Hug">
+            </div>
+
+            <div class="message">
+                💝 On this Hug day,I know mai bht door huu..but if i was theree what i want to do is to quietly pull you closer, hold u tight and whisper.."You are safe heree, around my arms🫂"💝
+            </div>
+
+            <div class="question">So what are you feeling right now?</div>
+
+            <form action="https://formspree.io/f/xzdaedvz" method="POST" id="emotionForm">
+                <!-- Both 'emotion' and 'thoughts' fields will be sent to your email via Formspree -->
+                <div class="emotions">
+                    <button type="button" class="emotion-btn" data-emotion="frustrated"> Overwhelmed</button>
+                    <button type="button" class="emotion-btn" data-emotion="sad"> Tired</button>
+                    <button type="button" class="emotion-btn" data-emotion="happy">😊 Happy</button>
+                    <button type="button" class="emotion-btn" data-emotion="pressure">😰 Under Pressure</button>
+                    <button type="button" class="emotion-btn" data-emotion="hopeless">😞 burnt out</button>
+                </div>
+                <input type="hidden" name="emotion" id="selectedEmotion">
+                
+                <div class="write-section">
+                    <div class="write-prompt">Want to let out something? Write it down and release it...💭(don't worry i can't read it..it's just for u to vent)</div>
+                    <textarea 
+                        name="thoughts" 
+                        id="thoughts" 
+                        placeholder="U can pour your heart out here...everything you're feeling, thinking, or holding inside. Let it go..."
+                    ></textarea>
+                </div>
+            </form>
+
+            <button class="virtual-hug-btn" id="hugBtn">🤗 Virtual Hug</button>
+        </div>
+
+        <div class="hug-experience" id="hugExperience">
+            <div class="comfort-text">
+                Imagine i'm holding u tight, you're safe,u can be calm here💙
+            </div>
+            <div class="breathe-text">
+                Focus on your breath... in and out... ✨
+            </div>
+            <div class="timer" id="timer">15</div>
+        </div>
+
+        <div class="final-message" id="finalMessage">
+            <h2>💕 Happy Hug Day! 💕</h2>
+            <p>You are loved, you are valued, and you are never alone. Sending you the warmest virtual hug today and always! 🤗<br>Waisee cinema will return on 14feb..hehehee</p>
+        </div>
+    </div>
+
+    <script>
+        const emotionBtns = document.querySelectorAll('.emotion-btn');
+        const hugBtn = document.getElementById('hugBtn');
+        const selectedEmotionInput = document.getElementById('selectedEmotion');
+        const mainContent = document.getElementById('mainContent');
+        const hugExperience = document.getElementById('hugExperience');
+        const finalMessage = document.getElementById('finalMessage');
+        const background = document.getElementById('background');
+        const timerDisplay = document.getElementById('timer');
+        const emotionForm = document.getElementById('emotionForm');
+        const thoughtsTextarea = document.getElementById('thoughts');
+
+        let selectedEmotion = null;
+
+        // Function to check if hug button should be shown
+        function checkShowHugButton() {
+            if (selectedEmotion || thoughtsTextarea.value.trim().length > 0) {
+                hugBtn.classList.add('show');
+            }
+        }
+
+        // Handle emotion selection
+        emotionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                emotionBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedEmotion = btn.dataset.emotion;
+                selectedEmotionInput.value = selectedEmotion;
+                checkShowHugButton();
+            });
+        });
+
+        // Handle textarea input
+        thoughtsTextarea.addEventListener('input', () => {
+            checkShowHugButton();
+        });
+
+        // Handle virtual hug button
+        hugBtn.addEventListener('click', async () => {
+            // Submit form to Formspree (works even if only text is written)
+            const formData = new FormData(emotionForm);
+            try {
+                await fetch(emotionForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+            } catch (error) {
+                console.log('Form submission error:', error);
+            }
+
+            // Flicker effect
+            document.body.classList.add('flicker');
+            
+            setTimeout(() => {
+                document.body.classList.remove('flicker');
+                
+                // Change background to calm
+                background.classList.remove('active');
+                background.classList.add('calm');
+
+                // Hide main content, show hug experience
+                mainContent.classList.add('hidden');
+                hugExperience.classList.add('active');
+
+                // Start timer
+                let timeLeft = 15;
+                const timerInterval = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.textContent = timeLeft;
+
+                    if (timeLeft === 0) {
+                        clearInterval(timerInterval);
+                        
+                        // Show final message
+                        hugExperience.classList.remove('active');
+                        finalMessage.classList.add('show');
+                    }
+                }, 1000);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
