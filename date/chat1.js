@@ -25,7 +25,7 @@ function typingThen(message, delay, html=false){
 
 /* MESSAGE FLOW */
 typingThen("Happy Valentine's day babee❤️",1000);
-typingThen("Heheheee...mainn kitnii baar wishh kar chukaa huu",4000);
+typingThen("Awww...u look so beautiful today",4000);
 typingThen("So wanna go on a tiny walk with me??👉👈",6000);
 
 typingThen(
