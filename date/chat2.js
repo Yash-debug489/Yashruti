@@ -38,7 +38,7 @@ typingThen(`
     </audio>
 `,18000,true);
 
-typingThen("Just wanted you to smile a little😌....",27000);
+typingThen("Just wanted you to smile a little😌....I LOVEE U SOO MUCHH, FOREVERR",27000);
 
 typingThen(
     `<a href="magic/">baas akk last chizz … open this 💛</a>`,
