@@ -26,11 +26,11 @@ function typingThen(message, delay, html=false){
 /* CONTINUATION */
 typingThen("Welcomee backkkk ❤️",1000);
 
-typingThen("I enjoyed todayy… next time we can go somewhere else, maybe a moviee 🍿",4000);
+typingThen("I enjoyed todayy… next time we can go somewhere else, maybe a moviee🍿,yaa wherever we decidee",4000);
 
 typingThen("Waisee that virtual hug drawing you sent… bhtt sundar thii yrr upar se colourfull..🫠❤️",9000);
 
-typingThen("Kuch sunogii before you go back to conquering NEET? 😤🎵",13000);
+typingThen("Kuch sunogii before you go back to conquering NEET? 😤",13000);
 
 typingThen(`
     <audio controls>
@@ -38,7 +38,7 @@ typingThen(`
     </audio>
 `,18000,true);
 
-typingThen("Just wanted you to smile a little 😌",27000);
+typingThen("Just wanted you to smile a little😌....I LOVEE U SOO SOO MUCHHH",27000);
 
 typingThen(
     `<a href="magic/">baas akk last chizz … open this 💛</a>`,
