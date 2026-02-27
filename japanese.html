@@ -35,13 +35,10 @@ body{
 
 /* ── NIGHT SKY ── */
 .sky{position:fixed;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse 100% 60% at 50% 0%,#1e0a2a 0%,#100820 35%,#0d0b18 70%,#080612 100%);}
+  background:radial-gradient(ellipse 100% 60% at 50% 0%,#1e0a2a 0%,#100820 35%,#0d0b18 70%,#080612 100%);}
 .sky::after{content:'';position:absolute;inset:0;
   background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
   pointer-events:none;}
-
-/* Ink wash horizon glow */
 .horizon{position:fixed;bottom:0;left:0;right:0;z-index:1;height:220px;
   background:linear-gradient(0deg,rgba(30,10,42,.7) 0%,transparent 100%);pointer-events:none;}
 
@@ -51,7 +48,6 @@ body{
   animation:tw var(--d,3s) ease-in-out infinite var(--dl,0s);}
 @keyframes tw{0%,100%{opacity:var(--mo,.2);transform:scale(1);}50%{opacity:1;transform:scale(1.5);}}
 
-/* Moon — full round pale Japanese moon */
 .moon{
   position:fixed;top:55px;right:90px;z-index:2;
   width:90px;height:90px;border-radius:50%;
@@ -61,7 +57,6 @@ body{
 }
 @keyframes mg{0%,100%{box-shadow:0 0 50px rgba(230,210,150,.5),0 0 110px rgba(230,210,150,.18);}50%{box-shadow:0 0 70px rgba(230,210,150,.65),0 0 150px rgba(230,210,150,.28);}}
 
-/* Shooting stars */
 .shooting{position:absolute;height:1px;opacity:0;
   background:linear-gradient(90deg,transparent,rgba(255,230,200,.8),transparent);
   animation:shoot var(--sd,11s) linear infinite var(--sdl,0s);}
@@ -79,7 +74,7 @@ body{
   100%{transform:translateY(105vh) rotate(360deg) translateX(var(--fx2,-30px));opacity:0;}
 }
 
-/* ── PAPER CRANE ── */
+/* ── CRANES ── */
 .cranes-layer{position:fixed;top:0;left:0;right:0;z-index:3;pointer-events:none;}
 .crane-wrap{position:absolute;top:0;
   display:flex;flex-direction:column;align-items:center;
@@ -103,7 +98,6 @@ body{
   88%{opacity:.15;}100%{transform:translate(var(--mx2,-20px),var(--my2,30px));opacity:0;}
 }
 
-/* ── TORII (bottom silhouette) ── */
 .torii{position:fixed;bottom:0;left:0;right:0;z-index:3;pointer-events:none;}
 
 /* ── WISTERIA DIVIDER ── */
@@ -120,70 +114,27 @@ body{
 .hero{
   min-height:100vh;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:60px 24px;
-  position:relative;
+  text-align:center;padding:60px 24px;position:relative;
 }
-
-/* Shoji screen frame */
 .hero-frame{
-  position:relative;
-  padding:50px 60px 44px;
+  position:relative;padding:50px 60px 44px;
   border:1px solid rgba(196,163,90,.18);
 }
-.hero-frame::before,.hero-frame::after{
-  content:'';position:absolute;
-  border:1px solid rgba(196,163,90,.1);
-}
+.hero-frame::before,.hero-frame::after{content:'';position:absolute;border:1px solid rgba(196,163,90,.1);}
 .hero-frame::before{inset:8px;}
 .hero-frame::after{inset:16px;border-color:rgba(196,163,90,.06);}
-
-/* Corner mon (family crests) */
 .hf-tl,.hf-tr,.hf-bl,.hf-br{
   position:absolute;width:22px;height:22px;z-index:2;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.65rem;color:rgba(196,163,90,.4);}
+  display:flex;align-items:center;justify-content:center;font-size:.65rem;color:rgba(196,163,90,.4);}
 .hf-tl{top:4px;left:8px;}.hf-tr{top:4px;right:8px;}
 .hf-bl{bottom:4px;left:8px;}.hf-br{bottom:4px;right:8px;}
-
-.hero-jp{
-  font-family:'Shippori Mincho',serif;
-  font-size:clamp(.85rem,2vw,1.1rem);
-  color:var(--sakura-d);letter-spacing:.35em;
-  margin-bottom:12px;opacity:.75;
-  writing-mode:horizontal-tb;
-}
-
-.hero-title{
-  font-family:'Shippori Mincho',serif;
-  font-size:clamp(2rem,7vw,4.2rem);
-  color:var(--sakura-l);
-  line-height:1.15;letter-spacing:.08em;
-  text-shadow:0 0 40px rgba(244,191,203,.4),0 2px 0 rgba(0,0,0,.4);
-  animation:rise 1.3s cubic-bezier(.22,1,.36,1) .3s both;
-}
-
-.hero-kanji{
-  font-family:'Shippori Mincho',serif;
-  font-size:clamp(1rem,2.5vw,1.4rem);
-  color:rgba(196,163,90,.6);letter-spacing:.3em;
-  margin:10px 0;display:block;
-  animation:rise .9s .6s both;
-}
-
+.hero-jp{font-family:'Shippori Mincho',serif;font-size:clamp(.85rem,2vw,1.1rem);color:var(--sakura-d);letter-spacing:.35em;margin-bottom:12px;opacity:.75;}
+.hero-title{font-family:'Shippori Mincho',serif;font-size:clamp(2rem,7vw,4.2rem);color:var(--sakura-l);line-height:1.15;letter-spacing:.08em;text-shadow:0 0 40px rgba(244,191,203,.4),0 2px 0 rgba(0,0,0,.4);animation:rise 1.3s cubic-bezier(.22,1,.36,1) .3s both;}
+.hero-kanji{font-family:'Shippori Mincho',serif;font-size:clamp(1rem,2.5vw,1.4rem);color:rgba(196,163,90,.6);letter-spacing:.3em;margin:10px 0;display:block;animation:rise .9s .6s both;}
 .hero-heart{font-size:1.8rem;display:block;margin:8px 0;animation:hb 2.2s ease-in-out infinite;}
 @keyframes hb{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
-
-.hero-sub{
-  font-style:italic;font-size:clamp(.85rem,2vw,1.05rem);
-  color:var(--ink-pale);letter-spacing:.08em;
-  animation:rise 1s .8s both;
-}
-
-.scroll-hint{
-  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  animation:fadeIn 1s 2s both;
-}
+.hero-sub{font-style:italic;font-size:clamp(.85rem,2vw,1.05rem);color:var(--ink-pale);letter-spacing:.08em;animation:rise 1s .8s both;}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;animation:fadeIn 1s 2s both;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .scroll-hint span{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-pale);opacity:.5;}
 .scroll-line{width:1px;height:44px;background:linear-gradient(180deg,rgba(196,163,90,.6),transparent);animation:sp 2s ease-in-out infinite;}
@@ -192,130 +143,40 @@ body{
 /* ── SECTION HEADERS ── */
 .sec-head{text-align:center;padding:80px 24px 40px;}
 .sec-label{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px;opacity:.8;}
-.sec-title{
-  font-family:'Shippori Mincho',serif;
-  font-size:clamp(1.5rem,4vw,2.5rem);
-  color:var(--sakura-l);
-  text-shadow:0 0 20px rgba(244,191,203,.2);
-}
+.sec-title{font-family:'Shippori Mincho',serif;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--sakura-l);text-shadow:0 0 20px rgba(244,191,203,.2);}
 .sec-title em{font-style:italic;color:var(--moss-l);font-family:'IM Fell English',serif;}
 .sec-note{font-style:italic;font-size:.95rem;color:var(--ink-pale);margin-top:8px;}
 .sec-jp{font-family:'Shippori Mincho',serif;font-size:.88rem;color:rgba(196,163,90,.5);margin-top:4px;letter-spacing:.2em;}
 
 /* ── TIMELINE ── */
-.timeline{
-  max-width:960px;margin:0 auto;padding:10px 24px 80px;
-  position:relative;
-}
-.timeline::before{
-  content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
-  background:linear-gradient(180deg,transparent,rgba(196,163,90,.3) 8%,rgba(196,163,90,.3) 92%,transparent);
-  transform:translateX(-50%);
-}
-
-/* ── EVENT ── */
-.event{
-  display:flex;padding:30px 0;position:relative;width:50%;
-  opacity:0;transform:translateY(22px);
-  transition:opacity .75s ease,transform .75s ease;
-}
+.timeline{max-width:960px;margin:0 auto;padding:10px 24px 80px;position:relative;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(196,163,90,.3) 8%,rgba(196,163,90,.3) 92%,transparent);transform:translateX(-50%);}
+.event{display:flex;padding:30px 0;position:relative;width:50%;opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease;}
 .event.vis{opacity:1;transform:translateY(0);}
 .event.left{left:0;justify-content:flex-end;padding-right:56px;}
 .event.right{left:50%;justify-content:flex-start;padding-left:56px;}
-
-/* Dot — sakura bloom */
-.dot{
-  position:absolute;top:50%;
-  width:14px;height:14px;border-radius:50%;
-  background:var(--ink-deep);
-  border:2px solid var(--sakura-d);
-  transform:translateY(-50%);z-index:3;
-  box-shadow:0 0 12px rgba(244,191,203,.45);
-}
-.dot::after{
-  content:'';position:absolute;inset:-5px;border-radius:50%;
-  background:rgba(244,191,203,.08);
-  animation:dp 2.8s ease-in-out infinite;
-}
+.dot{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--ink-deep);border:2px solid var(--sakura-d);transform:translateY(-50%);z-index:3;box-shadow:0 0 12px rgba(244,191,203,.45);}
+.dot::after{content:'';position:absolute;inset:-5px;border-radius:50%;background:rgba(244,191,203,.08);animation:dp 2.8s ease-in-out infinite;}
 @keyframes dp{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(2.2);opacity:0;}}
-.event.left .dot{right:-7px;}
-.event.right .dot{left:-7px;}
+.event.left .dot{right:-7px;}.event.right .dot{left:-7px;}
+.date-tag{position:absolute;top:50%;transform:translateY(-50%);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;color:var(--gold);white-space:nowrap;z-index:4;background:rgba(13,11,24,.85);padding:3px 9px;border:1px solid rgba(196,163,90,.14);border-radius:2px;}
+.event.left .date-tag{right:-108px;}.event.right .date-tag{left:-108px;text-align:right;}
 
-/* Date tag */
-.date-tag{
-  position:absolute;top:50%;transform:translateY(-50%);
-  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;
-  color:var(--gold);white-space:nowrap;z-index:4;
-  background:rgba(13,11,24,.85);padding:3px 9px;
-  border:1px solid rgba(196,163,90,.14);border-radius:2px;
-}
-.event.left .date-tag{right:-108px;}
-.event.right .date-tag{left:-108px;text-align:right;}
-
-/* ── MEMORY CARD (washi paper style) ── */
-.card{
-  background:var(--card-bg);
-  border:1px solid rgba(244,191,203,.1);
-  padding:14px 14px 24px;
-  width:252px;
-  box-shadow:0 18px 55px rgba(0,0,0,.6),0 4px 16px rgba(244,191,203,.08);
-  transform:rotate(-1.8deg);
-  transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .4s;
-  text-decoration:none;color:inherit;display:block;
-  position:relative;overflow:hidden;
-}
+/* ── CARD ── */
+.card{background:var(--card-bg);border:1px solid rgba(244,191,203,.1);padding:14px 14px 24px;width:252px;box-shadow:0 18px 55px rgba(0,0,0,.6),0 4px 16px rgba(244,191,203,.08);transform:rotate(-1.8deg);transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .4s;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;}
 .event.right .card{transform:rotate(2.0deg);}
-.card:hover{
-  transform:rotate(0deg) translateY(-12px) scale(1.02)!important;
-  box-shadow:0 35px 80px rgba(0,0,0,.7),0 0 40px rgba(244,191,203,.1);
-  z-index:10;
-}
-
-/* Washi paper top-strip */
-.card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,transparent,var(--sakura-d),transparent);
-}
-/* Nailhead corners */
-.card::after{
-  content:'✿';position:absolute;top:6px;right:8px;
-  font-size:.55rem;color:rgba(244,191,203,.25);
-}
-
-/* String from top */
-.card-thread{
-  width:1px;height:12px;
-  background:linear-gradient(180deg,rgba(196,163,90,.4),transparent);
-  margin:0 auto 6px;
-}
-
-.photo{
-  height:148px;
-  background:linear-gradient(135deg,#1a1030,#120820);
-  border:1px solid rgba(244,191,203,.08);
-  overflow:hidden;position:relative;
-}
+.card:hover{transform:rotate(0deg) translateY(-12px) scale(1.02)!important;box-shadow:0 35px 80px rgba(0,0,0,.7),0 0 40px rgba(244,191,203,.1);z-index:10;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--sakura-d),transparent);}
+.card::after{content:'✿';position:absolute;top:6px;right:8px;font-size:.55rem;color:rgba(244,191,203,.25);}
+.card-thread{width:1px;height:12px;background:linear-gradient(180deg,rgba(196,163,90,.4),transparent);margin:0 auto 6px;}
+.photo{height:148px;background:linear-gradient(135deg,#1a1030,#120820);border:1px solid rgba(244,191,203,.08);overflow:hidden;position:relative;}
 .photo img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
 .card:hover .photo img{transform:scale(1.07);}
-.photo::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 55%,rgba(10,8,20,.55));
-  pointer-events:none;
-}
-
+.photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,8,20,.55));pointer-events:none;}
 .caption{padding-top:10px;}
-.caption h3{
-  font-family:'Shippori Mincho',serif;font-size:.92rem;
-  letter-spacing:.08em;text-align:center;color:var(--sakura-l);
-  text-shadow:0 0 8px rgba(244,191,203,.3);
-}
+.caption h3{font-family:'Shippori Mincho',serif;font-size:.92rem;letter-spacing:.08em;text-align:center;color:var(--sakura-l);text-shadow:0 0 8px rgba(244,191,203,.3);}
 .caption p{font-style:italic;font-size:.77rem;color:var(--ink-pale);text-align:center;margin-top:5px;}
-.caption .jp-cap{
-  font-family:'Shippori Mincho',serif;font-size:.82rem;
-  color:rgba(196,163,90,.5);text-align:center;margin-top:4px;letter-spacing:.15em;
-}
-
-/* Locked */
+.caption .jp-cap{font-family:'Shippori Mincho',serif;font-size:.82rem;color:rgba(196,163,90,.5);text-align:center;margin-top:4px;letter-spacing:.15em;}
 .locked-card{opacity:.5;filter:saturate(.1) brightness(.6);pointer-events:none;}
 .locked-photo{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0818,#100e20)!important;}
 .lock-icon{font-size:1.9rem;opacity:.35;}
@@ -326,53 +187,20 @@ body{
 /* ── COUNTDOWN ── */
 .countdown-sec{max-width:900px;margin:0 auto 80px;padding:0 24px;text-align:center;}
 .timer{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:28px;}
-.time-box{
-  background:var(--card-bg);
-  border:1px solid rgba(244,191,203,.1);
-  padding:22px 22px 18px;min-width:100px;
-  box-shadow:0 16px 50px rgba(0,0,0,.6),0 4px 14px rgba(244,191,203,.06);
-  position:relative;overflow:hidden;
-  text-decoration:none;color:inherit;
-  transition:transform .3s,box-shadow .3s;
-}
-.time-box::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,transparent,var(--sakura-d),transparent);
-  transform:scaleX(0);transition:transform .35s;
-}
+.time-box{background:var(--card-bg);border:1px solid rgba(244,191,203,.1);padding:22px 22px 18px;min-width:100px;box-shadow:0 16px 50px rgba(0,0,0,.6),0 4px 14px rgba(244,191,203,.06);position:relative;overflow:hidden;text-decoration:none;color:inherit;transition:transform .3s,box-shadow .3s;}
+.time-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--sakura-d),transparent);transform:scaleX(0);transition:transform .35s;}
 .time-box:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(0,0,0,.7),0 0 30px rgba(244,191,203,.1);}
 .time-box:hover::before{transform:scaleX(1);}
-.time-num{
-  font-family:'Shippori Mincho',serif;font-size:2.4rem;
-  color:var(--sakura-l);line-height:1;
-  text-shadow:0 0 18px rgba(244,191,203,.3);
-}
+.time-num{font-family:'Shippori Mincho',serif;font-size:2.4rem;color:var(--sakura-l);line-height:1;text-shadow:0 0 18px rgba(244,191,203,.3);}
 .time-label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-pale);margin-top:8px;opacity:.7;}
 
 /* ── RIGHT NOW ── */
 .right-now-sec{max-width:900px;margin:0 auto 100px;padding:0 24px;}
 .now-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:18px;margin-top:28px;}
-.now-card{
-  background:var(--card-bg);
-  border:1px solid rgba(244,191,203,.1);
-  padding:30px 18px 26px;text-align:center;
-  box-shadow:0 16px 45px rgba(0,0,0,.55),0 4px 14px rgba(244,191,203,.06);
-  text-decoration:none;color:inherit;display:block;
-  position:relative;overflow:hidden;
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s;
-}
-.now-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,transparent,var(--sakura-d),transparent);
-}
-.now-card::after{
-  content:'✿';position:absolute;top:8px;right:10px;
-  font-size:.5rem;color:rgba(244,191,203,.18);
-}
-.now-card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 35px 70px rgba(0,0,0,.7),0 0 35px rgba(244,191,203,.1);
-}
+.now-card{background:var(--card-bg);border:1px solid rgba(244,191,203,.1);padding:30px 18px 26px;text-align:center;box-shadow:0 16px 45px rgba(0,0,0,.55),0 4px 14px rgba(244,191,203,.06);text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s;}
+.now-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--sakura-d),transparent);}
+.now-card::after{content:'✿';position:absolute;top:8px;right:10px;font-size:.5rem;color:rgba(244,191,203,.18);}
+.now-card:hover{transform:translateY(-10px);box-shadow:0 35px 70px rgba(0,0,0,.7),0 0 35px rgba(244,191,203,.1);}
 .now-icon{font-size:2rem;display:block;margin-bottom:12px;transition:transform .3s;}
 .now-card:hover .now-icon{transform:scale(1.2) rotate(-5deg);}
 .now-card h3{font-family:'Shippori Mincho',serif;font-size:1rem;letter-spacing:.08em;color:var(--sakura-l);margin-bottom:5px;}
@@ -381,119 +209,188 @@ body{
 .now-divider{width:22px;height:1px;background:var(--sakura-d);margin:8px auto;opacity:.35;}
 
 /* ── FOOTER ── */
-footer{
-  text-align:center;padding:28px 24px 50px;
-  font-family:'Shippori Mincho',serif;font-size:1.5rem;
-  color:var(--sakura);opacity:.6;cursor:default;
-  transition:opacity .3s;
-}
-footer::before{
-  content:'';display:block;width:180px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(196,163,90,.3),transparent);
-  margin:0 auto 20px;
-}
+footer{text-align:center;padding:28px 24px 50px;font-family:'Shippori Mincho',serif;font-size:1.5rem;color:var(--sakura);opacity:.6;cursor:default;transition:opacity .3s;}
+footer::before{content:'';display:block;width:180px;height:1px;background:linear-gradient(90deg,transparent,rgba(196,163,90,.3),transparent);margin:0 auto 20px;}
 footer:hover{opacity:1;}
 
 /* ── MAKE A WISH ── */
-.wish-sec{
-  max-width:680px;margin:0 auto;padding:52px 24px 60px;
-  text-align:center;position:relative;
-}
-
-/* Ink-wash circle glow behind button */
-.wish-glow{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:320px;height:320px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(244,191,203,.05) 0%,transparent 70%);
-  animation:wglow 4s ease-in-out infinite;
-}
+.wish-sec{max-width:680px;margin:0 auto;padding:52px 24px 60px;text-align:center;position:relative;}
+.wish-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;height:320px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(244,191,203,.05) 0%,transparent 70%);animation:wglow 4s ease-in-out infinite;}
 @keyframes wglow{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5;}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1;}}
-
-.wish-label{
-  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.38em;
-  text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px;opacity:.8;
-}
-.wish-title{
-  font-family:'Shippori Mincho',serif;
-  font-size:clamp(1.5rem,4vw,2.4rem);
-  color:var(--sakura-l);
-  text-shadow:0 0 24px rgba(244,191,203,.25);
-  margin-bottom:6px;
-}
-.wish-jp{
-  font-family:'Shippori Mincho',serif;font-size:.9rem;
-  color:rgba(196,163,90,.5);letter-spacing:.25em;margin-bottom:8px;display:block;
-}
+.wish-label{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px;opacity:.8;}
+.wish-title{font-family:'Shippori Mincho',serif;font-size:clamp(1.5rem,4vw,2.4rem);color:var(--sakura-l);text-shadow:0 0 24px rgba(244,191,203,.25);margin-bottom:6px;}
+.wish-jp{font-family:'Shippori Mincho',serif;font-size:.9rem;color:rgba(196,163,90,.5);letter-spacing:.25em;margin-bottom:8px;display:block;}
 .wish-note{font-style:italic;font-size:.88rem;color:var(--ink-pale);margin-bottom:32px;}
-
-/* The wish button */
-.wish-btn{
-  position:relative;display:inline-flex;align-items:center;justify-content:center;
-  gap:12px;
-  background:transparent;
-  border:1px solid rgba(244,191,203,.22);
-  color:var(--sakura-l);
-  font-family:'Shippori Mincho',serif;
-  font-size:1rem;letter-spacing:.12em;
-  padding:20px 52px;cursor:pointer;
-  transition:border-color .4s,box-shadow .4s,transform .3s;
-  overflow:hidden;
-}
-.wish-btn::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at center,rgba(244,191,203,.08) 0%,transparent 70%);
-  transform:scale(0);transition:transform .6s cubic-bezier(.22,1,.36,1);
-  border-radius:0;
-}
-.wish-btn:hover{
-  border-color:rgba(244,191,203,.55);
-  box-shadow:0 0 35px rgba(244,191,203,.15),0 0 70px rgba(244,191,203,.06);
-  transform:translateY(-3px);
-}
+.wish-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;background:transparent;border:1px solid rgba(244,191,203,.22);color:var(--sakura-l);font-family:'Shippori Mincho',serif;font-size:1rem;letter-spacing:.12em;padding:20px 52px;cursor:pointer;transition:border-color .4s,box-shadow .4s,transform .3s;overflow:hidden;}
+.wish-btn::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(244,191,203,.08) 0%,transparent 70%);transform:scale(0);transition:transform .6s cubic-bezier(.22,1,.36,1);}
+.wish-btn:hover{border-color:rgba(244,191,203,.55);box-shadow:0 0 35px rgba(244,191,203,.15),0 0 70px rgba(244,191,203,.06);transform:translateY(-3px);}
 .wish-btn:hover::before{transform:scale(1);}
 .wish-btn:active{transform:scale(.97);}
-
-/* Corner marks on button */
-.wish-btn .bc{
-  position:absolute;width:14px;height:14px;
-  border-style:solid;border-color:rgba(196,163,90,.3);
-}
+.wish-btn .bc{position:absolute;width:14px;height:14px;border-style:solid;border-color:rgba(196,163,90,.3);}
 .wish-btn .bc-tl{top:5px;left:5px;border-width:1px 0 0 1px;}
 .wish-btn .bc-tr{top:5px;right:5px;border-width:1px 1px 0 0;}
 .wish-btn .bc-bl{bottom:5px;left:5px;border-width:0 0 1px 1px;}
 .wish-btn .bc-br{bottom:5px;right:5px;border-width:0 1px 1px 0;}
-
 .wish-star-icon{font-size:1.4rem;animation:wspin 6s linear infinite;}
 @keyframes wspin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-
-/* Wish message that appears */
-.wish-msg{
-  display:none;margin-top:28px;
-  font-family:'Shippori Mincho',serif;font-style:italic;
-  font-size:clamp(.9rem,2.2vw,1.05rem);
-  color:var(--sakura-l);letter-spacing:.05em;line-height:1.85;
-  animation:msgrise .8s cubic-bezier(.22,1,.36,1) both;
-}
+.wish-msg{display:none;margin-top:28px;font-family:'Shippori Mincho',serif;font-style:italic;font-size:clamp(.9rem,2.2vw,1.05rem);color:var(--sakura-l);letter-spacing:.05em;line-height:1.85;animation:msgrise .8s cubic-bezier(.22,1,.36,1) both;}
 @keyframes msgrise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 .wish-msg.show{display:block;}
-.wish-msg-jp{
-  font-family:'Shippori Mincho',serif;font-style:normal;
-  font-size:.82rem;color:rgba(196,163,90,.5);
-  letter-spacing:.2em;margin-top:8px;display:block;
-}
-
-/* How many wishes counter */
-.wish-counter{
-  margin-top:16px;font-family:'Cinzel',serif;
-  font-size:.6rem;letter-spacing:.2em;color:rgba(196,163,90,.35);
-  display:none;
-}
+.wish-msg-jp{font-family:'Shippori Mincho',serif;font-style:normal;font-size:.82rem;color:rgba(196,163,90,.5);letter-spacing:.2em;margin-top:8px;display:block;}
+.wish-counter{margin-top:16px;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:rgba(196,163,90,.35);display:none;}
 .wish-counter.show{display:block;}
+#wish-canvas{position:fixed;inset:0;z-index:200;pointer-events:none;}
 
-/* ── SHOOTING STAR OVERLAY ── */
-#wish-canvas{
-  position:fixed;inset:0;z-index:200;
-  pointer-events:none;
+/* ═══════════════════════════════════════════
+   MUSIC PLAYER BUTTON — Japanese aesthetic
+═══════════════════════════════════════════ */
+#musicBtn {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 999;
+
+  /* Base shape */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(244,191,203,.28);
+  background: rgba(13,11,24,.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+
+  /* Center icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Glow */
+  box-shadow:
+    0 0 18px rgba(244,191,203,.12),
+    0 8px 30px rgba(0,0,0,.5),
+    inset 0 0 0 1px rgba(244,191,203,.06);
+
+  transition: border-color .4s, box-shadow .4s, transform .35s cubic-bezier(.34,1.56,.64,1);
+  overflow: visible;
+}
+
+/* Outer sakura ring — rotates when playing */
+#musicBtn::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(244,191,203,.18);
+  border-top-color: rgba(244,191,203,.6);
+  border-right-color: rgba(196,163,90,.4);
+  animation: none;
+  opacity: 0;
+  transition: opacity .4s;
+}
+#musicBtn.playing::before {
+  animation: ringrot 4s linear infinite;
+  opacity: 1;
+}
+@keyframes ringrot {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Petal glow pulse when playing */
+#musicBtn.playing {
+  border-color: rgba(244,191,203,.55);
+  box-shadow:
+    0 0 28px rgba(244,191,203,.25),
+    0 0 60px rgba(244,191,203,.1),
+    0 8px 30px rgba(0,0,0,.5),
+    inset 0 0 0 1px rgba(244,191,203,.1);
+}
+
+#musicBtn:hover {
+  transform: scale(1.1);
+  border-color: rgba(244,191,203,.5);
+  box-shadow:
+    0 0 24px rgba(244,191,203,.22),
+    0 8px 36px rgba(0,0,0,.5),
+    inset 0 0 0 1px rgba(244,191,203,.08);
+}
+
+/* The SVG icon inside */
+#musicBtn svg {
+  width: 22px;
+  height: 22px;
+  transition: opacity .3s;
+}
+
+/* Tiny kanji tooltip that appears on hover */
+#musicBtn .music-tip {
+  position: absolute;
+  left: 62px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: 'Shippori Mincho', serif;
+  font-size: .65rem;
+  letter-spacing: .15em;
+  color: rgba(244,191,203,.7);
+  background: rgba(13,11,24,.8);
+  border: 1px solid rgba(244,191,203,.15);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+}
+#musicBtn:hover .music-tip {
+  opacity: 1;
+}
+
+/* Volume bar that appears below when playing */
+#musicVol {
+  position: fixed;
+  bottom: 28px;
+  left: 90px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition: opacity .4s, transform .4s;
+}
+#musicVol.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+#musicVol input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--sakura-d), rgba(244,191,203,.2));
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+#musicVol input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sakura);
+  box-shadow: 0 0 6px rgba(244,191,203,.5);
+  cursor: pointer;
+}
+#musicVol label {
+  font-family: 'Cinzel', serif;
+  font-size: .48rem;
+  letter-spacing: .18em;
+  color: rgba(244,191,203,.4);
+  text-transform: uppercase;
 }
 
 /* ── RESPONSIVE ── */
@@ -506,6 +403,8 @@ footer:hover{opacity:1;}
   .card:hover{transform:translateY(-6px)!important;}
   .hero-frame{padding:28px 22px 22px;}
   .moon{width:58px;height:58px;right:18px;top:18px;}
+  #musicBtn{bottom:18px;left:18px;width:44px;height:44px;}
+  #musicVol{bottom:22px;left:72px;}
 }
 @media(max-width:440px){
   .now-grid{grid-template-columns:1fr 1fr;}
@@ -526,31 +425,19 @@ footer:hover{opacity:1;}
   <div class="shooting" style="--sd:18s;--sdl:11s;top:32%!important;width:100px;"></div>
 </div>
 <div class="horizon"></div>
-
-<!-- Sakura petals -->
 <div class="petals-layer" id="petals"></div>
-
-<!-- Paper cranes on strings -->
 <div class="cranes-layer" id="cranes"></div>
-
-<!-- Fireflies -->
 <div id="ffc"></div>
 
-<!-- Torii / tree silhouette at bottom -->
 <svg class="torii" viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Torii gate center -->
   <rect x="695" y="70" width="8" height="90" fill="#0a0816"/>
   <rect x="737" y="70" width="8" height="90" fill="#0a0816"/>
   <rect x="685" y="90" width="70" height="8" rx="2" fill="#0a0816"/>
   <rect x="680" y="75" width="80" height="7" rx="3" fill="#0a0816"/>
-  <!-- Left pillar top curve -->
   <path d="M680,75 Q720,50 760,75" fill="none" stroke="#0a0816" stroke-width="6"/>
-  <!-- Cherry blossom trees -->
   <path d="M0,160 L0,110 Q20,90 40,75 Q60,60 80,70 Q100,80 90,95 L120,90 Q140,70 160,80 Q180,90 170,100 L200,95 Q220,80 240,88 Q260,96 250,108 L280,110 L300,160Z" fill="#0d0b18"/>
   <path d="M1440,160 L1440,110 Q1420,90 1400,75 Q1380,60 1360,70 Q1340,80 1350,95 L1320,90 Q1300,70 1280,80 Q1260,90 1270,100 L1240,95 Q1220,80 1200,88 Q1180,96 1190,108 L1160,110 L1140,160Z" fill="#0d0b18"/>
-  <!-- Ground -->
   <path d="M0,160 L0,148 L1440,148 L1440,160Z" fill="#080612"/>
-  <!-- Cherry blossom suggestions on trees -->
   <circle cx="70" cy="72" r="18" fill="rgba(20,10,32,.8)"/>
   <circle cx="155" cy="78" r="16" fill="rgba(20,10,32,.8)"/>
   <circle cx="230" cy="85" r="20" fill="rgba(20,10,32,.8)"/>
@@ -561,14 +448,35 @@ footer:hover{opacity:1;}
 
 <canvas id="wish-canvas"></canvas>
 
+<!-- ══ MUSIC PLAYER ══ -->
+<audio id="bgm" loop preload="auto">
+  <source src="music/bg.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" aria-label="Toggle music">
+  <!-- Play icon (shown when paused) -->
+  <svg id="iconPlay" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 5.5L18.5 12L8 18.5V5.5Z" fill="rgba(244,191,203,.8)" stroke="rgba(244,191,203,.4)" stroke-width=".5"/>
+  </svg>
+  <!-- Pause icon (shown when playing) -->
+  <svg id="iconPause" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <rect x="6" y="5" width="4" height="14" rx="1.5" fill="rgba(244,191,203,.8)"/>
+    <rect x="14" y="5" width="4" height="14" rx="1.5" fill="rgba(244,191,203,.8)"/>
+  </svg>
+  <span class="music-tip" id="musicTip">音楽 · play</span>
+</button>
+
+<div id="musicVol">
+  <label>音量</label>
+  <input type="range" id="volSlider" min="0" max="1" step="0.01" value="0.18">
+</div>
+
 <div class="wrapper">
 
-  <!-- ── HERO ── -->
   <section class="hero">
     <div class="hero-frame">
       <div class="hf-tl">✿</div><div class="hf-tr">✿</div>
       <div class="hf-bl">✿</div><div class="hf-br">✿</div>
-
       <p class="hero-jp">シュルティ 🩷 ヤシュ</p>
       <h1 class="hero-title">Shruti 🩷 Yash</h1>
       <span class="hero-kanji">桜の夜に君と</span>
@@ -581,27 +489,21 @@ footer:hover{opacity:1;}
     </div>
   </section>
 
-  <!-- ── DIVIDER ── -->
   <div class="wisteria-div"><div class="w-line"></div><span class="w-kamon">✿ ✿ ✿</span><div class="w-line"></div></div>
 
-  <!-- ── MAKE A WISH ── -->
   <section class="wish-sec">
     <div class="wish-glow"></div>
     <span class="wish-label">願い事</span>
     <h2 class="wish-title">Make a Wish</h2>
     <span class="wish-jp">流れ星に願いを</span>
     <p class="wish-note">Close your eyes. Think of something beautiful. Then click.</p>
-
     <button class="wish-btn" id="wishBtn">
-      <span class="bc bc-tl"></span>
-      <span class="bc bc-tr"></span>
-      <span class="bc bc-bl"></span>
-      <span class="bc bc-br"></span>
+      <span class="bc bc-tl"></span><span class="bc bc-tr"></span>
+      <span class="bc bc-bl"></span><span class="bc bc-br"></span>
       <span class="wish-star-icon">✦</span>
       <span>Wish upon a star</span>
       <span class="wish-star-icon">✦</span>
     </button>
-
     <div class="wish-msg" id="wishMsg">
       <span id="wishText"></span>
       <span class="wish-msg-jp" id="wishJP"></span>
@@ -609,10 +511,8 @@ footer:hover{opacity:1;}
     <p class="wish-counter" id="wishCounter"></p>
   </section>
 
-  <!-- ── DIVIDER ── -->
   <div class="wisteria-div"><div class="w-line"></div><span class="w-kamon">✿ ✿ ✿</span><div class="w-line"></div></div>
 
-  <!-- ── TIMELINE HEADER ── -->
   <div class="sec-head">
     <span class="sec-label">Our Story</span>
     <h2 class="sec-title">Moments that <em>Stayed</em></h2>
@@ -620,7 +520,6 @@ footer:hover{opacity:1;}
     <p class="sec-jp">全ての始まりは星に書かれていた</p>
   </div>
 
-  <!-- ── TIMELINE ── -->
   <section class="timeline">
 
     <div class="event left">
@@ -628,9 +527,7 @@ footer:hover{opacity:1;}
       <span class="dot"></span>
       <a href="birthdays/" class="card">
         <div class="card-thread"></div>
-        <div class="photo">
-          <img src="images/birthday.jpg" alt="Her Birthday" onerror="this.style.display='none'">
-        </div>
+        <div class="photo"><img src="images/birthday.jpg" alt="Her Birthday" onerror="this.style.display='none'"></div>
         <div class="caption">
           <h3>Your 18th Birthday</h3>
           <p>the day you started being family</p>
@@ -644,12 +541,9 @@ footer:hover{opacity:1;}
       <span class="dot"></span>
       <a href="together/" class="card">
         <div class="card-thread"></div>
-        <div class="photo">
-          <img src="images/uss.jpg" alt="Us" onerror="this.style.display='none'">
-        </div>
+        <div class="photo"><img src="images/uss.jpg" alt="Us" onerror="this.style.display='none'"></div>
         <div class="caption">
-          <h3>We Became Us</h3>
-          <p>❤ 🌸</p>
+          <h3>We Became Us</h3><p>❤ 🌸</p>
           <p class="jp-cap">二人になった</p>
         </div>
       </a>
@@ -674,12 +568,9 @@ footer:hover{opacity:1;}
       <span class="dot"></span>
       <a href="date/" class="card">
         <div class="card-thread"></div>
-        <div class="photo">
-          <img src="images/valentine.jpg" alt="Valentine" onerror="this.style.display='none'">
-        </div>
+        <div class="photo"><img src="images/valentine.jpg" alt="Valentine" onerror="this.style.display='none'"></div>
         <div class="caption">
-          <h3>Valentine's Week</h3>
-          <p>💗</p>
+          <h3>Valentine's Week</h3><p>💗</p>
           <p class="jp-cap">愛の週</p>
         </div>
       </a>
@@ -692,8 +583,7 @@ footer:hover{opacity:1;}
         <div class="card-thread"></div>
         <div class="photo" style="display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:linear-gradient(135deg,#0d0820,#14102a)">🌸✨</div>
         <div class="caption">
-          <h3>To Be Continued</h3>
-          <p>this line keeps going.</p>
+          <h3>To Be Continued</h3><p>this line keeps going.</p>
           <p class="jp-cap">物語は続く</p>
         </div>
       </div>
@@ -701,10 +591,8 @@ footer:hover{opacity:1;}
 
   </section>
 
-  <!-- ── DIVIDER ── -->
   <div class="wisteria-div"><div class="w-line"></div><span class="w-kamon">✿</span><div class="w-line"></div></div>
 
-  <!-- ── COUNTDOWN ── -->
   <div class="sec-head" style="padding-top:40px">
     <span class="sec-label">Us, Since</span>
     <h2 class="sec-title">Still <em>choosing</em> each other</h2>
@@ -715,8 +603,7 @@ footer:hover{opacity:1;}
   <section class="countdown-sec">
     <div class="timer">
       <a href="days/" class="time-box" style="text-decoration:none">
-        <div class="time-num" id="days">0</div>
-        <div class="time-label">Days</div>
+        <div class="time-num" id="days">0</div><div class="time-label">Days</div>
       </a>
       <div class="time-box"><div class="time-num" id="hours">0</div><div class="time-label">Hours</div></div>
       <div class="time-box"><div class="time-num" id="minutes">0</div><div class="time-label">Minutes</div></div>
@@ -724,10 +611,8 @@ footer:hover{opacity:1;}
     </div>
   </section>
 
-  <!-- ── DIVIDER ── -->
   <div class="wisteria-div"><div class="w-line"></div><span class="w-kamon">✿ ✿ ✿</span><div class="w-line"></div></div>
 
-  <!-- ── RIGHT NOW ── -->
   <div class="sec-head">
     <span class="sec-label">Right Now</span>
     <h2 class="sec-title">Things that don't <em>belong to a date</em></h2>
@@ -738,32 +623,20 @@ footer:hover{opacity:1;}
   <section class="right-now-sec">
     <div class="now-grid">
       <a href="games/" class="now-card">
-        <span class="now-icon">🎮</span>
-        <div class="now-divider"></div>
-        <h3>Games</h3>
-        <p>play together.</p>
-        <p class="jp-small">一緒に遊ぶ</p>
+        <span class="now-icon">🎮</span><div class="now-divider"></div>
+        <h3>Games</h3><p>play together.</p><p class="jp-small">一緒に遊ぶ</p>
       </a>
       <a href="poems/" class="now-card">
-        <span class="now-icon">🪶</span>
-        <div class="now-divider"></div>
-        <h3>Poems</h3>
-        <p>words for you.</p>
-        <p class="jp-small">君への言葉</p>
+        <span class="now-icon">🪶</span><div class="now-divider"></div>
+        <h3>Poems</h3><p>words for you.</p><p class="jp-small">君への言葉</p>
       </a>
       <a href="music/" class="now-card">
-        <span class="now-icon">🎵</span>
-        <div class="now-divider"></div>
-        <h3>Music</h3>
-        <p>songs we share.</p>
-        <p class="jp-small">私たちの歌</p>
+        <span class="now-icon">🎵</span><div class="now-divider"></div>
+        <h3>Music</h3><p>songs we share.</p><p class="jp-small">私たちの歌</p>
       </a>
       <a href="toughdays/" class="now-card">
-        <span class="now-icon">🌸</span>
-        <div class="now-divider"></div>
-        <h3>Tough Days</h3>
-        <p>for when you feel heavy.</p>
-        <p class="jp-small">心が重い夜に</p>
+        <span class="now-icon">🌸</span><div class="now-divider"></div>
+        <h3>Tough Days</h3><p>for when you feel heavy.</p><p class="jp-small">心が重い夜に</p>
       </a>
     </div>
   </section>
@@ -792,20 +665,13 @@ footer:hover{opacity:1;}
 /* ── SAKURA PETALS ── */
 (()=>{
   const c=document.getElementById('petals');
-  // Petal SVGs: simple 5-petal cherry blossom paths
-  const petalSVGs=[
-    `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2 Q14,6 18,6 Q14,8 14,12 Q12,8 8,10 Q10,6 12,2Z" fill="FILLCOLOR" opacity="0.75"/><path d="M22,12 Q18,14 18,18 Q16,14 12,14 Q16,12 18,8 Q20,12 22,12Z" fill="FILLCOLOR" opacity="0.65"/><path d="M12,22 Q10,18 6,18 Q10,16 10,12 Q12,16 16,14 Q14,18 12,22Z" fill="FILLCOLOR" opacity="0.75"/><path d="M2,12 Q6,10 6,6 Q8,10 12,10 Q8,12 6,16 Q4,12 2,12Z" fill="FILLCOLOR" opacity="0.65"/><path d="M6,4 Q9,8 12,6 Q10,10 6,12 Q4,8 6,4Z" fill="FILLCOLOR" opacity="0.55"/></svg>`,
-    `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><ellipse cx="10" cy="5" rx="3.5" ry="5" fill="FILLCOLOR" opacity="0.7" transform="rotate(0 10 10)"/><ellipse cx="10" cy="5" rx="3.5" ry="5" fill="FILLCOLOR" opacity="0.65" transform="rotate(72 10 10)"/><ellipse cx="10" cy="5" rx="3.5" ry="5" fill="FILLCOLOR" opacity="0.7" transform="rotate(144 10 10)"/><ellipse cx="10" cy="5" rx="3.5" ry="5" fill="FILLCOLOR" opacity="0.65" transform="rotate(216 10 10)"/><ellipse cx="10" cy="5" rx="3.5" ry="5" fill="FILLCOLOR" opacity="0.6" transform="rotate(288 10 10)"/></svg>`,
-  ];
-  const cols=['%23f4bfcb','%23fde8ee','%23e8879a','%23f0c8d4','%23ffd0dc'];
+  const cols=['f4bfcb','fde8ee','e8879a','f0c8d4'];
   for(let i=0;i<55;i++){
     const div=document.createElement('div'); div.className='petal';
-    const col=cols[~~(Math.random()*cols.length)];
-    const svgIdx=Math.random()>.5?0:1;
     const sz=8+Math.random()*16;
-    const svg=petalSVGs[svgIdx].replaceAll('FILLCOLOR',`%23${['f4bfcb','fde8ee','e8879a','f0c8d4','ffd0dc'][~~(Math.random()*5)]}`);
+    const col=cols[~~(Math.random()*cols.length)];
     div.style.cssText=`left:${Math.random()*105}%;top:-30px;width:${sz}px;height:${sz}px;--fd:${8+Math.random()*14}s;--fdl:${Math.random()*16}s;--fo:${.45+Math.random()*.5};--fx:${(Math.random()-.5)*180}px;--fx2:${(Math.random()-.5)*120}px`;
-    div.innerHTML=`<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path d="M12,1 C13,5 17,5.5 19,4 C17,7.5 19,11 22,11 C18.5,13 18,17 20,19 C16.5,17 13,19 12,23 C11,19 7.5,17 4,19 C6,17 5.5,13 2,11 C5,11 7,7.5 5,4 C7,5.5 11,5 12,1Z" fill="%23${['f4bfcb','fde8ee','e8879a','f0c8d4'][~~(Math.random()*4)]}" opacity="${.55+Math.random()*.35}"/></svg>`;
+    div.innerHTML=`<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path d="M12,1 C13,5 17,5.5 19,4 C17,7.5 19,11 22,11 C18.5,13 18,17 20,19 C16.5,17 13,19 12,23 C11,19 7.5,17 4,19 C6,17 5.5,13 2,11 C5,11 7,7.5 5,4 C7,5.5 11,5 12,1Z" fill="%23${col}" opacity="${.55+Math.random()*.35}"/></svg>`;
     c.appendChild(div);
   }
 })();
@@ -819,7 +685,6 @@ footer:hover{opacity:1;}
     <polygon points="20,14 28,22 20,34" fill="${col}" opacity=".65"/>
     <polygon points="20,2 20,14 10,22" fill="${col}" opacity=".45"/>
   </svg>`;
-
   const configs=[
     {l:'5%', col:'rgba(244,191,203,.9)', sw:'4.8s', dl:'0s',   gc:'rgba(244,191,203,.45)', cg:'2.5s'},
     {l:'16%',col:'rgba(196,163,90,.8)',  sw:'5.8s', dl:'1.2s', gc:'rgba(196,163,90,.4)',   cg:'3.5s'},
@@ -827,7 +692,6 @@ footer:hover{opacity:1;}
     {l:'89%',col:'rgba(244,191,203,.85)',sw:'6.2s', dl:'2s',   gc:'rgba(244,191,203,.4)',  cg:'4s'},
     {l:'50%',col:'rgba(196,163,90,.7)',  sw:'5.2s', dl:'1.8s', gc:'rgba(196,163,90,.35)',  cg:'3.2s'},
   ];
-
   configs.forEach(({l,col,sw,dl,gc,cg})=>{
     const wrap=document.createElement('div'); wrap.className='crane-wrap';
     wrap.style.cssText=`left:${l};--sw:${sw};--dl:${dl};--sa:${(-2-Math.random()*2).toFixed(1)}deg;--sb:${(2+Math.random()*2).toFixed(1)}deg`;
@@ -885,226 +749,196 @@ function updateCd(){
 }
 setInterval(updateCd,1000); updateCd();
 
-/* ── MAKE A WISH — SHOOTING STAR CANVAS ── */
+/* ════════════════════════════════════
+   MUSIC PLAYER
+════════════════════════════════════ */
+(()=>{
+  const audio   = document.getElementById('bgm');
+  const btn     = document.getElementById('musicBtn');
+  const iconPlay= document.getElementById('iconPlay');
+  const iconPause=document.getElementById('iconPause');
+  const tip     = document.getElementById('musicTip');
+  const volWrap = document.getElementById('musicVol');
+  const volSlider=document.getElementById('volSlider');
+
+  audio.volume = 0.18;
+  let playing = false;
+
+  function setPlaying(state){
+    playing = state;
+    if(state){
+      iconPlay.style.display  = 'none';
+      iconPause.style.display = 'block';
+      btn.classList.add('playing');
+      tip.textContent = '音楽 · pause';
+      volWrap.classList.add('show');
+    } else {
+      iconPlay.style.display  = 'block';
+      iconPause.style.display = 'none';
+      btn.classList.remove('playing');
+      tip.textContent = '音楽 · play';
+      volWrap.classList.remove('show');
+    }
+  }
+
+  btn.addEventListener('click', ()=>{
+    if(playing){
+      audio.pause();
+      setPlaying(false);
+    } else {
+      audio.play().then(()=> setPlaying(true)).catch(()=>{});
+    }
+  });
+
+  volSlider.addEventListener('input', ()=>{
+    audio.volume = parseFloat(volSlider.value);
+  });
+
+  // Try autoplay on first user interaction anywhere
+  const tryAutoplay = () => {
+    audio.play().then(()=>{ setPlaying(true); }).catch(()=>{});
+    document.removeEventListener('click', tryAutoplay);
+    document.removeEventListener('touchstart', tryAutoplay);
+  };
+  document.addEventListener('click', tryAutoplay);
+  document.addEventListener('touchstart', tryAutoplay);
+})();
+
+/* ── MAKE A WISH ── */
 (()=>{
   const canvas = document.getElementById('wish-canvas');
   const ctx    = canvas.getContext('2d');
-  let W, H, raf, stars = [], petals = [], active = false;
-  let wishCount = 0;
+  let W, H, raf, active = false, wishCount = 0;
 
   const WISH_MESSAGES = [
     { t:"May every wish you've ever carried quietly in your heart find its way to you.",       j:"心の中にそっと抱いていた願いが、すべて叶いますように。" },
   ];
 
-  function resize(){
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
+  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+  window.addEventListener('resize',resize); resize();
 
-  /* ── Single grand shooting star ── */
   class ShootingStar {
-    constructor(delay){
-      this.reset(delay || 0);
-    }
+    constructor(delay){ this.reset(delay||0); }
     reset(delay){
-      // Start off-screen top-left area
-      this.x    = Math.random() * W * .4;
-      this.y    = -20;
-      this.len  = 180 + Math.random() * 220;
-      this.speed= 14 + Math.random() * 10;
-      this.angle= (25 + Math.random() * 20) * Math.PI / 180; // diagonal down-right
-      this.vx   = Math.cos(this.angle) * this.speed;
-      this.vy   = Math.sin(this.angle) * this.speed;
-      this.life  = 0; // 0→1
-      this.delay = delay;
-      this.done  = false;
-      // Tail points
-      this.trail = [];
-      // Glow color: warm white → sakura pink tip
-      this.col  = `rgba(255,240,220,`;
-      this.colTip = `rgba(244,191,203,`;
+      this.x=Math.random()*W*.4; this.y=-20;
+      this.speed=14+Math.random()*10;
+      this.angle=(25+Math.random()*20)*Math.PI/180;
+      this.vx=Math.cos(this.angle)*this.speed; this.vy=Math.sin(this.angle)*this.speed;
+      this.life=0; this.delay=delay; this.done=false; this.trail=[];
     }
     update(){
-      if(this.delay > 0){ this.delay--; return; }
-      this.trail.push({x: this.x, y: this.y});
-      if(this.trail.length > 28) this.trail.shift();
-      this.x += this.vx;
-      this.y += this.vy;
-      this.life = Math.min(this.life + .025, 1);
-      if(this.x > W + 50 || this.y > H + 50) this.done = true;
+      if(this.delay>0){this.delay--;return;}
+      this.trail.push({x:this.x,y:this.y});
+      if(this.trail.length>28)this.trail.shift();
+      this.x+=this.vx; this.y+=this.vy;
+      this.life=Math.min(this.life+.025,1);
+      if(this.x>W+50||this.y>H+50)this.done=true;
     }
     draw(ctx){
-      if(this.delay > 0 || this.trail.length < 2) return;
-      const t = this.trail;
-      for(let i = 1; i < t.length; i++){
-        const prog = i / t.length;
-        const alpha = prog * .9 * Math.min(this.life * 3, 1);
-        const width = prog * 3.5;
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(255,240,220,${alpha})`;
-        ctx.lineWidth = width;
-        ctx.lineCap = 'round';
-        ctx.moveTo(t[i-1].x, t[i-1].y);
-        ctx.lineTo(t[i].x, t[i].y);
-        ctx.stroke();
+      if(this.delay>0||this.trail.length<2)return;
+      const t=this.trail;
+      for(let i=1;i<t.length;i++){
+        const prog=i/t.length, alpha=prog*.9*Math.min(this.life*3,1);
+        ctx.beginPath(); ctx.strokeStyle=`rgba(255,240,220,${alpha})`;
+        ctx.lineWidth=prog*3.5; ctx.lineCap='round';
+        ctx.moveTo(t[i-1].x,t[i-1].y); ctx.lineTo(t[i].x,t[i].y); ctx.stroke();
       }
-      // Bright head
       if(t.length){
-        const head = t[t.length-1];
-        const grad = ctx.createRadialGradient(head.x,head.y,0,head.x,head.y,12);
-        grad.addColorStop(0,'rgba(255,255,240,.95)');
-        grad.addColorStop(.4,'rgba(244,191,203,.5)');
-        grad.addColorStop(1,'rgba(244,191,203,0)');
-        ctx.beginPath();
-        ctx.fillStyle = grad;
-        ctx.arc(head.x, head.y, 12, 0, Math.PI*2);
-        ctx.fill();
-        // Sparkle dot
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(255,255,255,.95)';
-        ctx.arc(head.x, head.y, 2.5, 0, Math.PI*2);
-        ctx.fill();
+        const head=t[t.length-1];
+        const grad=ctx.createRadialGradient(head.x,head.y,0,head.x,head.y,12);
+        grad.addColorStop(0,'rgba(255,255,240,.95)'); grad.addColorStop(.4,'rgba(244,191,203,.5)'); grad.addColorStop(1,'rgba(244,191,203,0)');
+        ctx.beginPath(); ctx.fillStyle=grad; ctx.arc(head.x,head.y,12,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.fillStyle='rgba(255,255,255,.95)'; ctx.arc(head.x,head.y,2.5,0,Math.PI*2); ctx.fill();
       }
     }
   }
 
-  /* ── Burst sparkles that scatter from the star's path ── */
   class Sparkle {
-    constructor(x, y){
-      this.x  = x + (Math.random()-.5)*30;
-      this.y  = y + (Math.random()-.5)*30;
-      const a = Math.random() * Math.PI * 2;
-      const spd = 1 + Math.random() * 3;
-      this.vx = Math.cos(a) * spd;
-      this.vy = Math.sin(a) * spd - 1;
-      this.life= 1;
-      this.decay = .018 + Math.random() * .025;
-      this.size = 1.5 + Math.random() * 2.5;
-      const cols=['255,240,220','244,191,203','255,220,180','255,255,230'];
-      this.col = cols[~~(Math.random()*cols.length)];
+    constructor(x,y){
+      this.x=x+(Math.random()-.5)*30; this.y=y+(Math.random()-.5)*30;
+      const a=Math.random()*Math.PI*2, spd=1+Math.random()*3;
+      this.vx=Math.cos(a)*spd; this.vy=Math.sin(a)*spd-1;
+      this.life=1; this.decay=.018+Math.random()*.025; this.size=1.5+Math.random()*2.5;
+      const c=['255,240,220','244,191,203','255,220,180','255,255,230'];
+      this.col=c[~~(Math.random()*c.length)];
     }
-    update(){ this.x+=this.vx; this.y+=this.vy; this.vy+=.04; this.life-=this.decay; }
-    draw(ctx){
-      if(this.life<=0) return;
-      ctx.beginPath();
-      ctx.fillStyle=`rgba(${this.col},${this.life*.85})`;
-      ctx.arc(this.x,this.y,this.size*this.life,0,Math.PI*2);
-      ctx.fill();
-    }
+    update(){this.x+=this.vx;this.y+=this.vy;this.vy+=.04;this.life-=this.decay;}
+    draw(ctx){if(this.life<=0)return;ctx.beginPath();ctx.fillStyle=`rgba(${this.col},${this.life*.85})`;ctx.arc(this.x,this.y,this.size*this.life,0,Math.PI*2);ctx.fill();}
   }
 
-  /* ── Sakura burst petals from star trail ── */
   class BurstPetal {
-    constructor(x, y){
-      this.x = x; this.y = y;
-      const a = Math.random()*Math.PI*2;
-      const spd = 2 + Math.random()*5;
-      this.vx = Math.cos(a)*spd; this.vy = Math.sin(a)*spd - 2;
-      this.life=1; this.decay=.008+Math.random()*.012;
-      this.rot=Math.random()*Math.PI*2; this.rotv=(Math.random()-.5)*.15;
+    constructor(x,y){
+      this.x=x;this.y=y;
+      const a=Math.random()*Math.PI*2, spd=2+Math.random()*5;
+      this.vx=Math.cos(a)*spd;this.vy=Math.sin(a)*spd-2;
+      this.life=1;this.decay=.008+Math.random()*.012;
+      this.rot=Math.random()*Math.PI*2;this.rotv=(Math.random()-.5)*.15;
       this.size=4+Math.random()*8;
     }
-    update(){ this.x+=this.vx; this.y+=this.vy; this.vy+=.06; this.vx*=.99; this.rot+=this.rotv; this.life-=this.decay; }
+    update(){this.x+=this.vx;this.y+=this.vy;this.vy+=.06;this.vx*=.99;this.rot+=this.rotv;this.life-=this.decay;}
     draw(ctx){
-      if(this.life<=0) return;
-      ctx.save();
-      ctx.translate(this.x,this.y);
-      ctx.rotate(this.rot);
-      ctx.globalAlpha=this.life*.7;
-      // Simple petal shape
-      ctx.beginPath();
-      ctx.fillStyle=`rgba(244,${150+~~(this.life*40)},${180+~~(this.life*30)},1)`;
-      ctx.ellipse(0,0,this.size/2,this.size,0,0,Math.PI*2);
-      ctx.fill();
-      ctx.restore();
+      if(this.life<=0)return;
+      ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rot);ctx.globalAlpha=this.life*.7;
+      ctx.beginPath();ctx.fillStyle=`rgba(244,${150+~~(this.life*40)},${180+~~(this.life*30)},1)`;
+      ctx.ellipse(0,0,this.size/2,this.size,0,0,Math.PI*2);ctx.fill();ctx.restore();
     }
   }
 
-  let shootingStars=[], sparkles=[], burstPetals=[];
+  let shootingStars=[],sparkles=[],burstPetals=[];
 
   function spawnWish(){
     shootingStars=[];sparkles=[];burstPetals=[];
-    // Spawn 3 staggered shooting stars for a dramatic show
     shootingStars.push(new ShootingStar(0));
     shootingStars.push(new ShootingStar(18));
     shootingStars.push(new ShootingStar(38));
   }
 
-  let lastSparkleFrame=0;
   function loop(){
     ctx.clearRect(0,0,W,H);
-
-    // Update & draw shooting stars — spawn sparkles from head
     let allDone=true;
     shootingStars.forEach(s=>{
-      s.update(); s.draw(ctx);
-      if(!s.done) allDone=false;
-      // Spawn sparkles along trail
-      if(s.trail.length && s.delay<=0 && Math.random()>.55){
+      s.update();s.draw(ctx);
+      if(!s.done)allDone=false;
+      if(s.trail.length&&s.delay<=0&&Math.random()>.55){
         const h=s.trail[s.trail.length-1];
         sparkles.push(new Sparkle(h.x,h.y));
-        if(Math.random()>.72) burstPetals.push(new BurstPetal(h.x,h.y));
+        if(Math.random()>.72)burstPetals.push(new BurstPetal(h.x,h.y));
       }
     });
-
-    // Draw sparkles
-    sparkles = sparkles.filter(sp=>sp.life>0);
-    sparkles.forEach(sp=>{ sp.update(); sp.draw(ctx); });
-
-    // Draw burst petals
-    burstPetals = burstPetals.filter(p=>p.life>0);
-    burstPetals.forEach(p=>{ p.update(); p.draw(ctx); });
-
-    if(allDone && sparkles.length===0 && burstPetals.length===0){
-      active=false;
-      cancelAnimationFrame(raf);
-      return;
-    }
+    sparkles=sparkles.filter(sp=>sp.life>0);
+    sparkles.forEach(sp=>{sp.update();sp.draw(ctx);});
+    burstPetals=burstPetals.filter(p=>p.life>0);
+    burstPetals.forEach(p=>{p.update();p.draw(ctx);});
+    if(allDone&&sparkles.length===0&&burstPetals.length===0){active=false;cancelAnimationFrame(raf);return;}
     raf=requestAnimationFrame(loop);
   }
 
-  // Wish button click
   const btn     = document.getElementById('wishBtn');
   const msgEl   = document.getElementById('wishMsg');
   const textEl  = document.getElementById('wishText');
   const jpEl    = document.getElementById('wishJP');
   const counter = document.getElementById('wishCounter');
 
-  btn.addEventListener('click', ()=>{
-    if(active) return; // don't re-trigger mid-animation
-    wishCount++;
-    active=true;
-
-    // Button micro-animation
+  btn.addEventListener('click',()=>{
+    if(active)return;
+    wishCount++;active=true;
     btn.style.transform='scale(.95)';
     setTimeout(()=>btn.style.transform='',300);
-
-    // Pick & show message
-    const msg = WISH_MESSAGES[(wishCount-1) % WISH_MESSAGES.length];
-    textEl.textContent = msg.t;
-    jpEl.textContent   = msg.j;
-    msgEl.classList.remove('show');
-    void msgEl.offsetWidth; // reflow to re-trigger animation
-    setTimeout(()=>msgEl.classList.add('show'), 900);
-
-    // Counter
-    counter.textContent = wishCount===1 ? '✦ one wish made ✦' : `✦ ${wishCount} wishes made ✦`;
+    const msg=WISH_MESSAGES[(wishCount-1)%WISH_MESSAGES.length];
+    textEl.textContent=msg.t;jpEl.textContent=msg.j;
+    msgEl.classList.remove('show');void msgEl.offsetWidth;
+    setTimeout(()=>msgEl.classList.add('show'),900);
+    counter.textContent=wishCount===1?'✦ one wish made ✦':`✦ ${wishCount} wishes made ✦`;
     counter.classList.add('show');
-
-    // Launch stars
-    spawnWish();
-    cancelAnimationFrame(raf);
-    raf=requestAnimationFrame(loop);
+    spawnWish();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);
   });
 })();
 
-
+/* ── FOOTER EASTER EGG ── */
 let ftaps=0,ftimer;
 document.getElementById('foot').addEventListener('click',()=>{
-  ftaps++; clearTimeout(ftimer); ftimer=setTimeout(()=>ftaps=0,1500);
-  if(ftaps>=7){ ftaps=0; alert('ふふ…これは私たちのデジタルアルバムだよ 🌸\nYaShrutii'); }
+  ftaps++;clearTimeout(ftimer);ftimer=setTimeout(()=>ftaps=0,1500);
+  if(ftaps>=7){ftaps=0;alert('ふふ…これは私たちのデジタルアルバムだよ 🌸\nYaShrutii');}
 });
 </script>
 </body>

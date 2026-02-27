@@ -297,6 +297,65 @@ svg.mosque{position:fixed;bottom:0;left:0;right:0;z-index:3;pointer-events:none;
   text-align:right;margin-top:12px;opacity:.65;}
 .mnomsg{font-style:italic;color:var(--ink-dim);font-size:.88rem;padding:10px 0;}
 
+/* ─── MUSIC BUTTON ─── */
+.music-btn{
+  position:fixed;bottom:28px;left:28px;z-index:9999;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(14,14,36,.8);
+  border:1px solid rgba(201,168,80,.25);
+  box-shadow:0 0 22px rgba(201,168,80,.1),0 4px 20px rgba(0,0,0,.5);
+  backdrop-filter:blur(10px);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .4s,box-shadow .4s,transform .3s;
+  overflow:visible;
+}
+.music-btn::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,80,.12) 0%,transparent 70%);
+  transform:scale(0);transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.music-btn:hover{
+  border-color:rgba(201,168,80,.55);
+  box-shadow:0 0 38px rgba(201,168,80,.2),0 4px 24px rgba(0,0,0,.6);
+  transform:scale(1.08);
+}
+.music-btn:hover::before{transform:scale(1);}
+.music-btn.playing .disc{animation:mbspin 4s linear infinite;}
+.disc{position:relative;width:24px;height:24px;flex-shrink:0;}
+.disc-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(201,168,80,.6);}
+.disc-ring:nth-child(2){inset:5px;border-color:rgba(240,208,128,.4);}
+.disc-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(201,168,80,.8);
+  box-shadow:0 0 6px rgba(201,168,80,.6);
+}
+@keyframes mbspin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.pause-icon{
+  display:none;gap:4px;align-items:center;justify-content:center;
+  width:24px;height:24px;flex-shrink:0;
+}
+.pause-icon span{display:block;width:3px;height:13px;border-radius:2px;background:rgba(201,168,80,.8);}
+.music-btn.playing .disc{display:none;}
+.music-btn.playing .pause-icon{display:flex;}
+.music-btn.playing::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1px solid rgba(201,168,80,.3);
+  animation:mring 2s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes mring{0%,100%{transform:scale(1);opacity:.4;}50%{transform:scale(1.28);opacity:0;}}
+.music-tip{
+  position:absolute;left:58px;top:50%;transform:translateY(-50%);
+  background:rgba(14,14,36,.92);border:1px solid rgba(201,168,80,.18);
+  color:rgba(201,168,80,.8);
+  font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.18em;
+  white-space:nowrap;padding:5px 12px;border-radius:2px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.music-btn:hover .music-tip{opacity:1;}
+
 /* Footer */
 footer{text-align:center;padding:24px 24px 50px;font-family:'Uncial Antiqua',cursive;
   font-size:1.4rem;color:var(--gold);opacity:.6;cursor:default;transition:opacity .3s;}
@@ -493,6 +552,49 @@ footer:hover{opacity:1;}
 
 </div><!-- /wrapper -->
 
+
 <script src="choosejs.js"></script>
+
+
+
+<!-- ─── MUSIC BUTTON ─── -->
+<button class="music-btn" id="musicBtn" aria-label="Toggle music">
+  <span class="music-tip">BGM</span>
+  <div class="disc">
+    <div class="disc-ring"></div>
+    <div class="disc-ring"></div>
+    <div class="disc-center"></div>
+  </div>
+  <div class="pause-icon"><span></span><span></span></div>
+</button>
+<audio id="bgm" loop preload="auto">
+  <source src="music/bg.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+(()=>{
+  const btn   = document.getElementById('musicBtn');
+  const audio = document.getElementById('bgm');
+  let playing = false;
+  audio.volume = 0.18;
+  function setPlaying(s){ playing=s; btn.classList.toggle('playing',s); }
+  audio.play().then(()=>setPlaying(true)).catch(()=>{});
+  const startOnce=()=>{
+    if(!playing){ audio.play().then(()=>setPlaying(true)).catch(()=>{}); }
+    document.removeEventListener('click',startOnce);
+    document.removeEventListener('touchstart',startOnce);
+  };
+  document.addEventListener('click',startOnce);
+  document.addEventListener('touchstart',startOnce);
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(playing){ audio.pause(); setPlaying(false); }
+    else { audio.play().then(()=>setPlaying(true)).catch(()=>{}); }
+  });
+  audio.addEventListener('pause',()=>setPlaying(false));
+  audio.addEventListener('play', ()=>setPlaying(true));
+})();
+</script>
 </body>
 </html>

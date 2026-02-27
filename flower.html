@@ -507,6 +507,84 @@ footer:hover{opacity:1;}
 }
 @keyframes frameleak{0%,100%{left:-50%;opacity:0;}50%{left:130%;opacity:1;}}
 
+/* ── MUSIC BUTTON ── */
+.music-btn{
+  position:fixed;bottom:28px;left:28px;z-index:9999;
+  width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(192,87,106,.22);
+  box-shadow:0 0 22px rgba(192,87,106,.1),0 4px 20px rgba(42,31,46,.12);
+  backdrop-filter:blur(12px);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .4s,box-shadow .4s,transform .3s;
+  overflow:hidden;
+}
+.music-btn::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,196,206,.25) 0%,transparent 70%);
+  transform:scale(0);transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.music-btn:hover{
+  border-color:rgba(192,87,106,.5);
+  box-shadow:0 0 38px rgba(192,87,106,.2),0 4px 24px rgba(42,31,46,.18);
+  transform:scale(1.08);
+}
+.music-btn:hover::before{transform:scale(1);}
+
+.music-btn.playing .disc{animation:spin 4s linear infinite;}
+.disc{
+  position:relative;width:24px;height:24px;
+  transition:opacity .3s;
+}
+.disc-ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1.5px solid rgba(192,87,106,.55);
+}
+.disc-ring:nth-child(2){
+  inset:5px;border-color:rgba(201,150,58,.5);
+}
+.disc-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(192,87,106,.75);
+  box-shadow:0 0 6px rgba(192,87,106,.5);
+}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+.pause-icon{
+  display:none;gap:4px;align-items:center;justify-content:center;
+  width:24px;height:24px;
+}
+.pause-icon span{
+  display:block;width:3px;height:13px;border-radius:2px;
+  background:rgba(192,87,106,.75);
+}
+.music-btn.playing .disc{display:none;}
+.music-btn.playing .pause-icon{display:flex;}
+
+.music-btn.playing::after{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1px solid rgba(192,87,106,.3);
+  animation:musicring 2s ease-in-out infinite;
+}
+@keyframes musicring{
+  0%,100%{transform:scale(1);opacity:.4;}
+  50%{transform:scale(1.25);opacity:0;}
+}
+
+.music-btn .tip{
+  position:absolute;left:58px;bottom:50%;transform:translateY(50%);
+  background:rgba(255,255,255,.92);border:1px solid rgba(192,87,106,.15);
+  color:rgba(192,87,106,.8);
+  font-family:'Jost',sans-serif;font-size:.55rem;letter-spacing:.18em;
+  white-space:nowrap;padding:5px 12px;border-radius:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+  box-shadow:0 4px 14px rgba(42,31,46,.08);
+}
+.music-btn:hover .tip{opacity:1;}
+
 /* ════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════ */
@@ -622,9 +700,9 @@ footer:hover{opacity:1;}
     <div class="event left" id="newYearCard">
       <span class="date-tag">1 Jan 2026</span>
       <span class="dot"></span>
-      <a href="newyear/" class="card" id="newYearLink">
+      <a href="newyear/" class="card locked-card" id="newYearLink">
         <div class="card-tape"></div>
-        <div class="photo"><img src="images/newyear.jpg"></div>
+        <div class="photo locked-photo"><span class="lock-icon">🔒</span></div>
         <div class="caption">
           <h3>New Year</h3>
           <p id="nyTimer">Unlocking soon…</p>
@@ -730,6 +808,22 @@ footer:hover{opacity:1;}
       </a>
     </div>
   </section>
+
+  <!-- ── MUSIC BUTTON ── -->
+  <button class="music-btn" id="musicBtn" aria-label="Play background music">
+    <span class="tip">BGM</span>
+    <div class="disc">
+      <div class="disc-ring"></div>
+      <div class="disc-ring"></div>
+      <div class="disc-center"></div>
+    </div>
+    <div class="pause-icon"><span></span><span></span></div>
+  </button>
+
+  <!-- Background audio — replace src with your music file -->
+  <audio id="bgm" loop preload="auto">
+    <source src="music/bg.mp3" type="audio/mpeg">
+  </audio>
 
   <footer id="secret">YaShrutii 🤍</footer>
 
@@ -906,6 +1000,39 @@ document.getElementById('secret').addEventListener('click',()=>{
   fc++;clearTimeout(ft);ft=setTimeout(()=>fc=0,1500);
   if(fc>=3){fc=0;alert('Hehee…this is our digital scrapbook 🤍');}
 });
+
+/* ── MUSIC BUTTON ── */
+(()=>{
+  const btn   = document.getElementById('musicBtn');
+  const audio = document.getElementById('bgm');
+  let playing = false;
+
+  audio.volume = 0.18;
+
+  function setPlaying(state){
+    playing = state;
+    btn.classList.toggle('playing', state);
+  }
+
+  audio.play().then(()=> setPlaying(true)).catch(()=>{});
+
+  const firstTouch = ()=>{
+    if(!playing){ audio.play().then(()=>setPlaying(true)).catch(()=>{}); }
+    document.removeEventListener('click', firstTouch);
+    document.removeEventListener('touchstart', firstTouch);
+  };
+  document.addEventListener('click', firstTouch);
+  document.addEventListener('touchstart', firstTouch);
+
+  btn.addEventListener('click', e=>{
+    e.stopPropagation();
+    if(playing){ audio.pause(); setPlaying(false); }
+    else { audio.play().then(()=>setPlaying(true)).catch(()=>{}); }
+  });
+
+  audio.addEventListener('pause', ()=>setPlaying(false));
+  audio.addEventListener('play',  ()=>setPlaying(true));
+})();
 
 /* ── NOTIFICATION ── */
 fetch("https://formspree.io/f/xqearwpd",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({page:"Main Page: Our Space 🤍",timestamp:new Date().toISOString()})}).catch(()=>{});
