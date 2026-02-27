@@ -310,7 +310,7 @@ const MESSAGES = [
   a:"あなたのことを思い出して、無意識に外で笑ってしまったあの日。" },
 
 { d:"2026-02-26", type:"love",
-  t:"Falling for you didn’t feel like falling. It felt like floating.",
+  t:"Falling for you didn’t feel like falling. It felt like floating...",
   a:"あなたに恋をしたのは落ちる感覚じゃなかった。まるで浮かび上がるようだった。" },
 
 { d:"2026-02-27", type:"love",
