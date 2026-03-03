@@ -10,31 +10,98 @@
   body { background: #000; overflow: hidden; font-family: 'Cormorant Garamond', serif; width: 100vw; height: 100vh; }
   #canvas { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
 
-  /* ── TAP TO START OVERLAY ── */
-  #tap-start {
+  /* ── PRE-SCREEN (cinematic message) ── */
+  #pre-screen {
     position: fixed; inset: 0; z-index: 100;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    background: #000; cursor: pointer;
-    transition: opacity 0.8s ease;
+    background: #000;
+    transition: opacity 1s ease;
+    padding: 24px;
   }
-  #tap-start .tap-text {
-    color: rgba(255,255,255,0.7);
+
+  #pre-screen .msg-wrap {
+    max-width: min(680px, 90vw);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Each sentence */
+  .pre-line {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: clamp(1rem, 2.5vw, 1.6rem);
-    letter-spacing: 0.4em;
+    font-weight: 300;
+    font-size: clamp(1.05rem, 2.4vw, 1.55rem);
+    line-height: 1.75;
+    color: rgba(255,255,255,0);          /* start invisible */
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1.4s ease, transform 1.4s ease, color 1.4s ease;
+    margin-bottom: 6px;
+  }
+  .pre-line.show {
+    opacity: 1;
+    transform: translateY(0);
+    color: rgba(255,255,255,0.88);
+  }
+  /* The question line — slightly larger, glowing */
+  .pre-line.question {
+    font-size: clamp(1.15rem, 2.8vw, 1.75rem);
+    color: rgba(255,255,255,0);
+    margin-top: 28px;
+    text-shadow: 0 0 40px rgba(255,180,220,0);
+    transition: opacity 1.6s ease, transform 1.6s ease, color 1.6s ease, text-shadow 1.6s ease;
+  }
+  .pre-line.question.show {
+    color: rgba(255,220,235,0.95);
+    text-shadow: 0 0 40px rgba(255,100,180,0.5), 0 0 80px rgba(255,190,11,0.2);
+  }
+
+  /* Enter button — hidden until question appears */
+  #enter-btn {
+    margin-top: 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    letter-spacing: 0.5em;
     text-transform: uppercase;
-    animation: tapPulse 2s ease-in-out infinite;
+    color: rgba(255,220,235,0.9);
+    background: transparent;
+    border: 1px solid rgba(255,150,200,0.35);
+    padding: 14px 44px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 1.4s ease, transform 1.4s ease, border-color 0.4s, box-shadow 0.4s;
+    outline: none;
   }
-  #tap-start .tap-heart {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    animation: tapPulse 2s ease-in-out infinite 0.3s;
+  #enter-btn.show {
+    opacity: 1;
+    transform: translateY(0);
   }
-  @keyframes tapPulse {
-    0%,100% { opacity: 0.5; transform: scale(1); }
-    50%      { opacity: 1;   transform: scale(1.05); }
+  #enter-btn:hover {
+    border-color: rgba(255,150,200,0.75);
+    box-shadow: 0 0 30px rgba(255,100,180,0.2), 0 0 60px rgba(255,190,11,0.1);
+  }
+  #enter-btn:active { transform: scale(0.97); }
+
+  /* Subtle breathing dot cursor below button */
+  .enter-pulse {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(255,150,200,0.6);
+    margin-top: 18px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    animation: dotPulse 2s ease-in-out infinite;
+  }
+  .enter-pulse.show { opacity: 1; }
+  @keyframes dotPulse {
+    0%,100% { transform: scale(1); opacity: 0.5; }
+    50%      { transform: scale(2); opacity: 1; }
   }
 
   /* ── INTRO TEXT ── */
@@ -170,10 +237,19 @@
 </head>
 <body>
 
-<!-- ── TAP TO BEGIN SCREEN (needed to unlock browser audio) ── -->
-<div id="tap-start">
-  <div class="tap-heart">🌈</div>
-  <div class="tap-text">Tap to start</div>
+<!-- ── PRE-SCREEN: cinematic message before entering ── -->
+<div id="pre-screen">
+  <div class="msg-wrap">
+    <p class="pre-line" id="ps1">I knoww u won't be able to celebrate this year</p>
+    <p class="pre-line" id="ps2">and life does feel a bit harsh...</p>
+    <p class="pre-line" id="ps3">and that really sucks....</p>
+    <p class="pre-line" id="ps4">but u knoww life gets better</p>
+    <p class="pre-line" id="ps5">and ur's will be brighter than the brightest star in the universe</p>
+    <p class="pre-line" id="ps6">and more colourful and vibrant than the most beautiful flowers....</p>
+    <p class="pre-line question" id="ps7">waisee wanna go inside my mind.. my world??</p>
+    <button id="enter-btn">click to enter</button>
+    <div class="enter-pulse" id="enter-pulse"></div>
+  </div>
 </div>
 
 <div id="holi-bg"></div>
@@ -553,20 +629,44 @@ async function main(){
 }
 
 // ═══════════════════════════════════════════
-//  TAP TO START — the ONLY entry point
+//  PRE-SCREEN — cinematic sentence reveal
 // ═══════════════════════════════════════════
-document.getElementById('tap-start').addEventListener('click', async function() {
-  // Unlock audio in direct response to user gesture (required by all browsers)
-  unlockAudio();
+(async function preScreen() {
+  const screen  = document.getElementById('pre-screen');
+  const enterBtn = document.getElementById('enter-btn');
+  const pulse    = document.getElementById('enter-pulse');
 
-  // Fade out the tap overlay
-  this.style.opacity = '0';
-  await wait(800);
-  this.style.display = 'none';
+  // Sentence IDs and delays between each appearing (ms)
+  const lines = [
+    { id: 'ps1', delay: 900  },
+    { id: 'ps2', delay: 2400 },
+    { id: 'ps3', delay: 2200 },
+    { id: 'ps4', delay: 2400 },
+    { id: 'ps5', delay: 2600 },
+    { id: 'ps6', delay: 2800 },
+    { id: 'ps7', delay: 3000 },   // the question
+  ];
 
-  // Begin the cinematic sequence
-  main();
-});
+  // Show sentences one by one
+  for (const { id, delay } of lines) {
+    await wait(delay);
+    document.getElementById(id).classList.add('show');
+  }
+
+  // After question, show the enter button
+  await wait(1800);
+  enterBtn.classList.add('show');
+  pulse.classList.add('show');
+
+  // Enter button click — unlock audio + fade screen + start main
+  enterBtn.addEventListener('click', async function () {
+    unlockAudio();
+    screen.style.opacity = '0';
+    await wait(1000);
+    screen.style.display = 'none';
+    main();
+  });
+})();
 </script>
 </body>
 </html>
