@@ -328,11 +328,11 @@ const MESSAGES = [
   a:"新しい月。それでも毎日のいちばん好きな瞬間は、あなた。" },
 
 { d:"2026-03-02", type:"love",
-  t:"I notice the small things about you — the pauses, the tone shifts, the quiet thoughts. I’m paying attention.",
+  t:"I LOVEE U SOO MUCHH..ULL KNOW IT...",
   a:"あなたの小さな変化や沈黙、声のトーン、心の動きに気づいている。ちゃんと見ているよ。" },
 
-{ d:"2026-03-03", type:"throwback",
-  t:"Throwback: The first time you surprised me and I realised I would never get bored of discovering you.",
+{ d:"2026-03-03", type:"love",
+  t:"You are the calm in my chaos and the warmth in my quiet",
   a:"あなたに驚かされたあの日、これからもずっとあなたを知り続けたいと思った。" },
 
 { d:"2026-03-04", type:"love",
