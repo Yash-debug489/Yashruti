@@ -268,7 +268,8 @@ document.getElementById('name-input').addEventListener('keydown', e => {
 });
 
 // ── PASSWORD ──
-const SECRET_PASSWORD = 'yashruti'; // CHANGE THIS
+// ── PASSWORD ──
+const SECRET_PASSWORD = 'yashruti';
 
 function checkPassword() {
   const val = document.getElementById('pw-input').value.trim().toLowerCase();
@@ -285,6 +286,17 @@ function checkPassword() {
     document.getElementById('pw-input').style.borderColor = '#e87070';
     setTimeout(() => document.getElementById('pw-input').style.borderColor = '', 1000);
   }
+}
+
+// Works on both desktop (click) and mobile (touchend)
+const unlockBtn = document.getElementById('unlock-btn');
+if (unlockBtn) {
+  ['click', 'touchend'].forEach(evt => {
+    unlockBtn.addEventListener(evt, e => {
+      e.preventDefault();
+      checkPassword();
+    });
+  });
 }
 
 document.getElementById('pw-input').addEventListener('keydown', e => {
