@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Unbounded:wght@200;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="for-her.css">
+</head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<nav>
+  <div class="nav-dot active" data-target="hero"></div>
+  <div class="nav-dot" data-target="name-section"></div>
+  <div class="nav-dot" data-target="letter-section"></div>
+  <div class="nav-dot" data-target="reasons-section"></div>
+  <div class="nav-dot" data-target="future-section"></div>
+  <div class="nav-dot" data-target="bestie-section"></div>
+  <div class="nav-dot" data-target="secret-section"></div>
+  <div class="nav-dot" data-target="reply-section"></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Ummm darling??</p>
+  <h1 class="hero-title">Hello baby!!<br><span>Ru excited!</span></h1>
+  <!-- <p class="hero-sub">not because of what you do. not because of what you prove. just because you exist, and you are you.</p> -->
+  <p class="hero-scroll">↓ &nbsp; scroll &nbsp; ↓</p>
+</section>
+
+<!-- NAME GENERATOR -->
+<section id="name-section">
+  <p class="section-label">Ummm</p>
+  <h2 class="section-title">Type your name</h2>
+  <div class="name-input-wrap">
+    <input type="text" id="name-input" placeholder="your name, love…" maxlength="40" />
+    <button onclick="generateMessage()">→</button>
+  </div>
+  <p id="message-loading">writing something just for you…</p>
+  <div id="message-output"></div>
+</section>
+
+<!-- LETTER -->
+<section id="letter-section">
+  <p class="section-label" style="align-self:flex-start;margin-left:auto;margin-right:auto;max-width:640px">Patr lekhan</p>
+  <div class="letter-container" id="letter-container">
+    <div class="letter-line">My love,</div>
+    <div class="letter-line">I want to tell u with every single part of me, U are so amazing.</div>
+    <div class="letter-line">Maine dekhaa haii, throughout the year , u working hard 3am tak , u completely breaking down and doubting urself then Trying again after that too....and handling pressures jahaa aak normal insaan toh kaabkaa give-up kar detaa</div>
+    <div class="letter-line bold-line">That is who you are and what I love.</div>
+    <div class="letter-line">The sound u make when u understand something. The way u say ki "tumhari writing kitni bekar hai"....The way u care, talk and everything about U.</div>
+    <div class="letter-line">Whenever i think about my life,i imagine u in every single scene. Every morning. Every trip. Every small perfect ordinary Tuesday.(Why did i choose tuesday??)</div>
+    <div class="letter-line bold-line">And I am so, so proud of you.</div>
+    <div class="letter-line" style="margin-top:2rem;font-style:italic;color:var(--accent)">—Ur cockroach, always</div>
+  </div>
+</section>
+
+<!-- 100 REASONS -->
+<section id="reasons-section">
+  <p class="section-label">Reasons fr somethings UNMEASURABLE</p>
+  <h2 class="section-title" style="text-align:center">why i love you</h2>
+  
+  <div id="reasons-reveal-wrap" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:1000px;">
+    <div id="reason-counter" style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--accent);margin-bottom:1.5rem;opacity:0.6;">I LOVE U</div>
+    
+    <button id="reveal-btn" onclick="revealReason()">
+      <span id="btn-label">reasons I love you</span>
+      <span id="btn-sub">click to reveal</span>
+    </button>
+
+    <div class="reasons-grid" id="reasons-grid"></div>
+
+    <p id="all-done" style="display:none;margin-top:3rem;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--accent);text-align:center;">that's all 100. and i could keep going.</p>
+  </div>
+</section>
+
+<!-- FUTURE -->
+<section id="future-section">
+  <p class="section-label">Next part of movie??</p>
+  <h2 class="section-title">everything I would love to do with u</h2>
+  <div class="future-items" id="future-items">
+    <div class="future-item">
+      <div class="future-num">01</div>
+      <div>
+        <div class="future-title">The trip we always talk about "someday"</div>
+        <div class="future-body">We have made a lot of plans..we'll go here ,we'll go there..But honestly i just wanna cover the entire world! and i want u to come with me in that journey..The best trips of ourr jawani</div>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">02</div>
+      <div>
+        <div class="future-title">Watching the sunrise from a mountain</div>
+        <div class="future-body">There is hill yaha pe at iitb and sunrise uske top se 5AM looks so beautiful but of all the times i have gone there, the only thought at the back of the mind is to do the same thing with U someday and maybe get bartan to cook some food up there!Heheee</div>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">03</div>
+      <div>
+        <div class="future-title">A road trip with no destination</div>
+        <div class="future-body">Windows down. Music up loud. Stopping at every weird little town,shop that looks interesting. Getting there doesn't matter. The drive is the whole point.</div>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">04</div>
+      <div>
+        <div class="future-title">A thousand lazy mornings</div>
+        <div class="future-body">Coffee/chai going cold because we got too busy talking. Sunlight through curtains. Nowhere to be. Just you, just me, chilling.</div>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">05</div>
+      <div>
+        <div class="future-title">Sitting by the ocean and saying nothing</div>
+        <div class="future-body">Watching and hearing waves, the beautiful skyline and u right next to me.</div>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">06</div>
+      <div>
+        <div class="future-title">A home full of us</div>
+        <div class="future-body">Plants on everywindow and balcony....A garden filled with greenary and beautiful flowers Walls..Walls covered in photographs from everywhere we've been. A place that's ours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BESTIE
+<section id="bestie-section">
+  <p class="section-label" style="color:#b48cdc">05 — from someone else who loves you</p>
+  <div class="bestie-card">
+    <div class="bestie-tag">a note from [BESTIE NAME]</div>
+    <div class="bestie-body">
+[Replace this with her bestie's actual letter — paste it here and it'll look exactly like this on the page.]
+
+Hey you.
+
+I'm not going to pretend I have fancy words for this — you know I don't. But I need you to hear it from me too, from the person who has seen you at your worst and your best and every messy bit in between.
+
+You are one of the most extraordinary people I have ever known. And I don't mean because of NEET or medicine or any of that. I mean the way you show up. The way you love people. The way you make everything feel a little more alive.
+
+Whatever today felt like — I'm here. We're here. And we are so incredibly proud of you. Not for what you wrote on that paper. For you. For all of you.
+
+Love you always, no matter what.</div>
+    <div class="bestie-sig">— [BESTIE NAME] ♡</div>
+  </div>
+</section> -->
+
+<!-- SECRET PAGE -->
+<section id="secret-section">
+  <p class="section-label">Something hidden</p>
+  <div class="lock-icon" id="lock-icon">🔒</div>
+  <h2 class="section-title" style="font-size:1.8rem">there's one more thing.<br>but you have to unlock it.</h2>
+  <p style="font-size:0.9rem;color:var(--muted);margin-bottom:0.5rem;font-style:italic">you know the word..hint(hint:spotify playlist, all small letters)</p>
+  <div class="pw-wrap">
+    <input type="password" id="pw-input" placeholder="enter the password…" />
+    <button onclick="checkPassword()">unlock</button>
+  </div>
+  <p class="pw-error" id="pw-error">Anotherhint- the word has both of our names.</p>
+
+  <div id="secret-content">
+    <div class="ornament">✦ ✦ ✦</div>
+    <p class="secret-text">
+      It's a small gift from me to quench your boreness for the next few months..<br>
+    </p>
+    <p class="secret-text">
+      ID - yash.kumaranime@gmail.com
+    </p>
+    <p class="secret-text">
+      passwrd =  desire_to_be_beaten_bymycutie<br>
+    </p>
+    <p class="secret-text">
+    </p>
+    <p class="secret-text">
+      NETFLIX...Enjoy karoo......login karke ull see a profile name Shruti..go there!
+    </p>
+
+
+    <p style="font-style:italic;color:var(--accent);font-size:1rem">—Ur cockroach</p>
+  </div>
+</section>
+
+<!-- REPLY -->
+<!-- <section id="reply-section">
+  <p class="section-label">07 — write back</p>
+  <h2 class="section-title" style="font-size:2rem;margin-bottom:1rem">say something back.</h2>
+  <p style="font-size:1rem;font-style:italic;color:var(--muted);margin-bottom:2.5rem;text-align:center">your words go straight to me. just for us.</p>
+  <div class="reply-box">
+    <textarea id="reply-text" placeholder="tell me anything…"></textarea>
+    <br>
+    <button class="reply-btn" onclick="sendReply()">send it →</button>
+    <p id="reply-thanks">i got it. i love you. ♡</p>
+  </div>
+</section> -->
+
+<footer>
+  <div class="ornament">✦</div>
+  <p class="footer-text">made with a lot of love</p>
+  <p style="margin-top:0.5rem;font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(245,239,232,0.15);letter-spacing:0.2em">Always.</p>
+</footer>
+
+<script src="for-her.js"></script>
+</body>
+</html>
