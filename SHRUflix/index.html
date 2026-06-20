@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShruFLIX</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Bebas Neue for logo, Nunito for body -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== LOGIN SCREEN ========== -->
+  <div id="loginScreen" class="screen active">
+    <div class="login-bg">
+      <div class="login-bg-overlay"></div>
+    </div>
+    <div class="login-card">
+      <div class="logo login-logo">ShruFLIX</div>
+      <h2 class="login-title">Sign In</h2>
+      <div class="input-group">
+        <input type="text" id="usernameInput" value="Shruti" disabled readonly class="input-field" placeholder="Username" />
+      </div>
+      <div class="input-group">
+        <input type="password" id="passwordInput" class="input-field" placeholder="Password" />
+      </div>
+      <div id="loginError" class="login-error hidden">
+        <span>Wrong password ❤️</span>
+        <span class="error-sub">Ummm...wapas daloo</span>
+      </div>
+      <button id="loginBtn" class="btn-primary login-btn">Sign In</button>
+    </div>
+  </div>
+
+  <!-- ========== WHO'S WATCHING SCREEN ========== -->
+  <div id="profileScreen" class="screen">
+    <div class="profile-screen-inner">
+      <h1 class="who-watching">Who's watching?</h1>
+      <div class="profiles-list">
+        <div class="profile-card" id="profileCard">
+          <div class="profile-avatar">
+            <span class="avatar-emoji">
+              <img src="images/profile.jpg" alt="🌸">
+            </span>
+          </div>
+          <p class="profile-name">Shruti</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MAIN HOMEPAGE ========== -->
+  <div id="mainScreen" class="screen">
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-left">
+        <div class="logo nav-logo">ShruFLIX</div>
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li><a href="#" class="nav-link">Shows</a></li>
+          <li><a href="#" class="nav-link">Movies</a></li>
+          <li><a href="#" class="nav-link">My Reviews</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <!-- Search -->
+        <div class="search-wrapper">
+          <button class="icon-btn" id="searchToggle" title="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+          <div class="search-bar hidden" id="searchBar">
+            <input type="text" id="searchInput" placeholder="Search... try 'love'" />
+          </div>
+        </div>
+        <!-- Profile -->
+        <div class="nav-profile">
+          <div class="nav-avatar">
+            <img src="images/profile.jpg" alt="Shruti" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+          </div>
+          <span class="nav-profile-name">ShruDarling</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO BANNER -->
+    <section class="hero" id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Welcome to ShruFLIX</h1>
+        <p class="hero-subtitle">
+          A collection of movies you recommended<br/>
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary hero-btn" onclick="scrollToContent()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            Watch Now
+          </button>
+          <button class="btn-secondary hero-btn" id="favoriteReviewBtn">
+            ❤️ My Favorite Movie
+          </button>
+        </div>
+      </div>
+      <div class="hero-fade"></div>
+    </section>
+
+    <!-- SEARCH RESULTS (hidden by default) -->
+    <div id="searchResults" class="search-results-row hidden">
+      <h2 class="row-title">Search Results</h2>
+      <div class="cards-container" id="searchResultsContainer"></div>
+    </div>
+
+    <!-- CONTENT ROWS -->
+    <div class="content-area" id="contentArea">
+
+      <!-- Continue Watching -->
+      <section class="content-row" id="continueWatchingRow">
+        <h2 class="row-title">Continue Watching</h2>
+        <div class="cards-container">
+          <div class="card continue-card" id="continueCard">
+            <div class="card-poster continue-poster">
+              <div class="continue-poster-inner">
+                <span class="continue-emoji">💫</span>
+                <p class="continue-label">Us</p>
+              </div>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar" style="width:99%"></div>
+            </div>
+            <p class="card-title">Us</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Rows rendered by JS -->
+      <div id="dynamicRows"></div>
+
+    </div>
+
+  </div><!-- end mainScreen -->
+
+  <!-- ========== CARD MODAL ========== -->
+  <div class="modal-overlay" id="cardModal">
+    <div class="modal-box" id="cardModalBox">
+      <button class="modal-close" id="cardModalClose">✕</button>
+      <div class="modal-banner" id="modalBanner"></div>
+      <div class="modal-body">
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-rating" id="modalRating"></div>
+        <div class="modal-section">
+          <h4>My Review</h4>
+          <p id="modalReview"></p>
+        </div>
+        <div class="modal-section">
+          <h4>🎬 Favorite Scene</h4>
+          <p id="modalScene"></p>
+        </div>
+        <div class="modal-section">
+          <h4>💬 Favorite Dialogue</h4>
+          <p id="modalDialogue" class="dialogue-text"></p>
+        </div>
+        <div class="modal-section">
+          <h4>💭 Personal Thoughts</h4>
+          <p id="modalThoughts"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CONTINUE WATCHING MODAL ========== -->
+  <div class="modal-overlay" id="continueModal">
+    <div class="modal-box cinematic-modal" id="continueModalBox">
+      <button class="modal-close" id="continueModalClose">✕</button>
+      <canvas id="particleCanvas"></canvas>
+      <div class="cinematic-content">
+        <div class="cinematic-icon">💫</div>
+        <h2 class="cinematic-title">Yashruti</h2>
+        <div class="cinematic-text">
+          <p>Thanks for every recommendation.</p>
+          <p>But honestly , i realised after watching so many shows that </p>
+          <p class="cinematic-highlight">you were always my favorite story.</p>
+        </div>
+        <div class="progress-bar-wrap cinematic-progress">
+          <div class="progress-bar" style="width:10%"></div>
+        </div>
+        <p class="cinematic-percent">1% Complete....continuing</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EASTER EGG MODAL ========== -->
+  <div class="modal-overlay" id="easterModal">
+    <div class="modal-box easter-modal" id="easterModalBox">
+      <button class="modal-close" id="easterModalClose">✕</button>
+      <div class="easter-content">
+        <div class="easter-stars">✨</div>
+        <h2 class="easter-title">Hehee...Hidden note</h2>
+        <div class="easter-text">
+          <p>U know my attention span is terrible..aaj kal watching anything is difficult</p>
+          <p>Have a confession to madee...</p>
+          <p class="easter-break">Half the time i start a movie because you told me, it's kinda romantic right knowing you weree laughing at this scene which i am watching right noww</p>
+          <p class="easter-highlight">Can't wait to watch movies sitting/sleeping nextt to youu</p>
+        </div>
+        <div class="easter-hearts">
+          <span>❤️</span><span>❤️</span><span>❤️</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

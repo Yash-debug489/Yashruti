@@ -16,6 +16,162 @@
 html{scroll-behavior:smooth;}
 body{font-family:'IM Fell English',serif;background:var(--night);color:var(--gold-pale);min-height:100vh;overflow-x:hidden;}
 
+
+/* ─── PHONE APP SECTION ─── */
+.phone-section {
+  padding: 0 24px 52px;
+}
+.phone-section .sec-lbl {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Phone frame */
+.phone-frame {
+  width: 220px;
+  margin: 0 auto;
+  background: #0a0a14;
+  border-radius: 38px;
+  padding: 14px 10px;
+  border: 2px solid rgba(201,168,80,.25);
+  box-shadow:
+    0 0 0 1px rgba(201,168,80,.08),
+    0 30px 80px rgba(0,0,0,.8),
+    0 0 40px rgba(201,168,80,.08),
+    inset 0 0 20px rgba(0,0,0,.5);
+  position: relative;
+}
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 5px;
+  background: rgba(201,168,80,.15);
+  border-radius: 3px;
+  z-index: 2;
+}
+.phone-screen {
+  background: #080814;
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 28px 12px 16px;
+  min-height: 380px;
+  position: relative;
+}
+
+/* Phone status bar */
+.phone-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px 16px;
+  font-family: 'Cinzel', serif;
+  font-size: .42rem;
+  letter-spacing: .12em;
+  color: rgba(201,168,80,.4);
+}
+
+/* App grid label */
+.phone-grid-label {
+  font-family: 'Cinzel', serif;
+  font-size: .5rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(201,168,80,.3);
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+/* App icon */
+.app-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 0 4px;
+}
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  -webkit-tap-highlight-color: transparent;
+}
+.app-icon:hover { transform: scale(1.12) translateY(-3px); }
+.app-icon:active { transform: scale(.95); }
+
+.app-icon-img {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,80,.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,.6), 0 0 12px rgba(229,9,20,.15);
+  position: relative;
+}
+.app-icon-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Fallback if no image */
+.app-icon-img.no-img {
+  background: linear-gradient(135deg, #1a0408, #0a0014);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: .9rem;
+  color: #e50914;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(229,9,20,.6);
+}
+
+.app-icon-name {
+  font-family: 'Cinzel', serif;
+  font-size: .46rem;
+  letter-spacing: .08em;
+  color: rgba(201,168,80,.65);
+  text-align: center;
+  max-width: 62px;
+  line-height: 1.3;
+}
+
+/* Phone home bar */
+.phone-bar {
+  width: 80px; height: 4px;
+  background: rgba(201,168,80,.2);
+  border-radius: 3px;
+  margin: 18px auto 0;
+}
+
+/* Section heading style — reused */
+.section-heading {
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: var(--gold-l);
+  text-align: center;
+  letter-spacing: .1em;
+  margin-bottom: 6px;
+  text-shadow: 0 0 22px rgba(201,168,80,.3);
+  animation: rise .8s .2s both;
+}
+.section-sub {
+  font-style: italic;
+  font-size: .82rem;
+  color: var(--ink-dim);
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: .06em;
+}
+
+/* ─── TIMELINE CARDS — replace original theme-cards section heading ─── */
+.timeline-heading {
+  text-align: center;
+  padding: 48px 24px 8px;
+}
+
 /* ─── NIGHT SKY ─── */
 .sky{position:fixed;inset:0;z-index:0;
   background:radial-gradient(ellipse at 50% 0%,#1a1050 0%,#080820 45%,#04040e 100%);}
@@ -430,15 +586,59 @@ footer:hover{opacity:1;}
 <!-- ─── PAGE ─── -->
 <div class="wrapper">
 
-<!-- HEADER -->
-<section style="text-align:center;padding:56px 24px 20px;">
-  <h1 style="font-family:'Uncial Antiqua',cursive;font-size:clamp(1.8rem,5vw,3rem);color:var(--gold-l);text-shadow:0 0 35px rgba(201,168,80,.4);letter-spacing:.1em;animation:rise .9s .1s both;">Choose Your World</h1>
-  <p style="font-style:italic;font-size:clamp(.85rem,2vw,1.05rem);color:var(--ink-dim);margin-top:8px;letter-spacing:.08em;animation:rise .8s .4s both;">Two paths for the same lovee!!</p>
-</section>
-<div class="geo-div" style="padding:6px 24px 22px;"><div class="geo-line"></div><span class="geo-star">✦ ✦ ✦</span><div class="geo-line"></div></div>
+<!-- ─── APP SECTION ─── -->
+<section class="phone-section" style="padding-top: 56px;">
+  <h2 class="section-heading">Apps</h2>
+  <p class="section-sub">Hamaraa common phonee😎</p>
+  <span class="sec-lbl" style="text-align:center;">tap to open</span>
 
-<!-- THEME CARDS -->
-<section style="padding:0 24px 52px;">
+  <div class="phone-frame">
+    <div class="phone-screen">
+
+      <!-- Status bar -->
+      <div class="phone-status">
+        <span>15:12</span>
+        <span>✦ ✦ ✦</span>
+        <span>♡ 100%</span>
+      </div>
+
+      <!-- Apps -->
+      <p class="phone-grid-label">Apps</p>
+      <div class="app-grid">
+
+        <!-- ShruFLIX — replace href with your actual file path -->
+        <a href="SHRUflix/index.html" class="app-icon">
+          <div class="app-icon-img">
+            <!-- If you have a logo image: -->
+            <img src="images/SHRUflix-logo.png" alt="ShruFLIX" />
+            <!-- If no image yet, remove the img tag above and add class="app-icon-img no-img"
+                 and put  SF  as text inside the div instead -->
+          </div>
+          <span class="app-icon-name">SHRUflix</span>
+        </a>
+
+        <!-- You can add more apps here later the same way -->
+
+      </div>
+
+    </div>
+    <div class="phone-bar"></div>
+  </div>
+</section>
+
+<div class="geo-div" style="padding: 32px 24px;">
+  <div class="geo-line"></div>
+  <span class="geo-star">✦ ✦ ✦</span>
+  <div class="geo-line"></div>
+</div>
+
+<!-- ─── TIMELINE SECTION ─── -->
+<div class="timeline-heading">
+  <h2 class="section-heading">Choose Your World</h2>
+  <p class="section-sub">Two paths for the same lovee!!</p>
+</div>
+
+<section style="padding: 0 24px 52px;">
   <span class="sec-lbl" style="text-align:center;">Themes</span>
   <div class="theme-cards">
     <a href="flower.html" class="tc tc-g" style="--ta:.2s">
@@ -470,7 +670,6 @@ footer:hover{opacity:1;}
     </a>
   </div>
 </section>
-
 <div class="geo-div"><div class="geo-line"></div><span class="geo-star">✦</span><div class="geo-line"></div></div>
 
 <script src="choosejs.js"></script>
