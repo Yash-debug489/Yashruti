@@ -771,11 +771,11 @@ input { font-family: var(--font-body); }
   background: linear-gradient(135deg, #0a0020, #200010, #000818) !important;
   border: 1px solid rgba(255,255,255,0.08) !important;
   text-align: center;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 #particleCanvas {
-  position: absolute;
+  position: fixed;
   inset: 0;
   width: 100%; height: 100%;
   pointer-events: none;
