@@ -15,7 +15,7 @@
 /* ============================================================
    ✏️  EDIT THIS: LOGIN PASSWORD
    ============================================================ */
-const PASSWORD = "LOL";
+const PASSWORD = "kissme";
 
 /* ============================================================
    ✏️  EDIT THIS: SHOWS & MOVIES DATA
@@ -494,7 +494,7 @@ function showEasterEggResult() {
 
   const titleEl = document.createElement("p");
   titleEl.className = "card-title";
-  titleEl.textContent = "The Girl Who Made Everything Better";
+  titleEl.textContent = "Netflix password find out?";
 
   eggCard.appendChild(poster);
   eggCard.appendChild(titleEl);
