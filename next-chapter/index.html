@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXT CHAPTER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- FILM GRAIN OVERLAY (persistent) -->
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- UNOBTRUSIVE UI CONTROLS -->
+<div class="ui-controls">
+  <button id="menuBtn" class="ui-btn" aria-label="Return to main stage" title="Main stage">
+    <span class="ui-icon">&#9670;</span>
+  </button>
+  <button id="muteBtn" class="ui-btn" aria-label="Toggle sound" title="Sound">
+    <span class="ui-icon" id="muteIcon">&#9834;</span>
+  </button>
+</div>
+
+<!-- progress dots: which scene are we in -->
+<div class="scene-progress" id="sceneProgress" aria-hidden="true"></div>
+
+<!-- CURTAIN TRANSITION LAYER -->
+<div class="curtain-layer" id="curtainLayer" aria-hidden="true">
+  <div class="curtain curtain-left"></div>
+  <div class="curtain curtain-right"></div>
+</div>
+
+<main id="app">
+
+  <!-- =====================================================
+       SECTION 01 — OPENING SEQUENCE
+  ====================================================== -->
+  <section class="scene" id="scene-intro" data-scene="intro">
+    <div class="intro-black">
+      <div class="credit-block" id="creditBlock"></div>
+      <button class="skip-intro" id="skipIntro">skip &#8250;</button>
+    </div>
+    <div class="opening-story" id="openingStory">
+      <div class="story-lines" id="storyLines"></div>
+      <div class="transition-line" id="transitionLine"></div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SECTION 02 — MAIN MOVIE SET
+  ====================================================== -->
+  <section class="scene" id="scene-set" data-scene="set">
+    <div class="stage-lights" aria-hidden="true">
+      <div class="spotlight sl-1"></div>
+      <div class="spotlight sl-2"></div>
+      <div class="spotlight sl-3"></div>
+    </div>
+
+    <header class="stage-header">
+      <h1 class="stage-title" id="stageTitle">THE NEXT CHAPTER</h1>
+      <p class="stage-subtitle" id="stageSubtitle">[SUBTITLE HERE]</p>
+    </header>
+
+    <div class="pillars" id="pillars"></div>
+
+    <div class="side-doors" id="sideDoors"></div>
+
+    <div class="stage-floor" aria-hidden="true"></div>
+  </section>
+
+  <!-- =====================================================
+       CHAPTER 01 — HOSTEL
+  ====================================================== -->
+  <section class="scene chapter-scene" id="scene-hostel" data-scene="hostel">
+    <div class="chapter-backdrop hostel-backdrop" aria-hidden="true"></div>
+    <div class="chapter-frame">
+      <p class="chapter-eyebrow">CHAPTER 01</p>
+      <h2 class="chapter-title" id="hostelTitle">[HOSTEL TITLE]</h2>
+      <p class="chapter-intro" id="hostelIntro">[HOSTEL INTRO TEXT]</p>
+      <div class="object-room" id="hostelObjects"></div>
+    </div>
+    <button class="back-btn" data-back>&#8592; BACK TO MAIN SET</button>
+  </section>
+
+  <!-- =====================================================
+       CHAPTER 02 — ACADEMICS
+  ====================================================== -->
+  <section class="scene chapter-scene" id="scene-academics" data-scene="academics">
+    <div class="chapter-backdrop academics-backdrop" aria-hidden="true"></div>
+    <div class="chapter-frame">
+      <p class="chapter-eyebrow">CHAPTER 02</p>
+      <h2 class="chapter-title" id="academicsTitle">[ACADEMICS TITLE]</h2>
+      <p class="chapter-intro" id="academicsIntro">[ACADEMICS INTRO TEXT]</p>
+      <div class="lecture-grid" id="academicsItems"></div>
+    </div>
+    <button class="back-btn" data-back>&#8592; BACK TO MAIN SET</button>
+  </section>
+
+  <!-- =====================================================
+       CHAPTER 03 — FRIENDS
+  ====================================================== -->
+  <section class="scene chapter-scene" id="scene-friends" data-scene="friends">
+    <div class="chapter-backdrop friends-backdrop" aria-hidden="true"></div>
+    <div class="chapter-frame">
+      <p class="chapter-eyebrow">CHAPTER 03</p>
+      <p class="chapter-intro" id="friendsIntro">[FRIENDS INTRO TEXT]</p>
+      <div class="silhouette-field" id="silhouetteField"></div>
+      <p class="friends-hint">tap into the dark to meet who's waiting</p>
+    </div>
+    <button class="back-btn" data-back>&#8592; BACK TO MAIN SET</button>
+  </section>
+
+  <!-- =====================================================
+       CHAPTER 04 — COLLEGE LIFE
+  ====================================================== -->
+  <section class="scene chapter-scene" id="scene-collegelife" data-scene="collegeLife">
+    <div class="chapter-backdrop collegelife-backdrop" aria-hidden="true"></div>
+    <div class="chapter-frame chapter-frame-wide">
+      <p class="chapter-eyebrow">CHAPTER 04</p>
+      <h2 class="chapter-title" id="collegeLifeTitle">[COLLEGE LIFE TITLE]</h2>
+      <p class="chapter-intro" id="collegeLifeIntro">[COLLEGE LIFE INTRO TEXT]</p>
+      <div class="life-cards" id="lifeCards"></div>
+    </div>
+    <button class="back-btn" data-back>&#8592; BACK TO MAIN SET</button>
+  </section>
+
+  <!-- =====================================================
+       CHAPTER 05 — UNKNOWN
+  ====================================================== -->
+  <section class="scene chapter-scene unknown-scene" id="scene-unknown" data-scene="unknown">
+    <div class="unknown-lines" id="unknownLines"></div>
+    <h2 class="unknown-title" id="unknownTitle"></h2>
+    <p class="unknown-conclusion" id="unknownConclusion"></p>
+    <button class="back-btn back-btn-ghost" data-back>&#8592; BACK TO MAIN SET</button>
+  </section>
+
+  <!-- =====================================================
+       CHAPTER 06 — US
+  ====================================================== -->
+  <section class="scene chapter-scene us-scene" id="scene-us" data-scene="us">
+    <div class="chapter-frame">
+      <div class="us-names" id="usNames"></div>
+      <p class="us-intro" id="usIntro">[US INTRO]</p>
+      <div class="us-paragraphs" id="usParagraphs"></div>
+
+      <!-- DISTANCE VISUALIZATION -->
+      <div class="distance-viz" id="distanceViz"></div>
+
+          <!-- FIRST STORY / MANIPAL SECTION -->
+      <div class="first-story" id="firstStory"></div>
+
+     <button class="to-final-btn" id="toFinalBtn">CONTINUE &#8594;</button>
+    </div>
+    <button class="back-btn" data-back>&#8592; BACK TO MAIN SET</button>
+  </section>
+  <!-- =====================================================
+       FINAL SCENE
+  ====================================================== -->
+  <section class="scene final-scene" id="scene-final" data-scene="final">
+    <div class="night-sky" aria-hidden="true">
+      <div class="stars"></div>
+    </div>
+    <div class="final-lines" id="finalLines"></div>
+    <h2 class="final-title" id="finalTitle"></h2>
+    <p class="final-message" id="finalMessage"></p>
+    <div class="coming-soon" id="comingSoon"></div>
+    <button class="restart-btn" id="restartBtn">[RESTART / ENTER STORY]</button>
+  </section>
+
+</main>
+
+<!-- OPTIONAL AUDIO — files are placeholders; site works fine if missing -->
+<audio id="audio-ambient" loop preload="none"><source src="assets/audio/ambient.mp3" type="audio/mpeg"></audio>
+<audio id="audio-projector" preload="none"><source src="assets/audio/projector.mp3" type="audio/mpeg"></audio>
+<audio id="audio-transition" preload="none"><source src="assets/audio/transition.mp3" type="audio/mpeg"></audio>
+<audio id="audio-click" preload="none"><source src="assets/audio/click.mp3" type="audio/mpeg"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
