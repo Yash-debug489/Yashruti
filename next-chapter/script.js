@@ -145,7 +145,7 @@ const CONTENT = {
     ],
     title: "THE NEW CHAPTER",
     message: "NEW chapter of SHRUTI's life",
-    comingSoon: "COLLEGE!!",
+    comingSoon: "New stuff!!",
     comingSoonSub: "NEW experiences",
     buttonLabel: "RESTART"
   },
